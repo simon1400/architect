@@ -1,0 +1,14 @@
+.DraftEditor-root{
+  border: 1px solid grey;
+  border-radius: 5px;
+  min-height: 300px;
+  padding: 20px 30px;
+}
+
+.public-DraftEditor-content{
+  min-height: 300px;
+}
+
+ul:not(.browser-default)>li{
+  list-style-type: disc;
+}
