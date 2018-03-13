@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_DATA } from './types'
+import { FETCH_DATA, FETCH_IMAGE } from './types'
 //
 // export const fetchUser = () => async dispatch => {
 //   const res = await axios.get('/api/current_user')
@@ -19,7 +19,7 @@ export const submitContent = (content) => async dispatch => {
 }
 //
 //
-// export const fetchSurveys = () => async dispatch => {
-//   const res = await axios.get('/api/surveys');
-//   dispatch({ type: FETCH_SURVEYS, payload: res.data});
-// }
+export const fetchImage = (files) => async dispatch => {
+  const res = await axios.post('/api/image', files);
+  dispatch({ type: FETCH_IMAGE, payload: res.data});
+}

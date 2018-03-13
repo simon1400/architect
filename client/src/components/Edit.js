@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Editor from './Editor/Editor'
-import FileUpload from './FileUpload'
+import DragDrop from './DragDrop'
 
 
 class Edit extends Component {
@@ -15,9 +15,8 @@ class Edit extends Component {
 			<div>
 				<label htmlFor="first_name">Zahlavi</label>
         <input placeholder="Clanek 1" id="first_name" type="text" className="validate" />
-        <FileUpload />
         <Editor />
-        <FileUpload />
+				<DragDrop />
 			</div>
 		)
 	}

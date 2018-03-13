@@ -1,11 +1,11 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Edit from './Edit'
 import ShortPages from './ShortPages'
 
 
 const Admin = ({match}) => {
-  
+
   return(
       <div>
         <h1>Admin</h1>
