@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Header from './Header';
 import Home from './Home';
 import Admin from './Admin';
-import Error from './404';
+// import Error from './404';
 
 
 class App extends Component {
@@ -16,18 +16,19 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <div className="container">
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/admin" component={Admin} />
-            <Route component={Error} />
+            <Route path="/admin" component={Admin} />
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     )
   }
 };
 
 export default connect(null, actions)(App);
+
+

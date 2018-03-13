@@ -1,0 +1,26 @@
+import React, { Component } from 'react';
+import Editor from './Editor/Editor'
+import FileUpload from './FileUpload'
+
+
+class Edit extends Component {
+
+	handleChange(event) {
+    const target = event.target.files;
+    console.log(target)
+	}
+
+	render() {
+		return(
+			<div>
+				<label htmlFor="first_name">Zahlavi</label>
+        <input placeholder="Clanek 1" id="first_name" type="text" className="validate" />
+        <FileUpload />
+        <Editor />
+        <FileUpload />
+			</div>
+		)
+	}
+}
+
+export default Edit;

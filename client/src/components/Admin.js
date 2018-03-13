@@ -1,38 +1,18 @@
-import React, { Component } from 'react';
-import Editor from './Editor/Editor'
+import React from 'react';
+import {Route, Switch} from 'react-router-dom';
+import Edit from './Edit'
+import ShortPages from './ShortPages'
 
-class Admin extends Component {
-  render() {
-    return(
+
+const Admin = ({match}) => {
+  
+  return(
       <div>
         <h1>Admin</h1>
-        <label htmlFor="first_name">Zahlavi</label>
-        <input placeholder="Clanek 1" id="first_name" type="text" className="validate" />
-        <div className="file-field input-field">
-          <div className="btn">
-            <span>File</span>
-            <input type="file" />
-          </div>
-          <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" />
-          </div>
-        </div>
-        <Editor />
-        <div className="row" style={{clear: 'both'}}>
-          <div className="file-field input-field">
-            <div className="btn">
-              <span>File</span>
-              <input type="file" multiple />
-            </div>
-            <div className="file-path-wrapper">
-              <input className="file-path validate" type="text" placeholder="Upload one or more files" />
-            </div>
-          </div>
-        </div>
-
+        <Route exact path={`${match.url}/`} component={ShortPages} />
+        <Route exact path={`${match.url}/edit`} component={Edit} />
       </div>
-    )
-  }
+  )
 }
 
 export default Admin;
