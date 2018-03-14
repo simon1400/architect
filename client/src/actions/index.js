@@ -18,7 +18,13 @@ export const submitContent = (content) => async dispatch => {
 
 }
 
-export const fetchImage = (files, config) => async dispatch => {
-  const res = await axios.post('/api/image', files, config);
+export const fetchImage = (files) => async dispatch => {
+  let data = new FormData();
+  files.map(file => data.append('file', file))
+  const config = {
+    headers: { 'content-type': 'multipart/form-data' }
+  }
+
+  const res = await axios.post('/api/image', data, config);
   dispatch({ type: FETCH_IMAGE, payload: res.data});
 }

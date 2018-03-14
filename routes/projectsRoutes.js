@@ -31,7 +31,7 @@ module.exports = (app) => {
   });
 
   app.post( '/api/image', upload.array('file', 12), function( req, res, next ) {
-		console.log(req.files)
+		// console.log(req.files)
 		res.end();
   });
 
