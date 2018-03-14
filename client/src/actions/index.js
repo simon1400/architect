@@ -17,9 +17,8 @@ export const submitContent = (content) => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: res.data});
 
 }
-//
-//
-export const fetchImage = (files) => async dispatch => {
-  const res = await axios.post('/api/image', files);
+
+export const fetchImage = (files, config) => async dispatch => {
+  const res = await axios.post('/api/image', files, config);
   dispatch({ type: FETCH_IMAGE, payload: res.data});
 }

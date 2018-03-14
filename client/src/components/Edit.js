@@ -15,8 +15,8 @@ class Edit extends Component {
 			<div>
 				<label htmlFor="first_name">Zahlavi</label>
         <input placeholder="Clanek 1" id="first_name" type="text" className="validate" />
-        <Editor />
 				<DragDrop />
+        <Editor />
 			</div>
 		)
 	}
