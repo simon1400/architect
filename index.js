@@ -7,7 +7,7 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./models/Projects');
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { autoIndex: false });
 
 const app = express();
 

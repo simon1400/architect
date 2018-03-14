@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
-import {stateToHTML} from 'draft-js-export-html';
-import { connect } from 'react-redux';
-import { submitContent } from '../../actions';
+import { Editor, RichUtils } from 'draft-js';
 
 import './Editor.css'
 
 class TextEditor extends Component {
 
-  state = {editorState: EditorState.createEmpty()}
-  onChange = (editorState) => this.setState({editorState});
+  constructor(props){
+    super(props)
 
-  toggleBlock = (typeBlock) => this.onChange(RichUtils.toggleBlockType(this.state.editorState, typeBlock));
-  toggleStyle = (typeStyle) => this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, typeStyle));
-
-  submitEditor = () => {
-    const content = stateToHTML(this.state.editorState.getCurrentContent());
-    this.props.submitContent(content);
+    this.onChange = this.onChange.bind(this)
+    this.toggleBlock = this.toggleBlock.bind(this)
+    this.toggleStyle = this.toggleStyle.bind(this)
   }
+
+  onChange(editorState){
+    this.props.changeEditor(editorState);
+  }
+
+  toggleBlock(typeBlock){
+     this.onChange(RichUtils.toggleBlockType(this.props.editorState, typeBlock));
+   }
+  toggleStyle(typeStyle){
+     this.onChange(RichUtils.toggleInlineStyle(this.props.editorState, typeStyle));
+   }
 
   render(){
     return(
@@ -29,23 +34,11 @@ class TextEditor extends Component {
           <button className="waves-effect waves-light btn" onClick={e => this.toggleBlock('unordered-list-item')}><i className="material-icons center">format_list_bulleted</i></button>
         </div>
         <Editor
-          editorState={this.state.editorState}
-          onChange={this.onChange}/>
-        <button
-          className="btn right waves-effect waves-light"
-          style={{marginTop: '20px', marginBottom: '20px'}}
-          name="action"
-          onClick={e => this.submitEditor()}>
-          Submit
-          <i className="material-icons right">send</i>
-        </button>
+          editorState={this.props.editorState}
+          onChange={(e) => this.onChange(e)}/>
       </div>
     )
   }
 }
 
-function mapStateToProps({ project }) {
-  return { project };
-}
-
-export default connect(mapStateToProps, {submitContent})(TextEditor);
+export default TextEditor;

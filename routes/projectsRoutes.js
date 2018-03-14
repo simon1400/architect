@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-var multer   =  require( 'multer' );
+var multer = require('multer');
+var mkdirp = require('mkdirp');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    const dir = 'uploads/'+req.params.id
+    mkdirp(dir, err => cb(null, dir))
   },
   filename: function (req, file, cb) {
     let type = file.originalname.split('.');
@@ -11,28 +13,26 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload   =  multer( { storage: storage } );
+var upload = multer( { storage: storage } );
 
 const Project = mongoose.model('projects');
 
 module.exports = (app) => {
-  app.post('/api/project', (req, res) => {
-    const { content } = req.body;
 
+  app.post( '/api/image/:id', upload.array('file', 12), function( req, res, next ) {
+
+    const { title, content } = req.body;
+    const namesImage = req.body.namesImage.split(',')
     const project = new Project({
-      content,
-      // _user: req.user.id,
+      uniqID: req.params.id,
+      title: title,
+      content: content,
+      namesImage: namesImage,
       dateSent: Date.now()
     })
 
     project.save()
     res.send(req.body)
-
-  });
-
-  app.post( '/api/image', upload.array('file', 12), function( req, res, next ) {
-		// console.log(req.files)
-		res.end();
   });
 
 }
