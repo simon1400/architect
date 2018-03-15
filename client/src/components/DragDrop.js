@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import DragSortableList from 'react-drag-sortable'
 
 import '../styles/DragDrop.css'
 
+const placeholder = (
+    <div className="placeholderContent">PLACEHOLDER</div>
+);
+
+const onSort = function(sortedList, dropEvent) {
+    console.log("sortedList", sortedList, dropEvent);
+ }
+
 class DragDrop extends Component {
 
+  // <DragSortableList items={photo} placeholder={placeholder} onSort={onSort} dropBackTransitionDuration={0.3} type="vertical"/>
+
   prewiewPhoto() {
-    return this.props.preview.map(link => <div key={link} className="preview" style={{backgroundImage: `url(${link})`}}></div>);
+    const photo = this.props.preview.map(link => <div key={link} className="preview" style={{backgroundImage: `url(${link})`}}></div>)
+    return <DragSortableList items={photo} placeholder={placeholder} onSort={onSort} dropBackTransitionDuration={0.3} type="horizontal"/>
   }
+
+
 
 	render() {
 		return(
@@ -22,5 +36,3 @@ class DragDrop extends Component {
 }
 
 export default DragDrop
-
-{/* <button className="btn flat" style={{marginBottom: '20px'}} onClick={() => this.props.fetchImage(this.props.files)}>Send</button> */}

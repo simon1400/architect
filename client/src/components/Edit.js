@@ -13,7 +13,10 @@ class Edit extends Component {
     title: '',
     files: [],
     preview: [],
-    namesImage: [],
+    namesImage: {
+      name: [],
+      index: []
+    },
     uniqID: '',
     editorState: EditorState.createEmpty()
   }
@@ -35,12 +38,16 @@ class Edit extends Component {
   }
 
 	onDrop = (files) => {
-    files.map(file =>
+    files.map((file, index) =>
       this.setState(prevState => ({
         files: [...prevState.files, file],
         preview: [...prevState.preview, file.preview],
-        namesImage: [...prevState.namesImage, file.name]
+        namesImage: {
+          name: [...prevState.namesImage.name, file.name],
+          index: [...prevState.namesImage.index, index]
+        }
       }))
+    
     )
   }
 
@@ -51,7 +58,8 @@ class Edit extends Component {
       content,
       namesImage: this.state.namesImage
     }
-    this.props.fetchData(this.state.uniqID, data, this.state.files)
+    console.log(data.namesImage)
+    // this.props.fetchData(this.state.uniqID, data, this.state.files)
   }
 
 	render() {

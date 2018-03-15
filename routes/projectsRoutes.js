@@ -19,7 +19,7 @@ const Project = mongoose.model('projects');
 
 module.exports = (app) => {
 
-  app.post( '/api/image/:id', upload.array('file', 12), function( req, res, next ) {
+  app.post( '/api/project/:id', upload.array('file', 12), function( req, res, next ) {
 
     const { title, content } = req.body;
     const namesImage = req.body.namesImage.split(',')
@@ -31,7 +31,9 @@ module.exports = (app) => {
       dateSent: Date.now()
     })
 
-    project.save()
+    project.save(err => {
+      console.log(err)
+    })
     res.send(req.body)
   });
 
