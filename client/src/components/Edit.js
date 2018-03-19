@@ -61,13 +61,11 @@ class Edit extends Component {
 
   submit = () => {
     const content = stateToHTML(this.state.editorState.getCurrentContent());
-    // const data = {
-    //   title: this.state.title,
-    //   content,
-    //   namesImage: this.state.namesImage
-    // }
-    console.log(this.state.image)
-    // this.props.fetchData(this.state.uniqID, data, this.state.files)
+    const data = {
+      title: this.state.title,
+      content
+    }
+    this.props.fetchData(this.state.uniqID, data, this.state.image)
   }
 
 	render() {

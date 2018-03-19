@@ -4,7 +4,7 @@ var ProjectSchema = new mongoose.Schema({
   uniqID: String,
   title: String,
   content: String,
-  namesImage: [String],
+  image: [],
   dateSent: Date
 });
 

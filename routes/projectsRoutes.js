@@ -8,8 +8,7 @@ var storage = multer.diskStorage({
     mkdirp(dir, err => cb(null, dir))
   },
   filename: function (req, file, cb) {
-    let type = file.originalname.split('.');
-    cb(null, file.fieldname + '-' + Date.now() + '.' + type[type.length - 1])
+    cb(null, file.originalname)
   }
 })
 
@@ -22,12 +21,12 @@ module.exports = (app) => {
   app.post( '/api/project/:id', upload.array('file', 12), function( req, res, next ) {
 
     const { title, content } = req.body;
-    const namesImage = req.body.namesImage.split(',')
+    image = JSON.parse(req.body.image);
     const project = new Project({
       uniqID: req.params.id,
-      title: title,
-      content: content,
-      namesImage: namesImage,
+      title,
+      content,
+      image,
       dateSent: Date.now()
     })
 
