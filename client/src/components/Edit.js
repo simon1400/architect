@@ -13,10 +13,7 @@ class Edit extends Component {
     title: '',
     files: [],
     preview: [],
-    namesImage: {
-      name: [],
-      index: []
-    },
+    namesImage: [],
     uniqID: '',
     editorState: EditorState.createEmpty()
   }
@@ -42,13 +39,16 @@ class Edit extends Component {
       this.setState(prevState => ({
         files: [...prevState.files, file],
         preview: [...prevState.preview, file.preview],
-        namesImage: {
-          name: [...prevState.namesImage.name, file.name],
-          index: [...prevState.namesImage.index, index]
-        }
+        namesImage: [...prevState.namesImage, file.name]
       }))
-    
+
     )
+  }
+
+  short = (value) => {
+    this.setState(prevState => ({
+      preview: value
+    }))
   }
 
   submit = () => {
@@ -67,7 +67,7 @@ class Edit extends Component {
 			<div>
 				<label htmlFor="first_name">Zahlavi</label>
         <input placeholder="Clanek 1" name="title" onChange={(e) => this.changeTitle(e)} type="text" value={this.state.title} />
-				<DragDrop {...this.state} onDrop={this.onDrop}/>
+				<DragDrop {...this.state} onDrop={this.onDrop} onShort={this.short}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <button
           className="btn right waves-effect waves-light"
