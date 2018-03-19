@@ -18,6 +18,8 @@
     "immutable": "^3.8.2",
     "materialize-css": "^0.100.2",
     "react": "^16.2.0",
+    "react-anything-sortable": "^1.7.4",
+    "react-beautiful-dnd": "^6.0.0",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.9",
     "react-fine-uploader": "^1.0.9",

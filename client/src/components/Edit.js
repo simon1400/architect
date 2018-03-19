@@ -11,9 +11,7 @@ class Edit extends Component {
 
   state = {
     title: '',
-    files: [],
-    preview: [],
-    namesImage: [],
+    image: [],
     uniqID: '',
     editorState: EditorState.createEmpty()
   }
@@ -35,19 +33,29 @@ class Edit extends Component {
   }
 
 	onDrop = (files) => {
-    files.map((file, index) =>
-      this.setState(prevState => ({
-        files: [...prevState.files, file],
-        preview: [...prevState.preview, file.preview],
-        namesImage: [...prevState.namesImage, file.name]
-      }))
-
-    )
+    let image = []
+    files.map((file, index) => {
+      return image = [
+        ...image,
+        {
+          file: file,
+          preview: file.preview,
+          name: file.name
+        }
+      ]
+    })
+    this.setState(prevState => ({
+      image: [...prevState.image, ...image]
+    }))
   }
 
-  short = (value) => {
+  short = (image) => {
+    this.setState({image})
+  }
+
+  shortPhoto = (e) => {
     this.setState(prevState => ({
-      preview: value
+      namesImage: [...prevState.namesImage, e]
     }))
   }
 
@@ -55,11 +63,9 @@ class Edit extends Component {
     const content = stateToHTML(this.state.editorState.getCurrentContent());
     const data = {
       title: this.state.title,
-      content,
-      namesImage: this.state.namesImage
+      content
     }
-    console.log(data.namesImage)
-    // this.props.fetchData(this.state.uniqID, data, this.state.files)
+    this.props.fetchData(this.state.uniqID, data, this.state.image)
   }
 
 	render() {
@@ -67,7 +73,7 @@ class Edit extends Component {
 			<div>
 				<label htmlFor="first_name">Zahlavi</label>
         <input placeholder="Clanek 1" name="title" onChange={(e) => this.changeTitle(e)} type="text" value={this.state.title} />
-				<DragDrop {...this.state} onDrop={this.onDrop} onShort={this.short}/>
+				<DragDrop image={this.state.image} onDrop={this.onDrop} onShort={this.short}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <button
           className="btn right waves-effect waves-light"
