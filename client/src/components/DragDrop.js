@@ -1,40 +1,47 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import Sortable from 'react-anything-sortable/src'
-import { SortableContainer } from 'react-anything-sortable';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 import '../styles/DragDrop.css'
-import 'react-anything-sortable/sortable.css';
 
-class SortableItem extends Component {
+const SortableItem = SortableElement(({value}) =>
+  <div className="preview" style={{backgroundImage: `url(${value.preview})`}}></div>
+);
+
+const SortableList = SortableContainer(({items}) => {
+  return <div>{items.map((value, index) => <SortableItem key={`item-${index}`} index={index} value={value} />)}</div>
+});
+
+class SortableComponent extends Component {
+
+  state = {
+    items: []
+  };
+
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState({
+      items: arrayMove(this.props.image, oldIndex, newIndex),
+
+    });
+    this.props.onShort(this.state.items)
+  };
+
   render() {
-    return (
-      <SortableContainer>
-        <div>
-          your item {this.props.shortData}
-        </div>
-      </SortableContainer>
-    )
+    return <SortableList axis="xy" items={this.props.image} onSortEnd={this.onSortEnd} />;
   }
 }
 
 class DragDrop extends Component {
 
-  // prewiewPhoto() {
-  //   return this.props.preview.map((link, index) => <SortableContainer shortData={index}><div className="preview" style={{backgroundImage: `url(${link})`}}></div></SortableContainer>)
+  // prewiewPhoto = () => {
+  //   return this.props.preview.map(link => <div key={link} className="preview" style={{backgroundImage: `url(${link})`}}></div>)
   // }
 
 	render() {
 		return(
-      <Dropzone
-        style={{width: '100%', minHeight: '200px', border: '2px dashed grey', borderRadius: '5px', padding: '20px', marginBottom: '40px'}}
-        onDrop={(e) => this.props.onDrop(e)}
-        disableClick={true}>
+      <Dropzone className="dropZone" onDrop={(e) => this.props.onDrop(e)} disableClick={true}>
         <p>Try dropping some files here, or click to select files to upload.</p>
-        <Sortable containment>
-          <SortableItem shortData="1"/>
-          <SortableItem shortData="2"/>
-        </Sortable>
+        <SortableComponent image={this.props.image} onShort={this.props.onShort}/>
       </Dropzone>
 		)
 	}
