@@ -5,7 +5,7 @@ import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 import '../styles/DragDrop.css'
 
 const SortableItem = SortableElement(({value}) =>
-  <div className="preview" style={{backgroundImage: `url(${value})`}}></div>
+  <div className="preview" style={{backgroundImage: `url(${value.preview})`}}></div>
 );
 
 const SortableList = SortableContainer(({items}) => {
@@ -20,13 +20,14 @@ class SortableComponent extends Component {
 
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState({
-      items: arrayMove(this.props.items, oldIndex, newIndex),
+      items: arrayMove(this.props.image, oldIndex, newIndex),
+
     });
     this.props.onShort(this.state.items)
   };
 
   render() {
-    return <SortableList axis="xy" items={this.props.items} onSortEnd={this.onSortEnd} />;
+    return <SortableList axis="xy" items={this.props.image} onSortEnd={this.onSortEnd} />;
   }
 }
 
@@ -40,7 +41,7 @@ class DragDrop extends Component {
 		return(
       <Dropzone className="dropZone" onDrop={(e) => this.props.onDrop(e)} disableClick={true}>
         <p>Try dropping some files here, or click to select files to upload.</p>
-        <SortableComponent items={this.props.preview} onShort={this.props.onShort}/>
+        <SortableComponent image={this.props.image} onShort={this.props.onShort}/>
       </Dropzone>
 		)
 	}
