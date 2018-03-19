@@ -13,10 +13,7 @@ class Edit extends Component {
     title: '',
     files: [],
     preview: [],
-    namesImage: {
-      name: [],
-      index: []
-    },
+    namesImage: [],
     uniqID: '',
     editorState: EditorState.createEmpty()
   }
@@ -38,17 +35,19 @@ class Edit extends Component {
   }
 
 	onDrop = (files) => {
-    files.map((file, index) =>
+    files.map(file =>
       this.setState(prevState => ({
         files: [...prevState.files, file],
         preview: [...prevState.preview, file.preview],
-        namesImage: {
-          name: [...prevState.namesImage.name, file.name],
-          index: [...prevState.namesImage.index, index]
-        }
+        namesImage: [...prevState.namesImage, file.name]
       }))
-    
     )
+  }
+
+  shortPhoto = (e) => {
+    this.setState(prevState => ({
+      namesImage: [...prevState.namesImage, e]
+    }))
   }
 
   submit = () => {
@@ -67,7 +66,7 @@ class Edit extends Component {
 			<div>
 				<label htmlFor="first_name">Zahlavi</label>
         <input placeholder="Clanek 1" name="title" onChange={(e) => this.changeTitle(e)} type="text" value={this.state.title} />
-				<DragDrop {...this.state} onDrop={this.onDrop}/>
+				<DragDrop {...this.state} onDrop={this.onDrop} shortPhoto={this.shortPhoto}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <button
           className="btn right waves-effect waves-light"
