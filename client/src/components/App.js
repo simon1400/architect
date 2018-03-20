@@ -10,9 +10,10 @@ import Admin from './Admin';
 
 
 class App extends Component {
-  // componentDidMount() {
+  componentDidMount() {
   //   this.props.fetchUser();
-  // }
+        this.props.getData();
+  }
 
   render() {
     return (
@@ -30,5 +31,3 @@ class App extends Component {
 };
 
 export default connect(null, actions)(App);
-
-

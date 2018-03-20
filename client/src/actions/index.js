@@ -20,3 +20,8 @@ export const fetchData = (id, data, image) => async dispatch => {
   const res = await axios.post('/api/project/'+id, formData);
   dispatch({ type: FETCH_DATA, payload: res.data});
 }
+
+export const getData = () => async dispatch => {
+  const res = await axios.get('/api/projects');
+  dispatch({ type: FETCH_DATA, payload: res.data});
+}

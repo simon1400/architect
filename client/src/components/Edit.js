@@ -81,9 +81,7 @@ class Edit extends Component {
     }))
   }
 
-  short = (image) => {
-    this.setState({image})
-  }
+  short = image => this.setState({image})
 
   submit = () => {
     const content = stateToHTML(this.state.editorState.getCurrentContent());
