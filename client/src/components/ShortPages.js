@@ -21,6 +21,7 @@ class ShortPages extends Component {
 			<div>
 				<h3>Short Pages</h3>
 				{this.renderArticle()}
+				<button className="btn flat">Add</button>
 			</div>
 		)
 	}
