@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_DATA } from './types'
+import { FETCH_DATA, MENU_DATA } from './types'
 
 export const fetchData = (id, data, image) => async dispatch => {
   let formData = new FormData();
@@ -24,4 +24,9 @@ export const fetchData = (id, data, image) => async dispatch => {
 export const getData = () => async dispatch => {
   const res = await axios.get('/api/projects');
   dispatch({ type: FETCH_DATA, payload: res.data});
+}
+
+export const addMenu = name => async dispatch => {
+  const res = await axios.post('/api/menu', {name});
+  dispatch({ type: MENU_DATA, payload: res.data});
 }

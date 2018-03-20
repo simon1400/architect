@@ -4,6 +4,7 @@ import * as actions from '../actions';
 import { EditorState, CompositeDecorator } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html';
 
+import Field from './Filed'
 import Editor from './Editor/Editor'
 import DragDrop from './DragDrop'
 import '../styles/Edit.css'
@@ -95,14 +96,11 @@ class Edit extends Component {
 	render() {
 		return(
 			<div>
-				<label htmlFor="title">Zahlavi</label>
-        <input placeholder="Clanek 1" id="title" name="title" onChange={(e) => this.changeTitle(e)} type="text" value={this.state.title} />
+        <h3>Edit article</h3>
+        <Field name="title" title="Zahlavi" onChange={this.changeTitle} placeholder="Clanek 1" value={this.state.title} type="text" />
 				<DragDrop image={this.state.image} onDrop={this.onDrop} onShort={this.short}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
-        <button
-          className="btn right waves-effect waves-light button_submit"
-          name="action"
-          onClick={this.submit}>
+        <button className="btn right waves-effect waves-light button_submit" onClick={this.submit}>
           Submit
           <i className="material-icons right">send</i>
         </button>

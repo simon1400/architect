@@ -1,0 +1,13 @@
+li a{
+  color: white;
+  display: block;
+  padding: 10px 20px;
+}
+
+li a:hover{
+  background-color: #004d40;
+}
+
+ul > li{
+  list-style-type: none!important;
+}
