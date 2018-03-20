@@ -1,11 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { EditorState } from 'draft-js';
+import { EditorState, CompositeDecorator } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html';
 
 import Editor from './Editor/Editor'
 import DragDrop from './DragDrop'
+import '../styles/Edit.css'
+
+function findLinkEntities(contentBlock, callback, contentState) {
+  contentBlock.findEntityRanges(
+    (character) => {
+      const entityKey = character.getEntity();
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === 'LINK'
+      );
+    },
+    callback
+  );
+}
+
+const Link = (props) => {
+  const { url } = props.contentState
+    .getEntity(props.entityKey).getData();
+
+  return (
+    <a href={url} title={url} className="ed-link">
+      {props.children}
+    </a>
+  );
+};
+
+const decorator = new CompositeDecorator([
+  {
+    strategy: findLinkEntities,
+    component: Link
+  }
+]);
 
 class Edit extends Component {
 
@@ -13,7 +45,7 @@ class Edit extends Component {
     title: '',
     image: [],
     uniqID: '',
-    editorState: EditorState.createEmpty()
+    editorState: EditorState.createEmpty(decorator)
   }
 
   componentDidMount = () => {
@@ -53,12 +85,6 @@ class Edit extends Component {
     this.setState({image})
   }
 
-  shortPhoto = (e) => {
-    this.setState(prevState => ({
-      namesImage: [...prevState.namesImage, e]
-    }))
-  }
-
   submit = () => {
     const content = stateToHTML(this.state.editorState.getCurrentContent());
     const data = {
@@ -71,13 +97,12 @@ class Edit extends Component {
 	render() {
 		return(
 			<div>
-				<label htmlFor="first_name">Zahlavi</label>
-        <input placeholder="Clanek 1" name="title" onChange={(e) => this.changeTitle(e)} type="text" value={this.state.title} />
+				<label htmlFor="title">Zahlavi</label>
+        <input placeholder="Clanek 1" id="title" name="title" onChange={(e) => this.changeTitle(e)} type="text" value={this.state.title} />
 				<DragDrop image={this.state.image} onDrop={this.onDrop} onShort={this.short}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <button
-          className="btn right waves-effect waves-light"
-          style={{marginTop: '20px', marginBottom: '20px'}}
+          className="btn right waves-effect waves-light button_submit"
           name="action"
           onClick={this.submit}>
           Submit
