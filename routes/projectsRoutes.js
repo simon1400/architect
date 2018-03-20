@@ -18,7 +18,7 @@ const Project = mongoose.model('projects');
 
 module.exports = (app) => {
 
-  app.post( '/api/project/:id', upload.array('file', 12), function( req, res, next ) {
+  app.post( '/api/project/:id', upload.array('file', 12), (req, res) => {
 
     const { title, content } = req.body;
     image = JSON.parse(req.body.image);
@@ -35,5 +35,10 @@ module.exports = (app) => {
     })
     res.send(req.body)
   });
+
+  app.get('/api/projects', async (req, res) => {
+    const projects = await Project.find({});
+    res.send(projects);
+  })
 
 }

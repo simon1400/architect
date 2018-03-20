@@ -33,10 +33,6 @@ class SortableComponent extends Component {
 
 class DragDrop extends Component {
 
-  // prewiewPhoto = () => {
-  //   return this.props.preview.map(link => <div key={link} className="preview" style={{backgroundImage: `url(${link})`}}></div>)
-  // }
-
 	render() {
 		return(
       <Dropzone className="dropZone" onDrop={(e) => this.props.onDrop(e)} disableClick={true}>

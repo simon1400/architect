@@ -1,0 +1,9 @@
+.button_submit{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ed-link{
+  text-decoration: underline;
+  cursor: pointer;
+}
