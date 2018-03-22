@@ -1,0 +1,22 @@
+ul li, .addWrap{
+  position: relative;
+  margin-bottom: 20px;
+}
+
+input{
+  margin-bottom: 0!important;
+}
+
+ul li span, .addSave{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+ul li span i, .addSave i{
+  cursor: pointer;
+}
+
+ul li span i:hover, .addSave i:hover{
+  color: #26a69a;
+}
