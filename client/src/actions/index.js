@@ -26,7 +26,17 @@ export const getData = () => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: res.data});
 }
 
-export const addMenu = name => async dispatch => {
-  const res = await axios.post('/api/menu', {name});
+export const addMenu = (name, id) => async dispatch => {
+  const res = await axios.post('/api/menu', {name, id});
+  dispatch({ type: MENU_DATA, payload: res.data});
+}
+
+export const getMenu = () => async dispatch => {
+  const res = await axios.get('/api/menu');
+  dispatch({ type: MENU_DATA, payload: res.data});
+}
+
+export const deleteMenu = id => async dispatch => {
+  const res = await axios.post('/api/menu/delete', {id});
   dispatch({ type: MENU_DATA, payload: res.data});
 }
