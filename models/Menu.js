@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var MenuSchema = new mongoose.Schema({
-  id: Number,
+  id: {type: Number, unique: true, default: 0},
   name: String
 });
 

@@ -12,6 +12,8 @@ class ShortPages extends Component {
 			addMenu: false,
 			name: ''
 		}
+
+		this.AddBtn = this.AddBtn.bind(this);
 	}
 
 
@@ -31,19 +33,16 @@ class ShortPages extends Component {
 	}
 
 	AddBtn() {
-		this.setState({
-			addMenu: true
-		})
+		this.props.addMenu('menu1')
 	}
 
 	render() {
 		return(
 			<div>
 				<h3>Short Pages</h3>
-				<button className="btn flat right">Add</button>
+				<button className="btn flat right" onClick={this.AddBtn}>Add</button>
 				<div style={{clear: 'both'}}></div>
-				{/* {this.state.addMenu ?
-					<Field name="menu" title="Add menu" onChange={this.onChangeMnu} placeholder="Menu 1" value={this.state.name} type="text" />} */}
+				{/* <Field name="menu" title="Add menu" onChange={this.onChangeMnu} placeholder="Menu 1" value={this.state.name} type="text" />} */}
 				{this.renderArticle()}
 			</div>
 		)

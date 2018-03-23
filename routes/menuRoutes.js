@@ -4,21 +4,18 @@ const Menu = mongoose.model('menus');
 
 module.exports = (app) => {
 
-  app.post( '/api/menu', (req, res) => {
+  app.post('/api/menu', async (req, res) => {
+    const count = await Menu.find({});
 
-    // const { title, content } = req.body;
-    // image = JSON.parse(req.body.image);
-    // const project = new Project({
-    //   uniqID: req.params.id,
-    //   title,
-    //   content,
-    //   image,
-    //   dateSent: Date.now()
-    // })
-    //
-    // project.save(err => {
-    //   console.log(err)
-    // })
+    const { name } = req.body;
+    const menu = new Menu({
+      id: count.length,
+      name
+    })
+
+    menu.save(err => {
+      console.log(err)
+    })
     res.send(req.body)
   });
 
