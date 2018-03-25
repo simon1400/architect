@@ -1,6 +1,9 @@
 ul li, .addWrap{
-  position: relative;
   margin-bottom: 20px;
+}
+
+.addWrap, .menuLi{
+  position: relative;
 }
 
 input{
@@ -19,4 +22,18 @@ ul li span i, .addSave i{
 
 ul li span i:hover, .addSave i:hover{
   color: #26a69a;
+}
+
+.addArticle, .menuArticles a{
+  color: black;
+}
+
+.menuArticles{
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.articleShort{
+  padding: 6px 10px;
+  background-color: #00897b;
 }

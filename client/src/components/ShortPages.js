@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -17,6 +18,8 @@ class ShortPages extends Component {
 		this.onChangeMnu = this.onChangeMnu.bind(this)
 		this.onClickMnu = this.onClickMnu.bind(this)
 		this.deleteData = this.deleteData.bind(this)
+		this.deleteArticle = this.deleteArticle.bind(this)
+		this.renderArticle = this.renderArticle.bind(this)
 	}
 
 	componentDidMount() {
@@ -43,31 +46,9 @@ class ShortPages extends Component {
 		this.props.getMenu()
 	}
 
-	renderAdd() {
-		return <div className="addWrap">
-				<input name="addField" value={this.state.addField} onChange={e => this.AddMnu(e)}/>
-				<span className="addSave">
-					<i className="material-icons" onClick={() => this.saveMnu(this.state.addField)}>save</i>
-				</span>
-			</div>
-	}
-
-	renderMenu() {
-		return this.props.menu.map((item, index) =>
-			<li key={item._id}>
-				<input
-					name={item._id}
-					value={this.state[item._id] ? this.state[item._id].value : item.name}
-					onChange={e => this.onChangeMnu(e)}
-					disabled={this.state[item._id] ? this.state[item._id].disable : true}
-				/>
-				<span>
-					<i className={this.state[item._id] ? this.state[item._id].disable ? "hide" : "material-icons" : "hide"} onClick={() => this.saveMnu(this.state[item._id].value, item._id)}>save</i>
-					<i className="material-icons" onClick={() => this.onClickMnu(item._id)}>edit</i>
-					<i className="material-icons" onClick={() => this.deleteData(item._id)}>delete_forever</i>
-					<i className="material-icons" onClick={() => this.deleteData(item._id)}>add</i>
-				</span>
-			</li>)
+	deleteArticle(id) {
+		this.props.deleteArticle(id)
+		this.props.getMenu()
 	}
 
 	AddMnu(e) {
@@ -89,6 +70,54 @@ class ShortPages extends Component {
 		})
 	}
 
+	renderAdd() {
+		return <div className="addWrap">
+				<input name="addField" value={this.state.addField} onChange={e => this.AddMnu(e)}/>
+				<span className="addSave">
+					<i className="material-icons" onClick={() => this.saveMnu(this.state.addField)}>save</i>
+				</span>
+			</div>
+	}
+
+	renderArticle(menuId) {
+		return this.props.articles.map((item, index) => {
+			if(menuId === item.menuId){
+				return <li key={index}>
+					<div className="menuLi">
+						<div className="articleShort">{item.title}</div>
+						<span>
+							<a href={`/admin/editor/edit/${item._id}`}><i className="material-icons">edit</i></a>
+							<i className="material-icons" onClick={() => this.deleteArticle(item._id)}>delete_forever</i>
+						</span>
+					</div>
+				</li>
+			}
+		});
+	}
+
+	renderMenu() {
+		return this.props.menu.map((item, index) =>
+			<li key={index}>
+				<div className="menuLi">
+					<input
+						name={item._id}
+						value={this.state[item._id] ? this.state[item._id].value : item.name}
+						onChange={e => this.onChangeMnu(e)}
+						disabled={this.state[item._id] ? this.state[item._id].disable : true}
+					/>
+					<span>
+						<i className={this.state[item._id] ? this.state[item._id].disable ? "hide" : "material-icons" : "hide"} onClick={() => this.saveMnu(this.state[item._id].value, item._id)}>save</i>
+						<i className="material-icons" onClick={() => this.onClickMnu(item._id)}>edit</i>
+						<i className="material-icons" onClick={() => this.deleteData(item._id)}>delete_forever</i>
+						<Link to={`admin/editor/new/${item._id}`} className="addArticle"><i className="material-icons">add</i></Link>
+					</span>
+				</div>
+				<ul className="menuArticles">
+					{this.renderArticle(item._id)}
+				</ul>
+			</li>);
+	}
+
 	render() {
 		return(
 			<div>
@@ -104,8 +133,8 @@ class ShortPages extends Component {
 	}
 }
 
-function mapStateToProps({ article, menu }) {
-  return { article, menu };
+function mapStateToProps({ articles, menu }) {
+  return { articles, menu };
 }
 
 export default connect(mapStateToProps, actions)(ShortPages);
