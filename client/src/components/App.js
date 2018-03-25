@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import Header from './Header';
-import Home from './Home';
+
+import Page from '../site/Page';
 import Admin from './Admin';
-import Sidebar from './Sidebar'
 // import Error from './404';
 
 import '../styles/layout.css'
@@ -22,19 +21,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Header />
-
-          <div className="sidenav cyan darken-4">
-            <Sidebar />
-          </div>
-
-          <div className="main">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/admin" component={Admin} />
-            </Switch>
-          </div>
-
+          <Route exact path="/" component={Page} />
+          <Route path="/admin" component={Admin} />
         </div>
       </Router>
     )

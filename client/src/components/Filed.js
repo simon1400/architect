@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Field extends Component {
   render() {
     return(
-      <div>
+      <div className="field">
         <label htmlFor={this.props.name}>{this.props.title}</label>
         <input
           placeholder={this.props.placeholder}

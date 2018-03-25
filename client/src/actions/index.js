@@ -15,6 +15,7 @@ export const fetchData = (id, data, image) => async dispatch => {
 
   formData.append('title', data.title)
   formData.append('content', data.content)
+  formData.append('menuId', data.menuId)
   formData.append('image', JSON.stringify(image))
 
   const res = await axios.post('/api/project/'+id, formData);
@@ -39,4 +40,14 @@ export const getMenu = () => async dispatch => {
 export const deleteMenu = id => async dispatch => {
   const res = await axios.post('/api/menu/delete', {id});
   dispatch({ type: MENU_DATA, payload: res.data});
+}
+
+export const deleteArticle = id => async dispatch => {
+  const res = await axios.post('/api/article/delete', {id});
+  dispatch({ type: FETCH_DATA, payload: res.data});
+}
+
+export const updateArticle = (id, body) => async dispatch => {
+  const res = await axios.put('/api/article', {id, body});
+  dispatch({ type: FETCH_DATA, payload: res.data});
 }
