@@ -5,6 +5,7 @@ var ProjectSchema = new mongoose.Schema({
   title: String,
   content: String,
   image: [],
+  menuId: String,
   dateSent: Date
 });
 

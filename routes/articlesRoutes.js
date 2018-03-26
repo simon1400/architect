@@ -20,13 +20,14 @@ module.exports = (app) => {
 
   app.post( '/api/project/:id', upload.array('file', 12), (req, res) => {
 
-    const { title, content } = req.body;
+    const { title, content, menuId } = req.body;
     image = JSON.parse(req.body.image);
     const project = new Project({
       uniqID: req.params.id,
       title,
       content,
       image,
+      menuId,
       dateSent: Date.now()
     })
 
@@ -41,4 +42,19 @@ module.exports = (app) => {
     res.send(projects);
   })
 
+  app.post('/api/article/delete', async (req, res) => {
+    Project.findByIdAndRemove(mongoose.Types.ObjectId(req.body.id), (err, menu) => {
+      if (err) return res.status(500).send(err);
+    });
+
+    const data = await Project.find({});
+    res.send(data);
+  })
+
+  app.put('/api/article', (req, res) => {
+    const idNew = mongoose.Types.ObjectId(req.body.id);
+    const { menuId, title, content } = req.body.body;
+    Project.findByIdAndUpdate(idNew, { menuId, title, content }, (err, menu) => {if(err) console.error(err)})
+    res.send({})
+  })
 }

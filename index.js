@@ -21,7 +21,7 @@ app.use(
 );
 
 require('./routes/authRoutes')(app);
-require('./routes/projectsRoutes')(app);
+require('./routes/articlesRoutes')(app);
 require('./routes/menuRoutes')(app);
 
 if(process.env.NODE_ENV === 'production'){

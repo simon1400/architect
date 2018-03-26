@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'worksans';
+  src: url('../fonts/worksans-light.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/worksans-light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/worksans-light.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/worksans-light.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/worksans-light.svg#svgFontName') format('svg'); /* Legacy iOS */
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'worksans';
+  src: url('../fonts/worksans-medium.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/worksans-medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/worksans-medium.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/worksans-medium.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/worksans-medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/worksans-medium.svg#svgFontName') format('svg'); /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Sites{
+  font-family: 'worksans';
+}
+
+header{
+  padding: 10px 0;
+}
+
+.container{
+  max-width: 1400px!important;
+}
+
+.logo{
+  font-size: 50px;
+}
+
+.topMenu{
+  background-color: transparent;
+  display: inline-block;
+  text-align: right;
+  box-shadow: none;
+  height: auto;
+  line-height: inherit;
+  padding-top: 20px;
+}
+
+.topMenu ul{
+  float: right;
+}
+
+.topMenu li{
+  margin-bottom: 0;
+}
+
+.topMenu a{
+  color: black;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.topMenu a:hover{
+  background-color: transparent;
+}
+
+.homeItem{
+  min-height: 200px;
+  text-align: center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+}

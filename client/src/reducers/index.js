@@ -5,6 +5,6 @@ import menuReducer from './menuReducer';
 
 export default combineReducers({
   auth: authReducer,
-  article: articleReducer,
+  articles: articleReducer,
   menu: menuReducer
 });

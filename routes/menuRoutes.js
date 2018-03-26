@@ -13,7 +13,7 @@ module.exports = (app) => {
     const idNew = mongoose.Types.ObjectId(id);
 
     if(id){
-      Menu.findByIdAndUpdate(idNew, {name: name}, (err, menu) => {if(err) console.error(err)})
+      Menu.findByIdAndUpdate(idNew, {name}, (err, menu) => {if(err) console.error(err)})
     }else{
       menu.save(err => {
         console.log(err)
