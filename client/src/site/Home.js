@@ -1,14 +1,37 @@
 import React, { Component } from 'react'
-import Header from './Header'
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class Home extends Component {
+
+  componentDidMount() {
+    this.props.getData();
+  }
+
   render() {
-    return(
-      <div className="homePage">
-        <Header />
+    let childElements = this.props.articles.map((item, index) => {
+      let firstImage = item.image[0]
+      let url = '/images/' + item.uniqID + '/' + firstImage.name;
+       return (
+          <div key={index} className="col s3">
+            <a href={`/project/${item._id}`} className="home_item_wrap">
+              <h2>{item.title}</h2>
+              <div className="homeItem" style={{backgroundImage: `url('${url}')`}}></div>
+            </a>
+          </div>
+        );
+    });
+
+    return (
+      <div className="homePage row">
+        {childElements}
       </div>
-    )
+    );
   }
 }
 
-export default Home;
+function mapStateToProps({ articles }) {
+  return { articles };
+}
+
+export default connect(mapStateToProps, actions)(Home);

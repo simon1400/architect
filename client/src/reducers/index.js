@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-import projectReducer from './projectReducer';
-import imageReducers from './imageReducers';
+import articleReducer from './articleReducer';
+import menuReducer from './menuReducer';
 
 export default combineReducers({
   auth: authReducer,
-  project: projectReducer,
-  image: imageReducers
+  articles: articleReducer,
+  menu: menuReducer
 });

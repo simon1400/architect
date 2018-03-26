@@ -6,6 +6,7 @@ const keys = require('./config/keys');
 
 require('./models/User');
 require('./models/Projects');
+require('./models/Menu');
 
 mongoose.connect(keys.mongoURI, { autoIndex: false });
 
@@ -20,7 +21,8 @@ app.use(
 );
 
 require('./routes/authRoutes')(app);
-require('./routes/projectsRoutes')(app);
+require('./routes/articlesRoutes')(app);
+require('./routes/menuRoutes')(app);
 
 if(process.env.NODE_ENV === 'production'){
     const path = require('path'); //We need path earlier for this!

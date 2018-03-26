@@ -17,9 +17,9 @@ class Header extends Component {
 
   render() {
     return(
-      <nav>
+      <nav className="header cyan darken-3">
         <div className="nav-wrapper">
-          <Link to='/' className="left brand-logo center">
+          <Link to='/' className="left brand-logo left">
             Architect project
           </Link>
           <ul className="right">
