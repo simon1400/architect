@@ -59,6 +59,7 @@ header{
   color: black;
   font-size: 20px;
   text-transform: uppercase;
+  font-weight: lighter;
 }
 
 .topMenu a:hover{
@@ -67,8 +68,46 @@ header{
 
 .homeItem{
   min-height: 200px;
+  height: 100%;
+  margin-bottom: 20px;
+  width: 100%;
   text-align: center;
+  overflow: hidden;
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center center;
+  position: absolute;
+  z-index: -1;
+  transform: scale(1);
+  transition: all 1s ease;
+}
+.home_item_wrap{
+  overflow: hidden;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+.home_item_wrap:hover .homeItem{
+  transform: scale(1.1);
+}
+
+.home_item_wrap:hover{
+  background-color: rgba(0,0,0, .7);
+}
+
+.home_item_wrap:hover h2{
+  display: block;
+}
+
+.home_item_wrap h2{
+  display: none;
+  margin: auto;
+  color: white;
+  font-size: 30px;
+  z-index: 1000;
 }

@@ -4,7 +4,7 @@ var mkdirp = require('mkdirp');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = 'uploads/'+req.params.id
+    const dir = 'client/public/images/'+req.params.id
     mkdirp(dir, err => cb(null, dir))
   },
   filename: function (req, file, cb) {
