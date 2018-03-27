@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import * as actions from '../actions';
 
 class Home extends Component {
-
-  componentDidMount() {
-    this.props.getData();
-  }
 
   render() {
     let childElements = this.props.articles.map((item, index) => {
@@ -34,4 +29,4 @@ function mapStateToProps({ articles }) {
   return { articles };
 }
 
-export default connect(mapStateToProps, actions)(Home);
+export default connect(mapStateToProps, {})(Home);

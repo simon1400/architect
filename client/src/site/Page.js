@@ -3,8 +3,9 @@ import {Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import Home from './Home'
 import Header from './Header'
+import Home from './Home'
+import Project from './Project'
 
 import './styles/page.css'
 
@@ -12,13 +13,15 @@ class Page extends Component {
 
   componentDidMount = () => {
     this.props.getMenu()
+    this.props.getData();
   }
 
   render() {
     return(
         <div className="container Sites">
           <Header />
-          <Route exact path={`${this.props.match.url}/`} component={Home} />
+          <Route exact path={`/`} component={Home} />
+          <Route exact path={`/project/:id`} component={Project} />
         </div>
     )
   }

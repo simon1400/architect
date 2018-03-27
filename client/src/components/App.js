@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={Page} />
+          <Route path="/" component={Page} />
           <Route path="/admin" component={Admin} />
         </div>
       </Router>
