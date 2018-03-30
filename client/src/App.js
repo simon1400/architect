@@ -12,9 +12,10 @@ import ShortPages from './components/ShortPages'
 
 import Home from './site/Home'
 import Project from './site/Project'
+import News from './site/News'
+import Contacts from './site/Contacts'
 
 import './styles/layout.css'
-
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route {...rest} render={props => (
@@ -35,8 +36,13 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <AppRoute exact path={`/`} layout={PageLayout} component={Home} />
-            <AppRoute exact path={`/project/:id`} layout={PageLayout} component={Project} />
+            {/* Site routes */}
+            <AppRoute exact path={`/projects`} layout={PageLayout} component={Home} />
+            <AppRoute exact path={`/news`} layout={PageLayout} component={News} />
+            <AppRoute exact path={`/contact`} layout={PageLayout} component={Contacts} />
+            <AppRoute exact path={`/:page/:id`} layout={PageLayout} component={Project} />
+
+          {/* Admin routes */}
             <AppRoute exact path={'/admin'} layout={AdminLayout} component={ShortPages} />
             <AppRoute exact path={'/admin/editor/:type(new|edit)/:id'} layout={AdminLayout} component={Edit} />
           </Switch>

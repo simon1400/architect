@@ -1,33 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import Slider from './components/Slider'
+import renderHTML from 'react-render-html';
 
-class Home extends Component {
+class Contacts extends Component {
 
   render() {
     let childElements,
-        urlImage = '',
         url = this.props.match.path.substring(1);
+
     if(this.props.articles.length > 0){
       let articles = this.props.articles.filter(article => article.parentPage == url ? article : null)
       childElements = articles.map((item, index) => {
-        let firstImage = item.image[0]
-        if(firstImage){
-          urlImage = '/images/' + item.uniqID + '/' + firstImage.name;
-        }
          return (
-            <div key={index} className="col s3">
-              <a href={`/project/${item._id}`} className="home_item_wrap">
-                <h2>{item.title}</h2>
-              <div className="homeItem" style={{backgroundImage: `url('${urlImage}')`}}></div>
-              </a>
+            <div key={item} className="col s6">
+              <Slider items={item}/>
+              <h2>{item.title}</h2>
+              {item.content ? renderHTML(item.content) : ''}
             </div>
           );
       });
     }
 
-
     return (
-      <div className="homePage row">
+      <div className="contacts row">
         {childElements}
       </div>
     );
@@ -38,4 +34,4 @@ function mapStateToProps({ articles }) {
   return { articles };
 }
 
-export default connect(mapStateToProps, {})(Home);
+export default connect(mapStateToProps, {})(Contacts);

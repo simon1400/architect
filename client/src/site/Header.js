@@ -16,7 +16,7 @@ class Header extends Component {
     return(
       <header className="row">
         <div className="logo col s2">
-          <a href="/" style={{color: 'black'}}>Logo</a>
+          <a href="/projects" style={{color: 'black'}}>Logo</a>
         </div>
         <div  className="col s10">
           <nav className="right topMenu">
