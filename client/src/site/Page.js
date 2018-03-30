@@ -16,11 +16,13 @@ class Page extends Component {
     this.props.getData();
   }
 
+
   render() {
+    console.log(this.props.match);
     return(
         <div className="container Sites">
           <Header />
-          <Route exact path={`/`} component={Home} />
+          <Route path={`/projects`} component={Home} />
           <Route exact path={`/project/:id`} component={Project} />
         </div>
     )

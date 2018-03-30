@@ -8,7 +8,7 @@ class Header extends Component {
   renderMenu() {
 		return this.props.menu.map((item, index) =>
 			<li key={index}>
-				<Link to="">{item.name}</Link>
+				<Link to={`/${item.name.toLowerCase()}`}>{item.name}</Link>
 			</li>);
 	}
 

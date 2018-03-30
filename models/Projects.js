@@ -6,6 +6,7 @@ var ProjectSchema = new mongoose.Schema({
   content: String,
   image: [],
   menuId: String,
+  parentPage: String,
   dateSent: Date
 });
 

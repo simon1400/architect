@@ -24,7 +24,7 @@ ul li span i:hover, .addSave i:hover{
   color: #26a69a;
 }
 
-.addArticle, .menuArticles a{
+.addArticle{
   color: black;
 }
 
@@ -33,7 +33,14 @@ ul li span i:hover, .addSave i:hover{
   margin-top: 20px;
 }
 
+.menuArticles span, .menuArticles a{
+  color: white;
+}
+
 .articleShort{
   padding: 6px 10px;
   background-color: #00897b;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: lighter;
 }

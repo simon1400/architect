@@ -15,19 +15,24 @@ var storage = multer.diskStorage({
 var upload = multer( { storage: storage } );
 
 const Project = mongoose.model('projects');
+const Menu = mongoose.model('menus');
 
 module.exports = (app) => {
 
-  app.post( '/api/project/:id', upload.array('file', 12), (req, res) => {
+  app.post( '/api/project/:id', upload.array('file', 12), async (req, res) => {
 
     const { title, content, menuId } = req.body;
     image = JSON.parse(req.body.image);
+
+    const parentPage = await Menu.findById(mongoose.Types.ObjectId(menuId));
+
     const project = new Project({
       uniqID: req.params.id,
       title,
       content,
       image,
       menuId,
+      parentPage: parentPage.name.toLowerCase(),
       dateSent: Date.now()
     })
 
