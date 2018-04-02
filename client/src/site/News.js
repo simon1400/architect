@@ -12,19 +12,19 @@ class News extends Component {
     if(this.props.articles.length > 0){
       let articles = this.props.articles.filter(article => article.parentPage == url ? article : null)
       childElements = articles.map((item, index) => {
-         return [
-            <div key={`${index}_A`} className="col s12">
-              <Slider items={item}/>
-          </div>,
-            <div key={`${index}_B`} className="col s6 offset-s3">
-              <h2>{item.title}</h2>
-              {item.content ? renderHTML(item.content) : ''}
+         return (
+           <div key={index} className="newsItem">
+              <div className="col s12">
+                <Slider items={item}/>
+              </div>
+                <div className="col s12 m12 offset-l3 l6">
+                  <h2>{item.title}</h2>
+                  {item.content ? renderHTML(item.content) : ''}
+              </div>
             </div>
-          ];
+          );
       });
     }
-
-
 
     return (
       <div className="news row">

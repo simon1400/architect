@@ -1,24 +1,17 @@
 import axios from 'axios';
-import { FETCH_DATA, MENU_DATA } from './types'
+import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA } from './types'
 
-export const fetchData = (id, data, image) => async dispatch => {
+export const saveImage = (id, images) => async dispatch => {
   let formData = new FormData();
-  let files = [];
-  image.map((item, index) => {
-    files.push(item.file);
-    delete item.file;
-    delete item.preview;
-    item.index = index;
-  })
 
-  files.map(file => formData.append('file', file))
+  images.map(file => formData.append('file', file))
 
-  formData.append('title', data.title)
-  formData.append('content', data.content)
-  formData.append('menuId', data.menuId)
-  formData.append('image', JSON.stringify(image))
+  const res = await axios.post('/api/image/'+id, formData);
+  dispatch({ type: IMAGE_DATA, payload: res.data});
+}
 
-  const res = await axios.post('/api/project/'+id, formData);
+export const fetchData = (id, data) => async dispatch => {
+  const res = await axios.post('/api/project/'+id, data);
   dispatch({ type: FETCH_DATA, payload: res.data});
 }
 
@@ -50,4 +43,21 @@ export const deleteArticle = id => async dispatch => {
 export const updateArticle = (id, body) => async dispatch => {
   const res = await axios.put('/api/article', {id, body});
   dispatch({ type: FETCH_DATA, payload: res.data});
+}
+
+
+export const saveSocial = (name, classname, link) => async dispatch => {
+  const res = await axios.post('/api/icons', {name, classname, link});
+  dispatch({ type: SOCIAL_DATA, payload: res.data});
+}
+
+
+export const getSocial = () => async dispatch => {
+  const res = await axios.get('/api/icons');
+  dispatch({ type: SOCIAL_DATA, payload: res.data});
+}
+
+export const deleteSocial = id => async dispatch => {
+  const res = await axios.post('/api/social/delete', {id});
+  dispatch({ type: SOCIAL_DATA, payload: res.data});
 }

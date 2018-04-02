@@ -28,3 +28,12 @@
   padding-right: 30px;
   top: 0;
 }
+
+.icons{
+  font-size: 20px;
+  top: 10px;
+}
+
+.icons i{
+  margin-right: 10px;
+}

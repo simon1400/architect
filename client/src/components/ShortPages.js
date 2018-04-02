@@ -26,10 +26,11 @@ class ShortPages extends Component {
 		this.props.getMenu()
 	}
 
-	onClickMnu(e) {
+	onClickMnu(e, value) {
 		this.setState({
 		[e]: {
-			disable: false
+			disable: false,
+			value: value
 		}})
 	}
 
@@ -74,7 +75,7 @@ class ShortPages extends Component {
 		return <div className="addWrap">
 				<input name="addField" value={this.state.addField} onChange={e => this.AddMnu(e)}/>
 				<span className="addSave">
-					<i className="material-icons" onClick={() => this.saveMnu(this.state.addField)}>save</i>
+					<i className="fas fa-save" onClick={() => this.saveMnu(this.state.addField)}></i>
 				</span>
 			</div>
 	}
@@ -85,9 +86,9 @@ class ShortPages extends Component {
 				return <li key={index}>
 					<div className="menuLi">
 						<div className="articleShort">{item.title}</div>
-						<span>
-							<a href={`/admin/editor/edit/${item._id}`}><i className="material-icons">edit</i></a>
-							<i className="material-icons" onClick={() => this.deleteArticle(item._id)}>delete_forever</i>
+					<span className="icons">
+							<a href={`/admin/editor/edit/${item._id}`}><i className="far fa-edit"></i></a>
+							<i className="far fa-trash-alt" onClick={() => this.deleteArticle(item._id)}></i>
 						</span>
 					</div>
 				</li>
@@ -105,16 +106,16 @@ class ShortPages extends Component {
 						onChange={e => this.onChangeMnu(e)}
 						disabled={this.state[item._id] ? this.state[item._id].disable : true}
 					/>
-					<span>
-						<i className={this.state[item._id] ? this.state[item._id].disable ? "hide" : "material-icons" : "hide"} onClick={() => this.saveMnu(this.state[item._id].value, item._id)}>save</i>
-						<i className="material-icons" onClick={() => this.onClickMnu(item._id)}>edit</i>
-						<i className="material-icons" onClick={() => this.deleteData(item._id)}>delete_forever</i>
-						<Link to={`admin/editor/new/${item._id}`} className="addArticle"><i className="material-icons">add</i></Link>
+				<span className="icons">
+						<i className={this.state[item._id] ? this.state[item._id].disable ? "hide" : 'fas fa-save' : "hide"} onClick={() => this.saveMnu(this.state[item._id].value, item._id)}></i>
+					<i className="far fa-edit" onClick={() => this.onClickMnu(item._id, item.name)}></i>
+						<i className="far fa-trash-alt" onClick={() => this.deleteData(item._id)}></i>
+					<Link to={`admin/editor/new/${item._id}`} className="addArticle"><i className="fas fa-plus"></i></Link>
 					</span>
+					<ul className="menuArticles">
+						{this.renderArticle(item._id)}
+					</ul>
 				</div>
-				<ul className="menuArticles">
-					{this.renderArticle(item._id)}
-				</ul>
 			</li>);
 	}
 

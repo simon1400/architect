@@ -1,0 +1,36 @@
+.addIcons span{
+  display: inline-block;
+  margin-top: 15px;
+}
+
+
+.item_social{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 15px;
+  vertical-align: middle;
+}
+.item_social span{
+  vertical-align: middle;
+}
+
+.item_social i{
+  margin-right: 15px;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+.controllButtons{
+  display: block;
+  text-align: right;
+}
+
+.controllButtons i{
+  font-size: 18px;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 0;
+  cursor: pointer;
+}

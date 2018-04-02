@@ -90,12 +90,12 @@ class Edit extends Component {
   }
 
 	onDrop = (files) => {
+    this.props.saveImage(this.state.uniqID, files);
     let image = []
     files.map((file, index) => {
       return image = [
         ...image,
         {
-          file: file,
           preview: file.preview,
           name: file.name
         }
@@ -110,15 +110,21 @@ class Edit extends Component {
 
   submit = () => {
     const content = stateToHTML(this.state.editorState.getCurrentContent());
+    const image = this.state.image;
+    image.map((item, index) => {
+      delete item.preview;
+      item.index = index;
+    })
     const data = {
       title: this.state.title,
       content,
-      menuId: this.state.menuId
+      menuId: this.state.menuId,
+      image: image
     }
     if(this.state.edit){
       this.props.updateArticle(this.state._id, data)
     }else{
-      this.props.fetchData(this.state.uniqID, data, this.state.image)
+      this.props.fetchData(this.state.uniqID, data)
     }
   }
 
@@ -127,12 +133,11 @@ class Edit extends Component {
 			<div>
         <h3>Edit article</h3>
         <Field name="title" title="Zahlavi" onChange={this.changeTitle} placeholder="Clanek 1" value={this.state.title} type="text" />
-				<DragDrop image={this.state.image} onDrop={this.onDrop} onShort={this.short}/>
+        <DragDrop id={this.state.uniqID} image={this.state.image} onDrop={this.onDrop} onShort={this.short}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <a href="/admin">
           <button className="btn right waves-effect waves-light button_submit" onClick={this.submit}>
             Submit
-            <i className="material-icons right">send</i>
           </button>
         </a>
 			</div>

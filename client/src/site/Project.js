@@ -26,10 +26,10 @@ class Project extends Component {
     return(
       <div className="project">
         <div className="row">
-          <div className="col s6">
+          <div className="col s12 m6">
             <Slider items={projectItem}/>
           </div>
-          <div className="col s6">
+          <div className="col s12 m6">
             <h1>{projectItem.title}</h1>
             {projectItem.content ? renderHTML(projectItem.content) : ''}
           </div>

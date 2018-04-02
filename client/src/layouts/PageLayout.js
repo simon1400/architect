@@ -11,6 +11,7 @@ class PageLayout extends Component {
 
   componentDidMount() {
     this.props.getMenu()
+    this.props.getSocial()
   }
 
 

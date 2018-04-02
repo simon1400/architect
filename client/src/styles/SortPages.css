@@ -44,3 +44,11 @@ ul li span i:hover, .addSave i:hover{
   letter-spacing: 1px;
   font-weight: lighter;
 }
+
+.menuArticles .icons{
+  top: 2px;
+}
+
+.addSave i{
+  font-size: 25px;
+}

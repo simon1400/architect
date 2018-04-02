@@ -13,7 +13,7 @@ class Contacts extends Component {
       let articles = this.props.articles.filter(article => article.parentPage == url ? article : null)
       childElements = articles.map((item, index) => {
          return (
-            <div key={item} className="col s6">
+            <div key={item} className="col s12 m12 l6">
               <Slider items={item}/>
               <h2>{item.title}</h2>
               {item.content ? renderHTML(item.content) : ''}
