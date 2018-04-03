@@ -57,11 +57,11 @@ class TextEditor extends Component {
     return(
       <div>
         <div className="button_group" style={{marginBottom: '20px'}}>
-          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('BOLD')}><i className="material-icons center">format_bold</i></button>
-          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('ITALIC')}><i className="material-icons center">format_italic</i></button>
-          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('UNDERLINE')}><i className="material-icons center">format_underlined</i></button>
-          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleBlock('unordered-list-item')}><i className="material-icons center">format_list_bulleted</i></button>
-          <button className="waves-effect waves-light btn" onClick={e => this.setLink()}><i className="material-icons center">insert_link</i></button>
+          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('BOLD')}><i className="fas fa-bold"></i></button>
+          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('ITALIC')}><i className="fas fa-italic"></i></button>
+          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('UNDERLINE')}><i className="fas fa-underline"></i></button>
+          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleBlock('unordered-list-item')}><i className="fas fa-list-ul"></i></button>
+          <button className="waves-effect waves-light btn" onClick={e => this.setLink()}><i className="fas fa-link"></i></button>
         </div>
         <Editor
           editorState={this.props.editorState}
