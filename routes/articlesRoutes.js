@@ -47,4 +47,12 @@ module.exports = app => {
     Project.findByIdAndUpdate(idNew, { menuId, title, content, image }, (err, menu) => {if(err) console.error(err)})
     res.send({})
   })
+
+  app.put('/api/article/column', async (req, res) => {
+    const idNew = mongoose.Types.ObjectId(req.body.id);
+    const { column } = req.body;
+    Project.findByIdAndUpdate(idNew, { column }, (err, menu) => {if(err) console.error(err)})
+    const data = await Project.find({});
+    res.send(data);
+  })
 }

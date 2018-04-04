@@ -45,6 +45,10 @@ export const updateArticle = (id, body) => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: res.data});
 }
 
+export const updateArticleColumn = (id, column) => async dispatch => {
+  const res = await axios.put('/api/article/column', {id, column});
+  dispatch({ type: FETCH_DATA, payload: res.data});
+}
 
 export const saveSocial = (name, classname, link) => async dispatch => {
   const res = await axios.post('/api/icons', {name, classname, link});

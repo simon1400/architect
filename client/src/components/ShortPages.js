@@ -11,7 +11,7 @@ class ShortPages extends Component {
 		super(props)
 		this.state = {
 			addMenu: false,
-			addField: ''
+			addField: '',
 		}
 
 		this.AddMnu = this.AddMnu.bind(this)
@@ -80,13 +80,18 @@ class ShortPages extends Component {
 			</div>
 	}
 
+	column(id, column) {
+		this.props.updateArticleColumn(id, !column)
+	}
+
 	renderArticle(menuId) {
 		return this.props.articles.map((item, index) => {
 			if(menuId === item.menuId){
 				return <li key={index}>
 					<div className="menuLi">
 						<div className="articleShort">{item.title}</div>
-					<span className="icons">
+						<span className="icons">
+							<i className={`far ${item.column ? 'fa-check-square' : 'fa-square'}`} onClick={() => this.column(item._id, item.column)}></i>
 							<a href={`/admin/editor/edit/${item._id}`}><i className="far fa-edit"></i></a>
 							<i className="far fa-trash-alt" onClick={() => this.deleteArticle(item._id)}></i>
 						</span>
