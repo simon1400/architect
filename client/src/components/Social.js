@@ -58,7 +58,7 @@ class Social extends Component {
 			<div className="col s4"><span>{social.link}</span></div>
 			<div className="col s2">
 				<span className="controllButtons">
-					{/* <i className="far fa-edit"></i> */}
+					<i className="far fa-edit"></i>
 					<i className="far fa-trash-alt" onClick={() => this.deleteData(social._id)}></i>
 				</span>
 			</div>
