@@ -4,13 +4,21 @@ import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 
 import '../styles/DragDrop.css'
 
-const SortableItem = SortableElement(({value, id}) => {
-  let url = value.preview ? value.preview : `/images/${id}/${value.name}`
-  return <div className="preview" style={{backgroundImage: `url(${url})`}}></div>
+const SortableItem = SortableElement(({value, index, id, onDelete}) => {
+  let url = value.preview ? value.preview : `/images/${id}/${value.name}`;
+  return (
+    <div
+      className="preview"
+      key={`index-${value.index}`}
+      style={{backgroundImage: `url(${url})`}}
+      >
+        <i onMouseDown={() => onDelete(id, value)} className="far fa-times-circle"></i>
+    </div>
+  )
 });
 
-const SortableList = SortableContainer(({items, id}) => {
-  return <div>{items.map((value, index) => <SortableItem key={`item-${index}`} index={index} id={id} value={value} />)}</div>
+const SortableList = SortableContainer(({items, id, onDelete}) => {
+  return <div>{items.map((value, index) => <SortableItem key={`item-${value.name}`} index={index} id={id} value={value} onDelete={onDelete} />)}</div>
 });
 
 class SortableComponent extends Component {
@@ -27,17 +35,20 @@ class SortableComponent extends Component {
   };
 
   render() {
-    return <SortableList axis="xy" id={this.props.id} items={this.props.image} onSortEnd={this.onSortEnd} />;
+    return <SortableList axis="xy" id={this.props.id} items={this.props.image} onSortEnd={this.onSortEnd} onDelete={this.props.onDelete} />;
   }
 }
 
 class DragDrop extends Component {
 
 	render() {
+    if(this.props.image[0] == undefined) {
+      this.props.image.splice(0, 1);
+    }
 		return(
       <Dropzone className="dropZone" onDrop={(e) => this.props.onDrop(e)} disableClick={true}>
         <p>Try dropping some files here to upload.</p>
-      <SortableComponent image={this.props.image} id={this.props.id} onShort={this.props.onShort}/>
+        <SortableComponent image={this.props.image} id={this.props.id} onShort={this.props.onShort} onDelete={this.props.deleteFoto}/>
       </Dropzone>
 		)
 	}

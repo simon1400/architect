@@ -10,6 +10,11 @@ export const saveImage = (id, images) => async dispatch => {
   dispatch({ type: IMAGE_DATA, payload: res.data});
 }
 
+export const deleteImage = (id, image, uniqID, name) => async dispatch => {
+  const res = await axios.put('/api/image/'+id, {image, uniqID, name});
+  dispatch({ type: IMAGE_DATA, payload: res.data});
+}
+
 export const fetchData = (id, data) => async dispatch => {
   const res = await axios.post('/api/project/'+id, data);
   dispatch({ type: FETCH_DATA, payload: res.data});

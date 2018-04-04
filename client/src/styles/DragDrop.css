@@ -3,6 +3,7 @@
   height: 150px;
   display: inline-block;
   margin-right: 10px;
+  position: relative;
 }
 
 .dropZone{
@@ -12,4 +13,17 @@
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 40px;
+}
+
+
+.preview i{
+  z-index: 100;
+  color: red;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  font-size: 20px;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
 }

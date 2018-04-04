@@ -55,7 +55,8 @@ class Edit extends Component {
       this.setState({
         uniqID: Math.random().toString(36).substr(2, 9),
         menuId: this.props.match.params.id,
-        edit: false
+        edit: false,
+        _id: 'new'
       })
     }
   }
@@ -128,12 +129,20 @@ class Edit extends Component {
     }
   }
 
+  deleteFoto = (id, element) => {
+    let image = this.state.image;
+    const itemPos = image.indexOf(element);
+    image.splice(itemPos, 1);
+    this.setState({image})
+    this.props.deleteImage(this.state._id, image, this.state.uniqID, element.name);
+  }
+
 	render() {
 		return(
 			<div>
         <h3>Edit article</h3>
         <Field name="title" title="Zahlavi" onChange={this.changeTitle} placeholder="Clanek 1" value={this.state.title} type="text" />
-        <DragDrop id={this.state.uniqID} image={this.state.image} onDrop={this.onDrop} onShort={this.short}/>
+        <DragDrop id={this.state.uniqID} image={this.state.image} onDrop={this.onDrop} onShort={this.short} deleteFoto={this.deleteFoto}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <a href="/admin">
           <button className="btn right waves-effect waves-light button_submit" onClick={this.submit}>
