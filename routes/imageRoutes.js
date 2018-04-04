@@ -3,10 +3,9 @@ var multer = require('multer');
 var mkdirp = require('mkdirp');
 const fs = require('fs');
 
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = 'client/public/images/'+req.params.id
+    let dir = 'client/public/images/'+req.params.id
     if(process.env.NODE_ENV === 'production'){
       dir = 'client/build/images/'+req.params.id
     }
@@ -34,7 +33,7 @@ module.exports = app => {
       })
     }
     let new_name = decodeURIComponent(name)
-    const deleteFile = `client/public/images/${uniqID}/${new_name}`
+    let deleteFile = `client/public/images/${uniqID}/${new_name}`
     if(process.env.NODE_ENV === 'production') deleteFile = `client/build/images/${uniqID}/${new_name}`
     fs.unlink(deleteFile, (err) => {
 

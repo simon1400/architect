@@ -41,7 +41,7 @@ module.exports = app => {
     Project.findByIdAndRemove(mongoose.Types.ObjectId(req.body.id), (err, item) => {
       if (err) return res.status(500).send(err);
 
-      const deleteFolderImage = `client/public/images/${item.uniqID}`
+      let deleteFolderImage = `client/public/images/${item.uniqID}`
       if(process.env.NODE_ENV === 'production') deleteFolderImage = `client/build/images/${item.uniqID}`
       rimraf(deleteFolderImage, () => console.log('done'))
     });
