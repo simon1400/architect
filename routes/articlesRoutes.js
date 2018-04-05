@@ -38,12 +38,18 @@ module.exports = app => {
   })
 
   app.post('/api/article/delete', (req, res) => {
-    Project.findByIdAndRemove(mongoose.Types.ObjectId(req.body.id), (err, item) => {
-      if (err) return res.status(500).send(err);
 
-      let deleteFolderImage = `client/public/images/${item.uniqID}`
-      if(process.env.NODE_ENV === 'production') deleteFolderImage = `client/build/images/${item.uniqID}`
-      rimraf(deleteFolderImage, () => console.log('done'))
+    Project.findOneAndRemove({_id: mongoose.Types.ObjectId(req.body.id)})
+      .exec(function(err, item) {
+        if (err) {
+            return res.json({success: false, msg: 'Cannot remove item'});
+        }
+        if (!item) {
+            return res.status(404).json({success: false, msg: 'Article not found'});
+        }
+        let deleteFolderImage = `client/public/images/${item.uniqID}`;
+        if(process.env.NODE_ENV === 'production') deleteFolderImage = `client/build/images/${item.uniqID}`;
+        rimraf(deleteFolderImage, () => console.log('done'))
     });
 
 
