@@ -32,7 +32,7 @@ module.exports = app => {
         res.send(item)
       })
     }
-    let new_name = decodeURIComponent(name)
+    let new_name = decodeURI(name)
     let deleteFile = `client/public/images/${uniqID}/${new_name}`
     if(process.env.NODE_ENV === 'production') deleteFile = `client/build/images/${uniqID}/${new_name}`
     fs.unlink(deleteFile, (err) => {

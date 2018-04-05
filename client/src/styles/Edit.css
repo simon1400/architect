@@ -11,3 +11,7 @@
 .field{
   margin-bottom: 20px;
 }
+
+.Editor ul, .Editor ul li{
+  list-style-type: disc!important;
+}

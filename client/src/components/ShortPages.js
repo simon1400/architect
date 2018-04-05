@@ -111,11 +111,11 @@ class ShortPages extends Component {
 						onChange={e => this.onChangeMnu(e)}
 						disabled={this.state[item._id] ? this.state[item._id].disable : true}
 					/>
-				<span className="icons">
+					<span className="icons">
 						<i className={this.state[item._id] ? this.state[item._id].disable ? "hide" : 'fas fa-save' : "hide"} onClick={() => this.saveMnu(this.state[item._id].value, item._id)}></i>
-					<i className="far fa-edit" onClick={() => this.onClickMnu(item._id, item.name)}></i>
+						<i className="far fa-edit" onClick={() => this.onClickMnu(item._id, item.name)}></i>
 						<i className="far fa-trash-alt" onClick={() => this.deleteData(item._id)}></i>
-					<Link to={`admin/editor/new/${item._id}`} className="addArticle"><i className="fas fa-plus"></i></Link>
+						<Link to={`admin/editor/new/${item._id}`} className="addArticle"><i className="fas fa-plus"></i></Link>
 					</span>
 					<ul className="menuArticles">
 						{this.renderArticle(item._id)}
@@ -126,7 +126,7 @@ class ShortPages extends Component {
 
 	render() {
 		return(
-			<div>
+			<div className="shortPages">
 				<h3>Short Pages</h3>
 				<button className="btn flat right" onClick={this.AddMnu}>{this.state.addMenu ? 'Hide' : 'Add'}</button>
 				<div style={{clear: 'both'}}></div>

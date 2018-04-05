@@ -4,12 +4,12 @@ import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 
 import '../styles/DragDrop.css'
 
-const SortableItem = SortableElement(({value, index, id, onDelete}) => {
+const SortableItem = SortableElement(({value, indexOf, id, onDelete}) => {
   let url = value.preview ? value.preview : `/images/${id}/${value.name}`;
   return (
     <div
       className="preview"
-      key={`index-${value.index}`}
+      key={`index-${indexOf}`}
       style={{backgroundImage: `url(${url})`}}
       >
         <i onMouseDown={() => onDelete(id, value)} className="far fa-times-circle"></i>
@@ -18,7 +18,7 @@ const SortableItem = SortableElement(({value, index, id, onDelete}) => {
 });
 
 const SortableList = SortableContainer(({items, id, onDelete}) => {
-  return <div>{items.map((value, index) => <SortableItem key={`item-${value.name}`} index={index} id={id} value={value} onDelete={onDelete} />)}</div>
+  return <div>{items.map((value, index) => <SortableItem key={`item-${index}`} index={index} id={id} indexOf={index} value={value} onDelete={onDelete} />)}</div>
 });
 
 class SortableComponent extends Component {
@@ -42,9 +42,12 @@ class SortableComponent extends Component {
 class DragDrop extends Component {
 
 	render() {
-    if(this.props.image[0] == undefined) {
-      this.props.image.splice(0, 1);
-    }
+    this.props.image.map(item => {
+      if(item == undefined) {
+        this.props.image.splice(this.props.image.indexOf(item), 1);
+      }
+    })
+
 		return(
       <Dropzone className="dropZone" onDrop={(e) => this.props.onDrop(e)} disableClick={true}>
         <p>Try dropping some files here to upload.</p>

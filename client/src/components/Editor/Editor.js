@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EditorState, Editor, RichUtils } from 'draft-js';
+import { EditorState, Editor, RichUtils, Modifier } from 'draft-js';
 
 import './Editor.css'
 
@@ -12,6 +12,7 @@ class TextEditor extends Component {
     this.toggleBlock = this.toggleBlock.bind(this)
     this.toggleStyle = this.toggleStyle.bind(this)
     this.setLink = this.setLink.bind(this)
+    this.clear = this.clear.bind(this)
   }
 
   onChange(editorState){
@@ -24,6 +25,24 @@ class TextEditor extends Component {
   toggleStyle(typeStyle){
      this.onChange(RichUtils.toggleInlineStyle(this.props.editorState, typeStyle));
    }
+
+   clear() {
+      const {editorState} = this.props
+      const selection = editorState.getSelection()
+      const contentState = editorState.getCurrentContent()
+      const styles = editorState.getCurrentInlineStyle()
+
+      const removeStyles = styles.reduce((state, style) => {
+        return Modifier.removeInlineStyle(state, selection, style) }, contentState)
+
+      const removeBlock = Modifier.setBlockType(removeStyles, selection, 'unstyled')
+
+      this.props.changeEditor(EditorState.push(
+        editorState,
+        removeBlock
+      ))
+    }
+
 
    setLink() {
       // получаем ссылку из prompt диалога
@@ -55,13 +74,14 @@ class TextEditor extends Component {
 
   render(){
     return(
-      <div>
+      <div className="Editor">
         <div className="button_group" style={{marginBottom: '20px'}}>
           <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('BOLD')}><i className="fas fa-bold"></i></button>
           <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('ITALIC')}><i className="fas fa-italic"></i></button>
           <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('UNDERLINE')}><i className="fas fa-underline"></i></button>
           <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.toggleBlock('unordered-list-item')}><i className="fas fa-list-ul"></i></button>
-          <button className="waves-effect waves-light btn" onClick={e => this.setLink()}><i className="fas fa-link"></i></button>
+          <button className="waves-effect waves-light btn" style={{marginRight: '10px'}} onClick={e => this.setLink()}><i className="fas fa-link"></i></button>
+          <button className="waves-effect waves-light btn" onClick={e => this.clear()}><i className="fas fa-times"></i></button>
         </div>
         <Editor
           editorState={this.props.editorState}

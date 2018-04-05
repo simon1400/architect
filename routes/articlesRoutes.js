@@ -11,7 +11,7 @@ module.exports = app => {
     const { title, content, menuId, image } = req.body;
 
     image.map(function(item) {
-      item.name = encodeURIComponent(item.name)
+      item.name = encodeURI(item.name)
     })
 
     const parentPage = await Menu.findById(mongoose.Types.ObjectId(menuId));
@@ -58,8 +58,8 @@ module.exports = app => {
     const { menuId, title, content, image } = req.body.body;
     let newImageName;
     image.map(function(item) {
-      newImageName = decodeURIComponent(item.name)
-      item.name = encodeURIComponent(newImageName)
+      newImageName = decodeURI(item.name)
+      item.name = encodeURI(newImageName)
     })
     Project.findByIdAndUpdate(idNew, { menuId, title, content, image }, (err, menu) => {if(err) console.error(err)})
     res.send({})
