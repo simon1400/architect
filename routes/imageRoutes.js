@@ -35,7 +35,7 @@ module.exports = app => {
     }
     let new_name = decodeURI(name)
     let deleteFile = `client/public/images/${uniqID}/${new_name}`
-    if(process.env.NODE_ENV === 'production') deleteFile = `client/build/images/${uniqID}/${new_name}`
+    if(process.env.NODE_ENV === 'production') deleteFile = `images/${uniqID}/${new_name}`
     fs.unlink(deleteFile, (err) => {
       if (err) throw err;
       console.log(deleteFile + ' was deleted');
