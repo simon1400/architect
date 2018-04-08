@@ -49,7 +49,7 @@ module.exports = app => {
         }
         let deleteFolderImage = `client/public/images/${item.uniqID}`;
         if(process.env.NODE_ENV === 'production') deleteFolderImage = `client/build/images/${item.uniqID}`;
-        rimraf(deleteFolderImage, () => console.log('done'))
+        rimraf(deleteFolderImage, () => console.log('delete this images folder' +  deleteFolderImage))
     });
 
 
