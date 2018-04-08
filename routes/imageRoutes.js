@@ -7,7 +7,7 @@ var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     let dir = 'client/public/images/'+req.params.id
     if(process.env.NODE_ENV === 'production'){
-      dir = 'images/'+req.params.id
+      dir = 'client/images/'+req.params.id
     }
     console.log('upload images in folder = ' + dir);
     mkdirp(dir, err => cb(null, dir))
@@ -35,7 +35,7 @@ module.exports = app => {
     }
     let new_name = decodeURI(name)
     let deleteFile = `client/public/images/${uniqID}/${new_name}`
-    if(process.env.NODE_ENV === 'production') deleteFile = `images/${uniqID}/${new_name}`
+    if(process.env.NODE_ENV === 'production') deleteFile = `client/images/${uniqID}/${new_name}`
     fs.unlink(deleteFile, (err) => {
       if (err) throw err;
       console.log(deleteFile + ' was deleted');
