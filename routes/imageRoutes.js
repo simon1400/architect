@@ -7,7 +7,7 @@ var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     let dir = 'client/public/images/'+req.params.id
     if(process.env.NODE_ENV === 'production'){
-      dir = 'client/build/images/'+req.params.id
+      dir = 'images/'+req.params.id
     }
     console.log('upload images in folder = ' + dir);
     mkdirp(dir, err => cb(null, dir))
