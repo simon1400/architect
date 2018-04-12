@@ -5,14 +5,12 @@ const fs = require('fs');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    let dir = 'client/public/images/'+req.params.id
+    let dir = process.cwd()+'/client/public/images/'+req.params.id
     if(process.env.NODE_ENV === 'production'){
-      dir = 'client/images/'+req.params.id
+      dir = process.cwd()+'/client/images/'+req.params.id
     }
     // mkdirp(dir, err => cb(null, dir))
     var result = mkdirp(dir, function(err){console.error(err);})
-    console.log(result);
-    console.log(process.env.NODE_ENV );
     console.log('upload images in folder = ' + dir);
   },
   filename: function (req, file, cb) {
