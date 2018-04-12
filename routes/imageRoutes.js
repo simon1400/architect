@@ -9,8 +9,8 @@ var storage = multer.diskStorage({
     if(process.env.NODE_ENV === 'production'){
       dir = 'client/images/'+req.params.id
     }
-    console.log('upload images in folder = ' + dir);
     mkdirp(dir, err => cb(null, dir))
+    console.log('upload images in folder = ' + dir);
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -22,7 +22,10 @@ var upload = multer( { storage: storage } );
 const Project = mongoose.model('projects');
 
 module.exports = app => {
-  app.post( '/api/image/:id', upload.array('file', 12), async (req, res) => res.send(req.body));
+  app.post( '/api/image/:id', upload.array('file', 12), async (req, res) => {
+    console.log('upload image!!');
+    res.send(req.body)
+  });
 
   app.put( '/api/image/:id', (req, res) => {
     const { image, uniqID, name } = req.body;

@@ -48,7 +48,7 @@ module.exports = app => {
             return res.status(404).json({success: false, msg: 'Article not found'});
         }
         let deleteFolderImage = `client/public/images/${item.uniqID}`;
-        if(process.env.NODE_ENV === 'production') deleteFolderImage = `images/${item.uniqID}`;
+        if(process.env.NODE_ENV === 'production') deleteFolderImage = `client/images/${item.uniqID}`;
         rimraf(deleteFolderImage, () => console.log('delete this images folder ' +  deleteFolderImage))
     });
 
