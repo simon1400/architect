@@ -10,10 +10,9 @@ var storage = multer.diskStorage({
       dir = process.cwd()+'/client/images/'+req.params.id
     }
     // mkdirp(dir, err => cb(null, dir))
-    var result = mkdirp(dir, function(err){console.error(err);})
-    console.log(result);
-    console.log(process.env.NODE_ENV );
+    mkdirp(dir, function(err){console.error(err);})
     console.log('upload images in folder = ' + dir);
+    cb(null, dir)
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
