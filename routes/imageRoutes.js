@@ -5,12 +5,12 @@ const fs = require('fs');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    let dir = process.cwd()+'/client/public/images/'+req.params.id
+    let dir = '/client/public/images/'+req.params.id
     if(process.env.NODE_ENV === 'production'){
-      dir = process.cwd()+'/client/images/'+req.params.id
+      dir = '/client/images/'+req.params.id
     }
-    // mkdirp(dir, err => cb(null, dir))
-    mkdirp(dir, function(err){console.error(err);})
+    mkdirp(dir, err => cb(null, dir))
+    // mkdirp(dir, function(err){console.error(err);})
     console.log('upload images in folder = ' + dir);
     cb(null, dir)
   },
@@ -25,6 +25,7 @@ const Project = mongoose.model('projects');
 
 module.exports = app => {
   app.post( '/api/image/:id', upload.array('file', 12), async (req, res) => {
+
     console.log('upload image!!');
     res.send(req.body)
   });
