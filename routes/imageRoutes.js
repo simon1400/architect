@@ -10,7 +10,7 @@ module.exports = app => {
     let dir = `${process.cwd()}/client/public/images/${req.params.id}`
     if(process.env.NODE_ENV === 'production') dir = `./client/images/${req.params.id}`
 
-    if (!fs.exists(dir)) fs.mkdir(dir);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
     let thisFile;
 
