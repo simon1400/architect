@@ -8,9 +8,9 @@ module.exports = app => {
   app.post( '/api/image/:id', (req, res) => {
 
     let dir = `${process.cwd()}/client/public/images/${req.params.id}`
-    if(process.env.NODE_ENV === 'production') dir = `${process.cwd()}/client/images/${req.params.id}`
+    if(process.env.NODE_ENV === 'production') dir = `./client/images/${req.params.id}`
 
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    if (!fs.exists(dir)) fs.mkdir(dir);
 
     let thisFile;
 
