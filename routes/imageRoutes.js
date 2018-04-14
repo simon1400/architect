@@ -24,43 +24,27 @@ const fs = require('fs');
 const Project = mongoose.model('projects');
 
 module.exports = app => {
-  app.post( '/api/image/:id', async (req, res) => {
-
-    let imageFile = req.files.file;
+  app.post( '/api/image/:id', (req, res) => {
 
     let dir = `${process.cwd()}/client/public/images/${req.params.id}`
     if(process.env.NODE_ENV === 'production') dir = `${process.cwd()}/client/build/images/${req.params.id}`
 
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir);
-    }
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
-    if(imageFile.length) {
-      imageFile.map(file => {
-        console.log(file);
-        file.mv(`${dir}/${imageFile.name}`, function(err) {
-          if (err) {
-            return console.log(err);
-            //  res.status(500).send(err);
-          }
+    let thisFile;
 
-          console.log('multi images upload');
-
-          res.send(req.body);
-        });
-      })
-    }else{
-      imageFile.mv(`${dir}/${imageFile.name}`, function(err) {
+    for (let key in req.files) {
+      thisFile = req.files[key];
+      thisFile.mv(`${dir}/${req.files[key].name}`, err => {
         if (err) {
-          return console.log(err);
-          //  res.status(500).send(err);
+          console.log(err);
+        } else {
+          console.log('File uploaded!');
         }
-
-        console.log('single image upload');
-
-        res.send(req.body);
       });
     }
+
+    res.send(req.body);
 
   });
 

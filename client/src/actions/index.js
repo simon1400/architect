@@ -4,7 +4,9 @@ import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA } from './types'
 export const saveImage = (id, images) => async dispatch => {
   let formData = new FormData();
 
-  images.map(file => formData.append('file', file))
+  console.log(images.length);
+  images.map((file, index) => formData.append('file_' + index, file))
+  formData.append('length', images.length)
 
   const res = await axios.post('/api/image/'+id, formData);
   dispatch({ type: IMAGE_DATA, payload: res.data});
