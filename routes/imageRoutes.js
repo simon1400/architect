@@ -20,7 +20,7 @@ module.exports = app => {
         if (err) {
           console.log(err);
         } else {
-          console.log('File uploaded!');
+          console.log(`File uploaded in this folder === ${dir}!`);
         }
       });
     }
