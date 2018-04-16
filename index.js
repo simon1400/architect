@@ -21,7 +21,7 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
-app.use(fileUpload());
+// app.use(fileUpload());
 
 require('./routes/authRoutes')(app);
 require('./routes/articlesRoutes')(app);

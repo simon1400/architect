@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "architect-proj",
+  "private_key_id": "3c5a2736018ecd69a95886b27a33120913b61941",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDnJtp2ubyeqhdi\nTXeBA4kSdWEBIBMLUvs/mVmSamX+RFnODck8Oy+ai9iimBrDfktdqy66FeQQk+jO\n8GLotP8Ct5s23B1bSNjfh+/sMJORKuhEognGzwmTPQ5kxg9Ohfgsx7GVpJwguD2q\nSoPKC92tr/qbIYJZh52xTFzeIUayZJFo46unFmFcCCT9auXgFZfP3UqV1aV5Zysk\nlv8I640FKLs93eTnB7caSjoKUUQAnGT9bwvNLGtbQBZ7Uz82wuooLn04wZlxQMp8\nxUQ6IuhXTK0iD4SEl6NWQ9jtIvwEehi0R/BtxKfpQ+KK3jJl+lLIPdukEAtC+/QQ\nHs2jqwj9AgMBAAECggEAAW1WIriXJiTa/3z8y+RYKE1TEJvxxxQe2F6ZFNG3p3xg\nPKPmEneWJ6cIdJiHgIpnYQWXE1cJuIB7Ho5qTenNsd0Pt1YRfAXeznFCkGf4rZH+\njbo6/nPYKSK1NjIQYdIwE0pko4PgWQrAT1PqwK/41hbplrdK3JNCE9Ng3ivA4nJK\nHZH6BZj8KrSv83yvytidqXsUt1zpB0NP4UyZfgp/2JExlO2PE+L68oCg1KIQ506I\nkLiZUXsSTDagDnphuUSAEzAjzqlgJqZSjwQWVt1t19Feut+dlJys1i53LH+JMjig\nudAXE63PRCsfw8UNrrCjBhZ/zdahshERn7Tp+V9YgQKBgQD27jNW2RZbtNJFLXoX\nZU3sWyzrsx/69SWMSnbu/wT8M9PcV5Euev8uP4zXxfTpBRYrYPc0OfLjy/y+2YpF\nUVjI/TXUDB3L4HAJwbGMJtkMdzKAAk3jPuBGAjrRXh8Xp2whelzN7PyNF1UBdZy5\n6SKQNSUvj7RyEIFLMZvur6ZDuQKBgQDvpEqUJjulGCqncLrAwimo9hF8rqzaTCsw\n3L3ucOPQe8tul2pMxXNfCMHk4DdeM8C1ggjBCh7N5qxMCDMkXObYwCcLqRGSwd3P\ndUQdYtz52Gx4T1S2ivTwctirviolDXIcngzVwHbQLORosaXIqYOMe4zdgiwAtnka\ndYg7Vz9ZZQKBgDtV2bhQyfKXbL96wg/FJAhbkFvC2zhul+syKYocdZI00f/setJ0\nc8UlOC7RPpyPwFgEIOLH2fmrFry1gWhOt8r0LW8ayj4nXES76nIHE7jPG69u3lBw\n12t7Na8Bsu74KB+TS6GgBL/Sj3aeUF7MCqYkXx8ipPWTyb3L2fBs/MLhAoGAIe/R\nQ/O6JKIsgDPdrqiQf8YBKfgOsIdy4mOQXjEMghzV7V5yBlc8BGxYERKTpLqNgubc\nWIIXZK9THR1YKMEjS/TCUstpmq/rupJvx/2VL6ivi8YoSAWbtGV/O6sdisvBqj3T\nsX2lFcwVuKHXyXgAEif5BfGGS7+LnOyiE01CwmUCgYAmD8UsCxlPWJjUA1gVTYRK\nmQFTdDFZOifzcZGzJloi3Z4YbfaIBugvy1b80Y5WUkL5h+/XoPOg1oTY4zM7iBoZ\nclziQ2JhRBODIwOl8KfrTHYMYJ3H0KEWC0iwjeOA7P2yAq8XQe6+SsEKRuf7dUKm\n8u/yt55eqxXHbi+9gIn1/w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "architect@architect-proj.iam.gserviceaccount.com",
+  "client_id": "103433464045189572380",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/architect%40architect-proj.iam.gserviceaccount.com"
+}

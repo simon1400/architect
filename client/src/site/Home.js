@@ -12,7 +12,7 @@ class Home extends Component {
       childElements = articles.map((item, index) => {
         let firstImage = item.image[0]
         if(firstImage){
-          urlImage = '/images/' + item.uniqID + '/' + firstImage.name;
+          urlImage = 'https://storage.googleapis.com/' + item.uniqID + '/' + firstImage.name;
         }
          return (
             <div key={index} className={`col s12 m4 ${item.column ? 'l6' : 'l3'}`}>

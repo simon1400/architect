@@ -1,31 +1,20 @@
 const mongoose = require('mongoose');
+const Multer = require('multer');
+const imgUpload = require('../middlewares/imgUpload');
 const path = require('path');
 const fs = require('fs');
 
 const Project = mongoose.model('projects');
 
+const multer = Multer({
+  storage: Multer.MemoryStorage,
+  fileSize: 5 * 1024 * 1024
+});
+
 module.exports = app => {
-  app.post( '/api/image/:id', (req, res) => {
+  app.post( '/api/image/:id', multer.array('file', 12), imgUpload.uploadToGcs, (req, res) => {
 
-    let dir = `${process.cwd()}/client/public/images/${req.params.id}`
-    if(process.env.NODE_ENV === 'production') dir = `${process.cwd()}/client/images/${req.params.id}`
-
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-
-    let thisFile;
-
-    for (let key in req.files) {
-      thisFile = req.files[key];
-      thisFile.mv(`${dir}/${req.files[key].name}`, err => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(`File uploaded in this folder === ${dir}!`);
-        }
-      });
-    }
-
-    res.send(req.body);
+    res.send({});
 
   });
 
