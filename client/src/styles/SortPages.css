@@ -10,10 +10,16 @@ input{
   margin-bottom: 0!important;
 }
 
-.shortPages ul li span, .addSave{
+.shortPages ul li span{
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.shortPages .addSave{
+  right: 10px;
+  top: 10px;
+  position: absolute;
 }
 
 .shortPages ul li span i, .addSave i{
@@ -22,6 +28,16 @@ input{
 
 .shortPages ul li span i:hover, .addSave i:hover{
   color: #26a69a;
+}
+
+.shortPages .addBtn{
+  float: right;
+  margin-bottom: 20px;
+}
+
+.shortPages input{
+  width: 100%;
+  padding: 10px;
 }
 
 .addArticle{

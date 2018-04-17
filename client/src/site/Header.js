@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../actions';
+import { Row, Col } from 'reactstrap'
 
 class Header extends Component {
 
@@ -36,28 +37,30 @@ class Header extends Component {
 
   render() {
     return(
-      <header className="row">
-        <div className="logo col s2">
-          <a href="/projects" style={{color: 'black'}}>Logo</a>
-        </div>
-        <div  className="col s10">
-          <nav className="right topMenu show-on-large">
-            <ul>{this.renderSocial()}</ul>
-            <ul>{this.renderMenu()}</ul>
-          </nav>
-          <div className="hamburger hide-on-large-only">
-            <div id="nav-icon3" className={this.state.open ? 'open' : null} onClick={() => this.setState({open: !this.state.open})}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+      <header>
+        <Row>
+          <Col sm="2" xs="2" className="logo">
+            <a href="/projects" style={{color: 'black'}}>Logo</a>
+          </Col>
+          <Col sm="10" xs="10">
+            <nav className="right topMenu d-lg-block d-none">
+              <ul>{this.renderSocial()}</ul>
+              <ul>{this.renderMenu()}</ul>
+            </nav>
+            <div className="hamburger d-lg-none">
+              <div id="nav-icon3" className={this.state.open ? 'open' : null} onClick={() => this.setState({open: !this.state.open})}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
-          </div>
-          <nav className={`mobileMenu hide-on-large-only${this.state.open ? ' show' : ''}`}>
-            <ul>{this.renderMenu()}</ul>
-            <ul>{this.renderSocial()}</ul>
-          </nav>
-        </div>
+            <nav className={`mobileMenu ${this.state.open ? ' show' : ''}`}>
+              <ul>{this.renderMenu()}</ul>
+              <ul>{this.renderSocial()}</ul>
+            </nav>
+          </Col>
+        </Row>
       </header>
     )
   }

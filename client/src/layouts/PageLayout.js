@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Container } from 'reactstrap';
 import * as actions from '../actions';
 
 import Header from '../site/Header'
@@ -17,10 +18,10 @@ class PageLayout extends Component {
 
   render() {
     return (
-      <div className="container Sites">
+      <Container className="Sites">
         <Header />
         {this.props.children}
-      </div>
+      </Container>
     )
   }
 };

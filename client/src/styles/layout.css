@@ -21,12 +21,11 @@
   margin-top: 90px;
 }
 
-.header{
-  z-index: 100;
+.Admin nav{
   position: fixed;
-  padding-left: 30px;
-  padding-right: 30px;
+  width: 100%;
   top: 0;
+  max-height: 60px;
 }
 
 .icons{
@@ -36,4 +35,8 @@
 
 .icons i{
   margin-right: 10px;
+}
+
+ul{
+  padding-left: 0;
 }

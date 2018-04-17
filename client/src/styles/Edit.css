@@ -12,6 +12,12 @@
   margin-bottom: 20px;
 }
 
+.field input{
+  display: block;
+  width: 100%;
+  padding: 10px;
+}
+
 .Editor ul, .Editor ul li{
   list-style-type: disc!important;
 }

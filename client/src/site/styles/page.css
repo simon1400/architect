@@ -32,6 +32,7 @@
 
 header{
   padding: 10px 0;
+  margin-bottom: 40px;
 }
 
 .Sites h1,
@@ -65,9 +66,13 @@ header{
   font-size: 50px;
 }
 
+.logo a:hover{
+  text-decoration: none;
+}
+
 .topMenu{
   background-color: transparent;
-  display: none;
+  /* display: none; */
   text-align: right;
   box-shadow: none;
   height: auto;
@@ -79,8 +84,14 @@ header{
   float: right;
 }
 
+.topMenu ul:last-child{
+  margin-right: 130px;
+}
+
 .topMenu li{
   margin-bottom: 0;
+  display: inline-block;
+
 }
 
 .topMenu a{
@@ -89,10 +100,12 @@ header{
   text-transform: uppercase;
   font-weight: lighter;
   letter-spacing: 1px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .topMenu a:hover{
-  background-color: transparent;
+  text-decoration: none;
 }
 
 .homeItem{
@@ -121,6 +134,7 @@ header{
   margin-bottom: 20px;
   background-color: rgba(0,0,0, 0);
   transition: all .5s ease;
+  padding: 0 20px;
 }
 
 .home_item_wrap:hover .homeItem{
@@ -129,6 +143,7 @@ header{
 
 .home_item_wrap:hover{
   background-color: rgba(0,0,0, .7);
+  text-decoration: none;
 }
 
 .home_item_wrap:hover h2{
@@ -174,7 +189,7 @@ header{
 }
 
 .news .projectSlide, .news .slider, .project .projectSlide, .project .slider{
-  min-height: 690px;
+  min-height: 670px;
 }
 
 .newsItem:not(:last-child){
@@ -290,6 +305,7 @@ header{
 
 .mobileMenu ul{
   font-size: 45px;
+  padding-left: 0;
 }
 
 .mobileMenu ul li{
@@ -299,10 +315,12 @@ header{
 
 .mobileMenu ul li a{
   font-size: 45px;
+  color: white;
 }
 
 .mobileMenu ul:last-child li{
   display: inline-block;
+  margin-right: 20px;
 }
 
 .mobileMenu ul:last-child li a i{
@@ -317,10 +335,10 @@ header{
 
 @media(max-width: 1400px) {
   .home_item_wrap{
-    height: 200px;
+    height: 270px;
   }
   .news .projectSlide, .news .slider, .project .projectSlide, .project .slider{
-    min-height: 400px;
+    min-height: 600px;
   }
 
   .slider{
@@ -328,8 +346,20 @@ header{
   }
 }
 
+@media(max-width: 1200px) {
+  .news .projectSlide, .news .slider, .project .projectSlide, .project .slider{
+    min-height: 500px;
+  }
+}
 
-@media(max-width: 600px) {
+@media(max-width: 950px) {
+  .news .projectSlide, .news .slider, .project .projectSlide, .project .slider{
+    min-height: 400px;
+  }
+}
+
+
+@media(max-width: 768px) {
   .mobileMenu{
     width: 100vw;
     right: -100vw;
@@ -342,10 +372,21 @@ header{
   }
 
   .news .projectSlide, .news .slider, .project .projectSlide, .project .slider{
-    min-height: 200px;
+    min-height: 600px;
   }
+}
 
+@media(max-width: 500px) {
+  .news .projectSlide, .news .slider, .project .projectSlide, .project .slider{
+    min-height: 400px;
+  }
+}
+
+@media(max-width: 350px) {
+  .news .projectSlide, .news .slider, .project .projectSlide, .project .slider{
+    min-height: 300px;
+  }
   .slider{
-    height: 200px;
+    height: 300px;
   }
 }

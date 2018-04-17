@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from './components/Slider'
 import renderHTML from 'react-render-html';
+import { Row, Col } from 'reactstrap'
 
 class Project extends Component {
 
@@ -25,15 +26,15 @@ class Project extends Component {
 
     return(
       <div className="project">
-        <div className="row">
-          <div className="col s12 m6">
+        <Row>
+          <Col sm="12" md="6">
             <Slider items={projectItem}/>
-          </div>
-          <div className="col s12 m6">
+          </Col>
+          <Col sm="12" md="6">
             <h1>{projectItem.title}</h1>
             {projectItem.content ? renderHTML(projectItem.content) : ''}
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     )
   }

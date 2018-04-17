@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 
@@ -9,9 +10,9 @@ class AdminLayout extends Component {
 
   render(){
     return(
-        <div>
+        <div className="Admin">
           <Header />
-          <div className="sidenav cyan darken-4">
+          <div className="sidenav bg-info">
             <Sidebar />
           </div>
 
@@ -21,7 +22,6 @@ class AdminLayout extends Component {
         </div>
     )
   }
-
 }
 
 export default AdminLayout;

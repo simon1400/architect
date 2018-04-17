@@ -4,6 +4,7 @@ import * as actions from '../actions';
 import { EditorState, CompositeDecorator } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html';
 import {stateFromHTML} from 'draft-js-import-html';
+import { Button } from 'reactstrap'
 
 import Field from './Filed'
 import Editor from './Editor/Editor'
@@ -145,9 +146,9 @@ class Edit extends Component {
         <DragDrop id={this.state.uniqID} image={this.state.image} onDrop={this.onDrop} onShort={this.short} deleteFoto={this.deleteFoto}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <a href="/admin">
-          <button className="btn right waves-effect waves-light button_submit" onClick={this.submit}>
+          <Button color="success" className="button_submit" onClick={this.submit}>
             Submit
-          </button>
+          </Button>
         </a>
 			</div>
 		)

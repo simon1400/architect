@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { Button } from 'reactstrap'
 
 import '../styles/SortPages.css'
 
@@ -128,7 +129,7 @@ class ShortPages extends Component {
 		return(
 			<div className="shortPages">
 				<h3>Short Pages</h3>
-				<button className="btn flat right" onClick={this.AddMnu}>{this.state.addMenu ? 'Hide' : 'Add'}</button>
+			<Button color="success" className="addBtn" onClick={this.AddMnu}>{this.state.addMenu ? 'Hide' : 'Add'}</Button>
 				<div style={{clear: 'both'}}></div>
 				{this.state.addMenu ? this.renderAdd() : ''}
 				<ul>

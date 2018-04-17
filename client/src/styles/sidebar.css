@@ -4,8 +4,13 @@
   padding: 10px 20px;
 }
 
+.sidenav ul{
+  padding-left: 0;
+}
+
 .sidenav li a:hover{
   background-color: #004d40;
+  text-decoration: none;
 }
 
 ul > li{
