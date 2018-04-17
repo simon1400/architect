@@ -1,25 +1,6 @@
 const mongoose = require('mongoose');
-// const multer = require('multer');
-// const mkdirp = require('mkdirp');
 const path = require('path');
 const fs = require('fs');
-
-// let storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     let dir = '/client/public/images/'+req.params.id
-//     if(process.env.NODE_ENV === 'production'){
-//       dir = '/client/images/'+req.params.id
-//     }
-//     mkdirp(dir, err => cb(null, dir))
-//     // mkdirp(dir, function(err){console.error(err);})
-//     console.log('upload images in folder = ' + dir);
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname)
-//   }
-// })
-//
-// let upload = multer( { storage: storage } );
 
 const Project = mongoose.model('projects');
 
@@ -37,7 +18,6 @@ module.exports = app => {
 
     if(imageFile.length) {
       imageFile.map(file => {
-        console.log(file);
         file.mv(`${dir}/${imageFile.name}`, function(err) {
           if (err) {
             return console.log(err);
