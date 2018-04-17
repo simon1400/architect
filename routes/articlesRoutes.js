@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const rimraf = require('rimraf');
+const bucketDelete = require('../middlewares/bucketDelete')
 
 const Project = mongoose.model('projects');
 const Menu = mongoose.model('menus');
@@ -47,9 +48,8 @@ module.exports = app => {
         if (!item) {
             return res.status(404).json({success: false, msg: 'Article not found'});
         }
-        let deleteFolderImage = `client/public/images/${item.uniqID}`;
-        if(process.env.NODE_ENV === 'production') deleteFolderImage = `client/images/${item.uniqID}`;
-        rimraf(deleteFolderImage, () => console.log('delete this images folder ' +  deleteFolderImage))
+
+        bucketDelete(item.uniqID);
     });
 
 

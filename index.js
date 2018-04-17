@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const keys = require('./config/keys');
 
+
 require('./models/User');
 require('./models/Projects');
 require('./models/Menu');
@@ -21,7 +22,8 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
-app.use(fileUpload());
+
+
 
 require('./routes/authRoutes')(app);
 require('./routes/articlesRoutes')(app);

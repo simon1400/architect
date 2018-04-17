@@ -31,7 +31,7 @@ class SliderEl extends Component {
         <div
           key={index}
           className="projectSlide"
-          style={{backgroundImage: `url('/images/${sliderItems.uniqID}/${item.name}')`}}>
+          style={{backgroundImage: `url('https://storage.googleapis.com/${sliderItems.uniqID}/${item.name}')`}}>
         </div>
       )
     }

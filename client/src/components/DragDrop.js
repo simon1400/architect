@@ -5,7 +5,7 @@ import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 import '../styles/DragDrop.css'
 
 const SortableItem = SortableElement(({value, indexOf, id, onDelete}) => {
-  let url = value.preview ? value.preview : `/images/${id}/${value.name}`;
+  let url = value.preview ? value.preview : `https://storage.googleapis.com/${id}/${value.name}`;
   return (
     <div
       className="preview"
