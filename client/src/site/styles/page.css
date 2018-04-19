@@ -35,6 +35,10 @@ header{
   margin-bottom: 40px;
 }
 
+.Sites strong{
+  font-family: 'worksans';
+}
+
 .Sites h1,
 .Sites h2,
 .Sites h3,
@@ -42,6 +46,7 @@ header{
 .Sites h5,
 .Sites h6{
   font-family: 'worksans';
+  margin-top: 15px;
 }
 
 .Sites h1{
@@ -63,7 +68,12 @@ header{
 }
 
 .logo{
-  font-size: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'worksans';
+  padding-top: 20px;
+  letter-spacing: 2px;
 }
 
 .logo a:hover{

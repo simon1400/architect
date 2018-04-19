@@ -40,7 +40,7 @@ class Header extends Component {
       <header>
         <Row>
           <Col sm="2" xs="2" className="logo">
-            <a href="/projects" style={{color: 'black'}}>Logo</a>
+            <a href="/projects" style={{color: 'black'}}>Overspace</a>
           </Col>
           <Col sm="10" xs="10">
             <nav className="right topMenu d-lg-block d-none">

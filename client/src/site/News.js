@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Slider from './components/Slider'
 import renderHTML from 'react-render-html';
+import { Row, Col } from 'reactstrap'
 
 class News extends Component {
 
@@ -13,21 +14,21 @@ class News extends Component {
       let articles = this.props.articles.filter(article => article.parentPage == url ? article : null)
       childElements = articles.map((item, index) => {
          return (
-           <div key={index} className="newsItem">
-              <div className="col s12">
+           <Row key={index} className="newsItem">
+              <Col sm="12">
                 <Slider items={item}/>
-              </div>
-                <div className="col s12 m12 offset-l3 l6">
+              </Col>
+                <Col sm="12" md="12" lg={{size: 6, offset: 3}}>
                   <h2>{item.title}</h2>
                   {item.content ? renderHTML(item.content) : ''}
-              </div>
-            </div>
+              </Col>
+            </Row>
           );
       });
     }
 
     return (
-      <div className="news row">
+      <div className="news">
         {childElements}
       </div>
     );
