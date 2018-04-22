@@ -3,31 +3,65 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Button } from 'reactstrap'
+import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
 
 import '../styles/SortPages.css'
 
+const DragHandle = SortableHandle(() => <div>::</div>);
+
+const SortableItem = SortableElement(({value, index, onClickMnu, onChangeMnu, state, deleteData, saveMnu}) => {
+	return <li key={index}>
+		<div className="menuLi">
+
+			<input
+				name={value._id}
+				value={state[value._id] ? state[value._id].value : value.name}
+				onChange={e => onChangeMnu(e)}
+				disabled={state[value._id] ? state[value._id].disable : true}
+			/>
+			<span className="icons">
+				<i className={state[value._id] ? state[value._id].disable ? "hide" : 'fas fa-save' : "hide"} onClick={() => saveMnu(state[value._id].value, value._id)}></i>
+				<i className="far fa-edit" onClick={() => onClickMnu(value._id, value.name)}></i>
+				<i className="far fa-trash-alt" onClick={() => deleteData(value._id)}></i>
+				<Link to={`admin/editor/new/${value._id}`} className="addArticle"><i className="fas fa-plus"></i></Link>
+				<DragHandle />
+			</span>
+			{/* <ul className="menuArticles">
+				{this.renderArticle(item._id)}
+			</ul> */}
+		</div>
+	</li>
+});
+
+const SortableMenu = SortableContainer(({items, onClickMnu, onChangeMnu, state, saveMnu, deleteData}) => {
+	return (
+		<ul>
+			{items.map((value, index) => (
+				<SortableItem key={`item-${index}`} index={index} value={value} state={state} deleteData={deleteData} saveMnu={saveMnu} onClickMnu={onClickMnu} onChangeMnu={onChangeMnu} />
+			))}
+		</ul>
+	);
+});
+
 class ShortPages extends Component {
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			addMenu: false,
-			addField: '',
-		}
-
-		this.AddMnu = this.AddMnu.bind(this)
-		this.onChangeMnu = this.onChangeMnu.bind(this)
-		this.onClickMnu = this.onClickMnu.bind(this)
-		this.deleteData = this.deleteData.bind(this)
-		this.deleteArticle = this.deleteArticle.bind(this)
-		this.renderArticle = this.renderArticle.bind(this)
+	state = {
+		addMenu: false,
+		addField: '',
 	}
 
-	componentDidMount() {
+	componentDidMount = () => {
 		this.props.getMenu()
 	}
 
-	onClickMnu(e, value) {
+	componentWillReceiveProps = (nextProps) => {
+		this.setState({
+			menu: nextProps.menu,
+			articles: nextProps.articles
+		})
+  }
+
+	onClickMnu = (e, value) => {
 		this.setState({
 		[e]: {
 			disable: false,
@@ -35,31 +69,31 @@ class ShortPages extends Component {
 		}})
 	}
 
-	onChangeMnu(e) {
+	onChangeMnu = (e) => {
 		this.setState({
 			[e.target.name]: {
 				value: e.target.value
 		}})
 	}
 
-	deleteData(id) {
+	deleteData = (id) => {
 		delete this.state[id]
 		this.props.deleteMenu(id)
 		this.props.getMenu()
 	}
 
-	deleteArticle(id) {
+	deleteArticle = (id) => {
 		this.props.deleteArticle(id)
 		this.props.getMenu()
 	}
 
-	AddMnu(e) {
+	AddMnu = (e) => {
 		e.target.name ? this.setState({
 			addField: e.target.value
 		}) : this.setState({addMenu: !this.state.addMenu})
 	}
 
-	saveMnu(menu, id) {
+	saveMnu = (menu, id) => {
 		delete this.state[id]
 		this.props.addMenu(menu, id)
 		this.props.getMenu();
@@ -72,7 +106,7 @@ class ShortPages extends Component {
 		})
 	}
 
-	renderAdd() {
+	renderAdd = () => {
 		return <div className="addWrap">
 				<input name="addField" value={this.state.addField} onChange={e => this.AddMnu(e)}/>
 				<span className="addSave">
@@ -81,12 +115,12 @@ class ShortPages extends Component {
 			</div>
 	}
 
-	column(id, column) {
+	column = (id, column) => {
 		this.props.updateArticleColumn(id, !column)
 	}
 
-	renderArticle(menuId) {
-		return this.props.articles.map((item, index) => {
+	renderArticle = (menuId) => {
+		return this.state.menu ? this.state.articles.map((item, index) => {
 			if(menuId === item.menuId){
 				return <li key={index}>
 					<div className="menuLi">
@@ -99,42 +133,32 @@ class ShortPages extends Component {
 					</div>
 				</li>
 			}
-		});
+		}) : null;
 	}
 
-	renderMenu() {
-		return this.props.menu.map((item, index) =>
-			<li key={index}>
-				<div className="menuLi">
-					<input
-						name={item._id}
-						value={this.state[item._id] ? this.state[item._id].value : item.name}
-						onChange={e => this.onChangeMnu(e)}
-						disabled={this.state[item._id] ? this.state[item._id].disable : true}
-					/>
-					<span className="icons">
-						<i className={this.state[item._id] ? this.state[item._id].disable ? "hide" : 'fas fa-save' : "hide"} onClick={() => this.saveMnu(this.state[item._id].value, item._id)}></i>
-						<i className="far fa-edit" onClick={() => this.onClickMnu(item._id, item.name)}></i>
-						<i className="far fa-trash-alt" onClick={() => this.deleteData(item._id)}></i>
-						<Link to={`admin/editor/new/${item._id}`} className="addArticle"><i className="fas fa-plus"></i></Link>
-					</span>
-					<ul className="menuArticles">
-						{this.renderArticle(item._id)}
-					</ul>
-				</div>
-			</li>);
-	}
+	onSortEnd = ({oldIndex, newIndex}) => {
+		this.setState({
+			menu: arrayMove(this.state.menu, oldIndex, newIndex),
+		});
+	};
 
 	render() {
 		return(
 			<div className="shortPages">
 				<h3>Short Pages</h3>
-			<Button color="success" className="addBtn" onClick={this.AddMnu}>{this.state.addMenu ? 'Hide' : 'Add'}</Button>
+				<Button color="success" className="addBtn" onClick={this.AddMnu}>{this.state.addMenu ? 'Hide' : 'Add'}</Button>
 				<div style={{clear: 'both'}}></div>
 				{this.state.addMenu ? this.renderAdd() : ''}
-				<ul>
-					{this.renderMenu()}
-				</ul>
+				{this.state.menu ? <SortableMenu
+					items={this.state.menu}
+					onSortEnd={this.onSortEnd}
+					onClickMnu={this.onClickMnu}
+					onChangeMnu={this.onChangeMnu}
+					saveMnu={this.saveMnu}
+					deleteData={this.deleteData}
+					state={this.state}
+					useDragHandle={true}
+				/> : null}
 			</div>
 		)
 	}
