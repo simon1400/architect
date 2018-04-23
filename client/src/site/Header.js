@@ -16,6 +16,11 @@ class Header extends Component {
 
 
   renderMenu() {
+    this.props.menu.sort((a, b) => {
+      if (a.index > b.index) return 1;
+      if (a.index < b.index) return -1;
+      return 0;
+    });
 		return this.props.menu.map((item, index) =>
 			<li key={index}>
 				<Link to={`/${item.name.toLowerCase()}`}>{item.name}</Link>

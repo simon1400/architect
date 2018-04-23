@@ -12,6 +12,11 @@ class News extends Component {
 
     if(this.props.articles.length > 0){
       let articles = this.props.articles.filter(article => article.parentPage == url ? article : null)
+      articles.sort((a, b) => {
+        if (a.index > b.index) return 1;
+        if (a.index < b.index) return -1;
+        return 0;
+      });
       childElements = articles.map((item, index) => {
          return (
            <Row key={index} className="newsItem">

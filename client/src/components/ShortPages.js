@@ -207,6 +207,7 @@ class ShortPages extends Component {
 			</div>
 		)
 	}
+
 }
 
 function mapStateToProps({ articles, menu }) {
