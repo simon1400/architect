@@ -7,12 +7,37 @@ import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'rea
 
 import '../styles/SortPages.css'
 
-const DragHandle = SortableHandle(() => <div>::</div>);
+const DragHandle = SortableHandle(() => <i>::</i>);
 
-const SortableItem = SortableElement(({value, index, onClickMnu, onChangeMnu, state, deleteData, saveMnu}) => {
+const SortableArticlesItem = SortableElement(({value, index, column, deleteArticle}) => {
 	return <li key={index}>
 		<div className="menuLi">
+			<div className="articleShort">{value.title}</div>
+			<span className="icons">
+				<i className={`far ${value.column ? 'fa-check-square' : 'fa-square'}`} onClick={() => column(value._id, value.column)}></i>
+				<a href={`/admin/editor/edit/${value._id}`}><i className="far fa-edit"></i></a>
+				<i className="far fa-trash-alt" onClick={() => deleteArticle(value._id)}></i>
+				<DragHandle />
+			</span>
+		</div>
+	</li>
+})
+const SortableArticles = SortableContainer(({items, menuId, column, deleteArticle}) => {
+	return (
+		<ul className="menuArticles">
+			{items.map((value, index) => {
+				if(menuId == value.menuId){
+					return <SortableArticlesItem key={`item-${index}`} index={index} value={value} column={column} deleteArticle={deleteArticle} />
+				}
+			})}
+		</ul>
+	)
+})
 
+const SortableMenuItem = SortableElement(({value, index, onClickMnu, onChangeMnu, state, deleteData, saveMnu, column, deleteArticle, onSortArticlesEnd}) => {
+
+	return <li key={index}>
+		<div className="menuLi">
 			<input
 				name={value._id}
 				value={state[value._id] ? state[value._id].value : value.name}
@@ -26,18 +51,34 @@ const SortableItem = SortableElement(({value, index, onClickMnu, onChangeMnu, st
 				<Link to={`admin/editor/new/${value._id}`} className="addArticle"><i className="fas fa-plus"></i></Link>
 				<DragHandle />
 			</span>
-			{/* <ul className="menuArticles">
-				{this.renderArticle(item._id)}
-			</ul> */}
+			{state.articles ? <SortableArticles
+				items={state.articles}
+				menuId={value._id}
+				column={column}
+				deleteArticle={deleteArticle}
+				onSortEnd={onSortArticlesEnd}
+				useDragHandle={true}
+			/> : null}
 		</div>
 	</li>
 });
-
-const SortableMenu = SortableContainer(({items, onClickMnu, onChangeMnu, state, saveMnu, deleteData}) => {
+const SortableMenu = SortableContainer(({items, onClickMnu, onChangeMnu, state, saveMnu, deleteData, column, deleteArticle, onSortArticlesEnd}) => {
 	return (
 		<ul>
 			{items.map((value, index) => (
-				<SortableItem key={`item-${index}`} index={index} value={value} state={state} deleteData={deleteData} saveMnu={saveMnu} onClickMnu={onClickMnu} onChangeMnu={onChangeMnu} />
+				<SortableMenuItem
+					key={`item-${index}`}
+					index={index}
+					value={value}
+					state={state}
+					column={column}
+					deleteData={deleteData}
+					saveMnu={saveMnu}
+					onClickMnu={onClickMnu}
+					onChangeMnu={onChangeMnu}
+					deleteArticle={deleteArticle}
+					onSortArticlesEnd={onSortArticlesEnd}
+				/>
 			))}
 		</ul>
 	);
@@ -55,6 +96,16 @@ class ShortPages extends Component {
 	}
 
 	componentWillReceiveProps = (nextProps) => {
+		nextProps.menu.sort((a, b) => {
+		  if (a.index > b.index) return 1;
+		  if (a.index < b.index) return -1;
+		  return 0;
+		});
+		nextProps.articles.sort((a, b) => {
+		  if (a.index > b.index) return 1;
+		  if (a.index < b.index) return -1;
+		  return 0;
+		});
 		this.setState({
 			menu: nextProps.menu,
 			articles: nextProps.articles
@@ -119,27 +170,18 @@ class ShortPages extends Component {
 		this.props.updateArticleColumn(id, !column)
 	}
 
-	renderArticle = (menuId) => {
-		return this.state.menu ? this.state.articles.map((item, index) => {
-			if(menuId === item.menuId){
-				return <li key={index}>
-					<div className="menuLi">
-						<div className="articleShort">{item.title}</div>
-						<span className="icons">
-							<i className={`far ${item.column ? 'fa-check-square' : 'fa-square'}`} onClick={() => this.column(item._id, item.column)}></i>
-							<a href={`/admin/editor/edit/${item._id}`}><i className="far fa-edit"></i></a>
-							<i className="far fa-trash-alt" onClick={() => this.deleteArticle(item._id)}></i>
-						</span>
-					</div>
-				</li>
-			}
-		}) : null;
-	}
-
 	onSortEnd = ({oldIndex, newIndex}) => {
 		this.setState({
 			menu: arrayMove(this.state.menu, oldIndex, newIndex),
 		});
+		this.props.updateMenu(this.state.menu)
+	};
+
+	onSortArticlesEnd = ({oldIndex, newIndex}) => {
+		this.setState({
+			articles: arrayMove(this.state.articles, oldIndex, newIndex),
+		});
+		this.props.shortArticles(this.state.articles)
 	};
 
 	render() {
@@ -158,6 +200,9 @@ class ShortPages extends Component {
 					deleteData={this.deleteData}
 					state={this.state}
 					useDragHandle={true}
+					column={this.column}
+					deleteArticle={this.deleteArticle}
+					onSortArticlesEnd={this.onSortArticlesEnd}
 				/> : null}
 			</div>
 		)
