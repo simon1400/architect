@@ -22,10 +22,12 @@ class Home extends Component {
         }
          return (
             <Col key={index} sm="12" md="4" lg={item.column ? '6' : '3'}>
-              <a href={`/projects/${item._id}`} className="home_item_wrap">
-                <h2>{item.title}</h2>
-              <div className="homeItem" style={{backgroundImage: `url('${urlImage}')`}}></div>
-              </a>
+              <div className={item.column ? 'square_wrap big' : 'square_wrap'}>
+                <a href={`/projects/${item._id}`} className="home_item_wrap">
+                  <h2>{item.title}</h2>
+                  <div className="homeItem" style={{backgroundImage: `url('${urlImage}')`}}></div>
+                </a>
+              </div>
             </Col>
           );
       });
