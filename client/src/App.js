@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import PageLayout from './layouts/PageLayout'
 import AdminLayout from './layouts/AdminLayout'
@@ -42,7 +43,7 @@ class App extends Component {
             <AppRoute exact path={`/projects`} layout={PageLayout} component={Home} />
             <AppRoute exact path={`/news`} layout={PageLayout} component={News} />
             <AppRoute exact path={`/contact`} layout={PageLayout} component={Contacts} />
-          <AppRoute exact path={`/projects/:id`} layout={PageLayout} component={Project} />
+            <AppRoute exact path={`/projects/:id`} layout={PageLayout} component={Project} />
 
           {/* Admin routes */}
             <AppRoute exact path={'/admin'} layout={AdminLayout} component={ShortPages} />

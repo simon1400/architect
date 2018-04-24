@@ -35,6 +35,10 @@ header{
   margin-bottom: 40px;
 }
 
+.Sites strong{
+  font-family: 'worksans';
+}
+
 .Sites h1,
 .Sites h2,
 .Sites h3,
@@ -42,6 +46,7 @@ header{
 .Sites h5,
 .Sites h6{
   font-family: 'worksans';
+  margin-top: 15px;
 }
 
 .Sites h1{
@@ -63,7 +68,12 @@ header{
 }
 
 .logo{
-  font-size: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'worksans';
+  padding-top: 20px;
+  letter-spacing: 2px;
 }
 
 .logo a:hover{
@@ -91,7 +101,6 @@ header{
 .topMenu li{
   margin-bottom: 0;
   display: inline-block;
-
 }
 
 .topMenu a{
@@ -100,8 +109,25 @@ header{
   text-transform: uppercase;
   font-weight: lighter;
   letter-spacing: 1px;
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.topMenu a:after{
+  content: '';
+  position: absolute;
+  width: 0;
+  border-bottom: 2px solid black;
+  bottom: 0;
+  left: 0;
+  transition: all .5s ease;
+  display: block;
+}
+
+.topMenu li:hover a:after{
+  width: 100%;
 }
 
 .topMenu a:hover{

@@ -39,4 +39,14 @@ module.exports = (app) => {
     res.send(data);
   })
 
+  app.put('/api/menu', async (req, res) => {
+    req.body.menu.map(item => {
+      Menu.findByIdAndUpdate(mongoose.Types.ObjectId(item._id), {index: item.index}, (err, menu) => {if(err) console.error(err)})
+    })
+
+
+    const data = await Menu.find({});
+    res.send(data);
+  })
+
 }

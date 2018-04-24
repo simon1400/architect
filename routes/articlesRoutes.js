@@ -78,4 +78,12 @@ module.exports = app => {
     const data = await Project.find({});
     res.send(data);
   })
+
+  app.put('/api/article/sort', async (req, res) => {
+    req.body.articles.map(item => {
+      Project.findByIdAndUpdate(mongoose.Types.ObjectId(item._id), { index: item.index }, (err, menu) => {if(err) console.error(err)})
+    })
+    const data = await Project.find({});
+    res.send(data);
+  })
 }

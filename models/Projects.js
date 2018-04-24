@@ -8,7 +8,8 @@ var ProjectSchema = new mongoose.Schema({
   image: [],
   menuId: String,
   parentPage: String,
-  dateSent: Date
+  dateSent: Date,
+  index: Number
 });
 
 module.exports = mongoose.model('projects', ProjectSchema);

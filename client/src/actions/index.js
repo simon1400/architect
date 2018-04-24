@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA } from './types'
 
+// IMAGE
 export const saveImage = (id, images) => async dispatch => {
-  
+
   let formData = new FormData();
   images.map((file, index) => formData.append('file', file))
 
@@ -15,6 +16,8 @@ export const deleteImage = (id, image, uniqID, name) => async dispatch => {
   dispatch({ type: IMAGE_DATA, payload: res.data});
 }
 
+// ALL DATA
+
 export const fetchData = (id, data) => async dispatch => {
   const res = await axios.post('/api/project/'+id, data);
   dispatch({ type: FETCH_DATA, payload: res.data});
@@ -25,6 +28,8 @@ export const getData = () => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: res.data});
 }
 
+
+// MENU
 export const addMenu = (name, id) => async dispatch => {
   const res = await axios.post('/api/menu', {name, id});
   dispatch({ type: MENU_DATA, payload: res.data});
@@ -40,6 +45,15 @@ export const deleteMenu = id => async dispatch => {
   dispatch({ type: MENU_DATA, payload: res.data});
 }
 
+export const updateMenu = menu => async dispatch => {
+  menu.map((item, index) => {
+    item.index = index;
+  })
+  const res = await axios.put('/api/menu', {menu});
+  dispatch({type: MENU_DATA, payload: res.data});
+}
+
+// ARTICLE
 export const deleteArticle = id => async dispatch => {
   const res = await axios.post('/api/article/delete', {id});
   dispatch({ type: FETCH_DATA, payload: res.data});
@@ -55,6 +69,15 @@ export const updateArticleColumn = (id, column) => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: res.data});
 }
 
+export const shortArticles = articles => async dispatch => {
+  articles.map((item, index) => {
+    item.index = index;
+  })
+  const res = await axios.put('/api/article/sort', {articles});
+  dispatch({ type: FETCH_DATA, payload: res.data});
+}
+
+// SOCIAL
 export const saveSocial = (name, classname, link) => async dispatch => {
   const res = await axios.post('/api/icons', {name, classname, link});
   dispatch({ type: SOCIAL_DATA, payload: res.data});
