@@ -4,6 +4,7 @@ const imgUpload = require('../middlewares/imgUpload');
 const imgDelete = require('../middlewares/imgDelete');
 
 const Project = mongoose.model('projects');
+const Setting = mongoose.model('settings');
 
 const multer = Multer({
   storage: Multer.MemoryStorage,
@@ -12,6 +13,10 @@ const multer = Multer({
 
 module.exports = app => {
   app.post( '/api/image/:id', multer.array('file', 12), imgUpload.uploadToGcs, (req, res) => {
+    // if(req.params.id === 'favicon_image'){
+    //   Setting.update({}, { favicon: req.params.id +  }, (err, menu) => {if(err) console.error(err)})
+    //   res.send(await Setting.find({}));
+    // }
     res.send({});
   });
 

@@ -7,9 +7,10 @@ const keys = require('./config/keys');
 
 
 require('./models/User');
-require('./models/Projects');
+require('./models/Articles');
 require('./models/Menu');
 require('./models/Social');
+require('./models/Setting');
 
 mongoose.connect(keys.mongoURI, { autoIndex: false });
 
@@ -23,13 +24,12 @@ app.use(
   })
 );
 
-
-
 require('./routes/authRoutes')(app);
 require('./routes/articlesRoutes')(app);
 require('./routes/menuRoutes')(app);
 require('./routes/socialRoutes')(app);
 require('./routes/imageRoutes')(app);
+require('./routes/settingRoutes')(app);
 
 if(process.env.NODE_ENV === 'production'){
     const path = require('path'); //We need path earlier for this!

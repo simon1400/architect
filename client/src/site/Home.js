@@ -9,19 +9,20 @@ class Home extends Component {
         urlImage = '',
         url = this.props.match.path.substring(1);
     if(this.props.articles.length > 0){
-      let articles = this.props.articles.filter(article => article.parentPage == url ? article : null)
-      articles.sort((a, b) => {
-  		  if (a.index > b.index) return 1;
-  		  if (a.index < b.index) return -1;
-  		  return 0;
-  		});
+      let articles = this.props.articles
+          .filter(article => article.parentPage == url && article.visible ? article : null)
+          .sort((a, b) => {
+      		  if (a.index > b.index) return 1;
+      		  if (a.index < b.index) return -1;
+      		  return 0;
+      		});
       childElements = articles.map((item, index) => {
         let firstImage = item.image[0]
         if(firstImage){
           urlImage = 'https://storage.googleapis.com/' + item.uniqID + '/' + firstImage.name;
         }
          return (
-            <Col key={index} sm="12" md="4" lg={item.column ? '6' : '3'}>
+            <Col key={index} xs="6" sm="6" md="4" lg={item.column ? '6' : '3'}>
               <div className={item.column ? 'square_wrap big' : 'square_wrap'}>
                 <a href={`/projects/${item._id}`} className="home_item_wrap">
                   <h2>{item.title}</h2>
@@ -32,7 +33,6 @@ class Home extends Component {
           );
       });
     }
-
 
     return (
       <Row className="homePage">

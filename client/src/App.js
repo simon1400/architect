@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
+import DocumentMeta from 'react-document-meta';
 
 import PageLayout from './layouts/PageLayout'
 import AdminLayout from './layouts/AdminLayout'
@@ -11,6 +12,7 @@ import AdminLayout from './layouts/AdminLayout'
 import Edit from './components/Edit'
 import ShortPages from './components/ShortPages'
 import Social from './components/Social'
+import Setting from './components/Setting'
 
 import Home from './site/Home'
 import Project from './site/Project'
@@ -27,33 +29,54 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   )} />
 )
 
+
+
 class App extends Component {
   componentDidMount() {
   //   this.props.fetchUser();
-        this.props.getData();
+    this.props.getData();
+    this.props.getSettings();
   }
 
-  render() {
-    return (
-      <Router>
-        <div>
-          {window.location.pathname == '/' ? <Redirect to="/projects" /> : null}
-          <Switch>
-            {/* Site routes */}
-            <AppRoute exact path={`/projects`} layout={PageLayout} component={Home} />
-            <AppRoute exact path={`/news`} layout={PageLayout} component={News} />
-            <AppRoute exact path={`/contact`} layout={PageLayout} component={Contacts} />
-            <AppRoute exact path={`/projects/:id`} layout={PageLayout} component={Project} />
 
-          {/* Admin routes */}
-            <AppRoute exact path={'/admin'} layout={AdminLayout} component={ShortPages} />
-            <AppRoute exact path={'/admin/social'} layout={AdminLayout} component={Social} />
-            <AppRoute exact path={'/admin/editor/:type(new|edit)/:id'} layout={AdminLayout} component={Edit} />
-          </Switch>
-        </div>
-      </Router>
+
+  render() {
+
+    const meta = {
+      meta: {
+        name: {
+          'theme-color': this.props.setting.length > 0 ? this.props.setting[0].themeColor : '#000000'
+        }
+      }
+    }
+
+    return (
+      <DocumentMeta {...meta}>
+        <Router>
+          <div>
+            {window.location.pathname == '/' ? <Redirect to="/projects" /> : null}
+            <Switch>
+              {/* Site routes */}
+              <AppRoute exact path={`/projects`} layout={PageLayout} component={Home} />
+              <AppRoute exact path={`/news`} layout={PageLayout} component={News} />
+              <AppRoute exact path={`/contact`} layout={PageLayout} component={Contacts} />
+              <AppRoute exact path={`/projects/:id`} layout={PageLayout} component={Project} />
+
+              {/* Admin routes */}
+              <AppRoute exact path={'/admin'} layout={AdminLayout} component={ShortPages} />
+              <AppRoute exact path={'/admin/social'} layout={AdminLayout} component={Social} />
+              <AppRoute exact path={'/admin/setting'} layout={AdminLayout} component={Setting} />
+              <AppRoute exact path={'/admin/editor/:type(new|edit)/:id'} layout={AdminLayout} component={Edit} />
+            </Switch>
+          </div>
+        </Router>
+      </DocumentMeta>
     )
   }
 };
 
-export default connect(null, actions)(App);
+function mapStateToProps({ setting }) {
+  return { setting };
+}
+
+export default connect(mapStateToProps, actions)(App);

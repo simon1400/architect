@@ -1,0 +1,8 @@
+.setting .setting_row button{
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.setting .setting_row {
+  margin-bottom: 30px;
+}

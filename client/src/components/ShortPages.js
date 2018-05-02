@@ -9,32 +9,33 @@ import '../styles/SortPages.css'
 
 const DragHandle = SortableHandle(() => <i>::</i>);
 
-const SortableArticlesItem = SortableElement(({value, index, column, deleteArticle}) => {
+const SortableArticlesItem = SortableElement(({value, index, column, deleteArticle, visible}) => {
 	return <li key={index}>
 		<div className="menuLi">
 			<div className="articleShort">{value.title}</div>
 			<span className="icons">
 				<i className={`far ${value.column ? 'fa-check-square' : 'fa-square'}`} onClick={() => column(value._id, value.column)}></i>
 				<a href={`/admin/editor/edit/${value._id}`}><i className="far fa-edit"></i></a>
+			<i className={`far ${value.visible ? 'fa-check-square' : 'fa-square'}`} onClick={() => visible(value._id, value.visible)}></i>
 				<i className="far fa-trash-alt" onClick={() => deleteArticle(value._id)}></i>
 				<DragHandle />
 			</span>
 		</div>
 	</li>
 })
-const SortableArticles = SortableContainer(({items, menuId, column, deleteArticle}) => {
+const SortableArticles = SortableContainer(({items, menuId, column, deleteArticle, visible}) => {
 	return (
 		<ul className="menuArticles">
 			{items.map((value, index) => {
 				if(menuId == value.menuId){
-					return <SortableArticlesItem key={`item-${index}`} index={index} value={value} column={column} deleteArticle={deleteArticle} />
+					return <SortableArticlesItem key={`item-${index}`} index={index} value={value} column={column} visible={visible} deleteArticle={deleteArticle} />
 				}
 			})}
 		</ul>
 	)
 })
 
-const SortableMenuItem = SortableElement(({value, index, onClickMnu, onChangeMnu, state, deleteData, saveMnu, column, deleteArticle, onSortArticlesEnd}) => {
+const SortableMenuItem = SortableElement(({value, index, onClickMnu, onChangeMnu, state, deleteData, saveMnu, column, deleteArticle, onSortArticlesEnd, visible}) => {
 
 	return <li key={index}>
 		<div className="menuLi">
@@ -57,12 +58,13 @@ const SortableMenuItem = SortableElement(({value, index, onClickMnu, onChangeMnu
 				column={column}
 				deleteArticle={deleteArticle}
 				onSortEnd={onSortArticlesEnd}
+				visible={visible}
 				useDragHandle={true}
 			/> : null}
 		</div>
 	</li>
 });
-const SortableMenu = SortableContainer(({items, onClickMnu, onChangeMnu, state, saveMnu, deleteData, column, deleteArticle, onSortArticlesEnd}) => {
+const SortableMenu = SortableContainer(({items, onClickMnu, onChangeMnu, state, saveMnu, deleteData, column, deleteArticle, onSortArticlesEnd, visible}) => {
 	return (
 		<ul>
 			{items.map((value, index) => (
@@ -77,6 +79,7 @@ const SortableMenu = SortableContainer(({items, onClickMnu, onChangeMnu, state, 
 					onClickMnu={onClickMnu}
 					onChangeMnu={onChangeMnu}
 					deleteArticle={deleteArticle}
+					visible={visible}
 					onSortArticlesEnd={onSortArticlesEnd}
 				/>
 			))}
@@ -184,6 +187,10 @@ class ShortPages extends Component {
 		this.props.shortArticles(this.state.articles)
 	};
 
+	visible = (id, visible) => {
+		this.props.updateArticleVisible(id, !visible)
+	}
+
 	render() {
 		return(
 			<div className="shortPages">
@@ -201,6 +208,7 @@ class ShortPages extends Component {
 					state={this.state}
 					useDragHandle={true}
 					column={this.column}
+					visible={this.visible}
 					deleteArticle={this.deleteArticle}
 					onSortArticlesEnd={this.onSortArticlesEnd}
 				/> : null}

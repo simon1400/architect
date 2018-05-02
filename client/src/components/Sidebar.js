@@ -9,6 +9,7 @@ class Sidebar extends Component {
       <ul>
         <li><NavLink exact to='/admin' activeClassName="teal darken-4">Short pages</NavLink></li>
         <li><NavLink exact to='/admin/social' activeClassName="teal darken-4">Social buttons</NavLink></li>
+      <li><NavLink exact to='/admin/setting' activeClassName="teal darken-4">Setting</NavLink></li>
       </ul>
     )
   }

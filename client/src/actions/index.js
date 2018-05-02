@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA } from './types'
+import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA, SETTING_DATA } from './types'
 
 // IMAGE
 export const saveImage = (id, images) => async dispatch => {
-
   let formData = new FormData();
   images.map((file, index) => formData.append('file', file))
 
@@ -69,6 +68,11 @@ export const updateArticleColumn = (id, column) => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: res.data});
 }
 
+export const updateArticleVisible = (id, visible) => async dispatch => {
+  const res = await axios.put('/api/article/visible', {id, visible});
+  dispatch({ type: FETCH_DATA, payload: res.data});
+}
+
 export const shortArticles = articles => async dispatch => {
   articles.map((item, index) => {
     item.index = index;
@@ -92,4 +96,17 @@ export const getSocial = () => async dispatch => {
 export const deleteSocial = id => async dispatch => {
   const res = await axios.post('/api/social/delete', {id});
   dispatch({ type: SOCIAL_DATA, payload: res.data});
+}
+
+//Settings
+export const themeColor = color => async dispatch => {
+  const res = await axios.post('/api/setting/theme-color', {color});
+  dispatch({ type: SETTING_DATA, payload: res.data});
+}
+
+
+
+export const getSettings = () => async dispatch => {
+  const res = await axios.get('/api/setting');
+  dispatch({ type: SETTING_DATA, payload: res.data});
 }

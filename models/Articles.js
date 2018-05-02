@@ -9,7 +9,8 @@ var ProjectSchema = new mongoose.Schema({
   menuId: String,
   parentPage: String,
   dateSent: Date,
-  index: Number
+  index: Number,
+  visible: {type: Boolean, default: true}
 });
 
 module.exports = mongoose.model('projects', ProjectSchema);
