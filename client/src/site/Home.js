@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Home extends Component {
 
@@ -38,9 +39,17 @@ class Home extends Component {
     }
 
     return (
-      <Row className="homePage">
-        {childElements}
-      </Row>
+          <ReactCSSTransitionGroup
+            transitionName="example"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            transitionAppear={true}
+            transitionAppearTimeout={300}
+            component='div'
+            className="row homePage">
+            {childElements}
+          </ReactCSSTransitionGroup>
+
     );
   }
 }

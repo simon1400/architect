@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Slider from './components/Slider'
 import renderHTML from 'react-render-html';
 import {Row, Col} from 'reactstrap'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Contacts extends Component {
 
@@ -19,7 +20,7 @@ class Contacts extends Component {
   		});
       childElements = articles.map((item, index) => {
          return (
-            <Col key={item} sm="12" md="12" lg="6">
+            <Col key={item} sm="12" md="6" lg="6">
               <Slider items={item}/>
               <h2>{item.title}</h2>
               {item.content ? renderHTML(item.content) : ''}
@@ -29,9 +30,16 @@ class Contacts extends Component {
     }
 
     return (
-      <Row className="contacts">
+        <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+          transitionAppear={true}
+          transitionAppearTimeout={300}
+          component='div'
+          className="row contacts">
         {childElements}
-      </Row>
+      </ReactCSSTransitionGroup>
     );
   }
 }
