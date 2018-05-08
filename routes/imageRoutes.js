@@ -12,11 +12,12 @@ const multer = Multer({
 });
 
 module.exports = app => {
-  app.post( '/api/image/:id', multer.array('file', 12), imgUpload.uploadToGcs, (req, res) => {
-    // if(req.params.id === 'favicon_image'){
-    //   Setting.update({}, { favicon: req.params.id +  }, (err, menu) => {if(err) console.error(err)})
-    //   res.send(await Setting.find({}));
-    // }
+  app.post( '/api/image/:id', multer.array('file', 12), imgUpload.uploadToGcs, async (req, res) => {
+    if(req.params.id === 'favicon_image'){
+      Setting.update({}, { favicon: req.params.id + '/' + req.files[0].originalname }, (err, menu) => {if(err) console.error(err)})
+      let data = await Setting.find({})
+      res.end();
+    }
     res.send({});
   });
 

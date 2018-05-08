@@ -38,11 +38,11 @@ class App extends Component {
     this.props.getSettings();
   }
 
-
-
   render() {
 
     const meta = {
+      description: this.props.setting.length > 0 ? this.props.setting[0].description : '',
+      title: this.props.setting.length > 0 ? this.props.setting[0].title : '',
       meta: {
         name: {
           'theme-color': this.props.setting.length > 0 ? this.props.setting[0].themeColor : '#000000'

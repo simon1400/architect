@@ -48,6 +48,7 @@ class Edit extends Component {
     title: '',
     image: [],
     uniqID: '',
+    withoutLink: false,
     editorState: EditorState.createEmpty(decorator)
   }
 
@@ -71,6 +72,9 @@ class Edit extends Component {
             _id: item._id,
             uniqID: item.uniqID,
             title: item.title,
+            description: item.description,
+            link: item.link,
+            withoutLink: item.withoutLink,
             image: item.image,
             editorState: EditorState.createWithContent(stateFromHTML(item.content)),
             menuId: item.menuId,
@@ -119,6 +123,9 @@ class Edit extends Component {
     })
     const data = {
       title: this.state.title,
+      description: this.state.description,
+      link: this.state.link,
+      withoutLink: this.state.withoutLink,
       content,
       menuId: this.state.menuId,
       image: image
@@ -138,11 +145,23 @@ class Edit extends Component {
     this.props.deleteImage(this.state._id, image, this.state.uniqID, element.name);
   }
 
+  withoutLink = () => {
+    this.setState({
+      withoutLink: !this.state.withoutLink
+    })
+  }
+
 	render() {
 		return(
 			<div>
         <h3>Edit article</h3>
         <Field name="title" title="Zahlavi" onChange={this.changeTitle} placeholder="Clanek 1" value={this.state.title} type="text" />
+        <Field name="link" title="Another link" onChange={this.changeTitle} placeholder="Another link" value={this.state.link} type="text" />
+        <div className="checkboxInside">
+          <i className={`far ${this.state.withoutLink ? 'fa-check-square' : 'fa-square'}`} onClick={() => this.withoutLink()}></i>
+          <span classNmae="label"> - without link</span>
+      </div>
+        <Field name="description" title="Description" onChange={this.changeTitle} placeholder="Key words" value={this.state.description} type="text" />
         <DragDrop id={this.state.uniqID} image={this.state.image} onDrop={this.onDrop} onShort={this.short} deleteFoto={this.deleteFoto}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
         <a href="/admin">

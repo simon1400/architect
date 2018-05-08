@@ -4,7 +4,9 @@ import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA, SETTING_DATA } from './
 // IMAGE
 export const saveImage = (id, images) => async dispatch => {
   let formData = new FormData();
-  images.map((file, index) => formData.append('file', file))
+  images.map((file, index) => {
+    return formData.append('file', file)
+  })
 
   const res = await axios.post('/api/image/'+id, formData);
   dispatch({ type: IMAGE_DATA, payload: res.data});
@@ -16,7 +18,6 @@ export const deleteImage = (id, image, uniqID, name) => async dispatch => {
 }
 
 // ALL DATA
-
 export const fetchData = (id, data) => async dispatch => {
   const res = await axios.post('/api/project/'+id, data);
   dispatch({ type: FETCH_DATA, payload: res.data});
@@ -99,12 +100,10 @@ export const deleteSocial = id => async dispatch => {
 }
 
 //Settings
-export const themeColor = color => async dispatch => {
-  const res = await axios.post('/api/setting/theme-color', {color});
+export const setSetting = (type, val) => async dispatch => {
+  const res = await axios.post('/api/setting/' + type, {val});
   dispatch({ type: SETTING_DATA, payload: res.data});
 }
-
-
 
 export const getSettings = () => async dispatch => {
   const res = await axios.get('/api/setting');

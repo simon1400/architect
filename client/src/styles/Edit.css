@@ -21,3 +21,15 @@
 .Editor ul, .Editor ul li{
   list-style-type: disc!important;
 }
+
+.Editor{
+  margin-bottom: 20px;
+}
+
+.checkboxInside{
+  margin-bottom: 20px;
+}
+
+.checkboxInside i{
+  cursor: pointer;
+}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Slider from './components/Slider'
 import renderHTML from 'react-render-html';
 import { Row, Col } from 'reactstrap'
+import DocumentMeta from 'react-document-meta';
 
 class Project extends Component {
 
@@ -22,20 +23,26 @@ class Project extends Component {
 
   render() {
 
-    let projectItem = this.state.projectItem
+    let projectItem = this.state.projectItem;
+
+    const meta = {
+      description: projectItem.description
+    }
 
     return(
-      <div className="project">
-        <Row>
-          <Col sm="12" md="6">
-            <Slider items={projectItem}/>
-          </Col>
-          <Col sm="12" md="6">
-            <h1>{projectItem.title}</h1>
-            {projectItem.content ? renderHTML(projectItem.content) : ''}
-          </Col>
-        </Row>
-      </div>
+      <DocumentMeta {...meta}>
+        <div className="project">
+          <Row>
+            <Col sm="12" md="6">
+              <Slider items={projectItem}/>
+            </Col>
+            <Col sm="12" md="6">
+              <h1>{projectItem.title}</h1>
+              {projectItem.content ? renderHTML(projectItem.content) : ''}
+            </Col>
+          </Row>
+        </div>
+      </DocumentMeta>
     )
   }
 

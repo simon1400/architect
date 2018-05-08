@@ -16,7 +16,7 @@ const SortableArticlesItem = SortableElement(({value, index, column, deleteArtic
 			<span className="icons">
 				<i className={`far ${value.column ? 'fa-check-square' : 'fa-square'}`} onClick={() => column(value._id, value.column)}></i>
 				<a href={`/admin/editor/edit/${value._id}`}><i className="far fa-edit"></i></a>
-			<i className={`far ${value.visible ? 'fa-check-square' : 'fa-square'}`} onClick={() => visible(value._id, value.visible)}></i>
+				<i className={`far ${value.visible ? 'fa-check-square' : 'fa-square'}`} onClick={() => visible(value._id, value.visible)}></i>
 				<i className="far fa-trash-alt" onClick={() => deleteArticle(value._id)}></i>
 				<DragHandle />
 			</span>

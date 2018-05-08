@@ -9,7 +9,7 @@ module.exports = app => {
 
   app.post( '/api/project/:id', async (req, res) => {
 
-    const { title, content, menuId, image } = req.body;
+    const { title, description, link, withoutLink, content, menuId, image } = req.body;
 
     image.map(function(item) {
       item.name = encodeURI(item.name)
@@ -20,6 +20,9 @@ module.exports = app => {
     const project = new Project({
       uniqID: req.params.id,
       title,
+      description,
+      link,
+      withoutLink,
       content,
       image,
       menuId,
@@ -61,13 +64,13 @@ module.exports = app => {
 
   app.put('/api/article', (req, res) => {
     const idNew = mongoose.Types.ObjectId(req.body.id);
-    const { menuId, title, content, image } = req.body.body;
+    const { menuId, title, description, link, withoutLink, content, image } = req.body.body;
     let newImageName;
     image.map(function(item) {
       newImageName = decodeURI(item.name)
       item.name = encodeURI(newImageName)
     })
-    Project.findByIdAndUpdate(idNew, { menuId, title, content, image }, (err, menu) => {if(err) console.error(err)})
+    Project.findByIdAndUpdate(idNew, { menuId, title, description, link, withoutLink, content, image }, (err, menu) => {if(err) console.error(err)})
     res.send({})
   })
 

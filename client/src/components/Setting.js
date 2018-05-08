@@ -10,13 +10,17 @@ class Setting extends Component {
 
   state = {
     themeColor: '',
-    favicon: ''
+    favicon: 'https://storage.googleapis.com/favicon_image/favicon.ico',
+    description: '',
+    title: '',
+    namePage: ''
   }
 
   componentWillReceiveProps = (nextProps) => {
 		this.setState({
       themeColor: nextProps.setting[0].themeColor,
-      favicon: nextProps.setting[0].favicon
+      description: nextProps.setting[0].description,
+      title: nextProps.setting[0].title,
     })
   }
 
@@ -27,8 +31,8 @@ class Setting extends Component {
   }
 
   onDrop = (file) => {
-    this.props.saveImage('favicon_image', [file]);
-    this.setState({favicon: file.preview})
+    this.props.saveImage('favicon_image', file);
+    this.setState({favicon: file[0].preview})
   }
 
   render() {
@@ -38,13 +42,29 @@ class Setting extends Component {
         <div className="setting_row theme-color">
           <label>Theme color</label><br/>
           <input name="themeColor" value={this.state.themeColor} onChange={(e) => this.onChange(e)} type="text" placeholder="Teheme color..." />
-          <Button color="success" onClick={() => this.props.themeColor(this.state.themeColor)}>Save</Button>
+        <Button color="success" onClick={() => this.props.setSetting('themeColor', this.state.themeColor)}>Save</Button>
         </div>
         <label>Favicon</label>
         <Dropzone onDrop={(e) => this.onDrop(e)}>
           <p>Try dropping favicon file here to upload.</p>
-          <img src={this.state.favicon} />
+          <div className="faviconPreview"><img src={this.state.favicon} /></div>
         </Dropzone>
+        <div className="setting_row"></div>
+        <div className="setting_row description">
+          <label>Description</label><br/>
+          <input name="description" value={this.state.description} onChange={(e) => this.onChange(e)} type="text" placeholder="Description..." />
+          <Button color="success" onClick={() => this.props.setSetting('description', this.state.description)}>Save</Button>
+        </div>
+        <div className="setting_row title">
+          <label>Title</label><br/>
+          <input name="title" value={this.state.title} onChange={(e) => this.onChange(e)} type="text" placeholder="Title..." />
+          <Button color="success" onClick={() => this.props.setSetting('title', this.state.title)}>Save</Button>
+        </div>
+        <div className="setting_row title">
+          <label>Name page</label><br/>
+          <input name="namePage" value={this.state.namePage} onChange={(e) => this.onChange(e)} type="text" placeholder="Name page..." />
+          <Button color="success" onClick={() => this.props.setSetting('namePage', this.state.namePage)}>Save</Button>
+        </div>
       </div>
     )
   }

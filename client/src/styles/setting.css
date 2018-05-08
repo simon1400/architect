@@ -6,3 +6,10 @@
 .setting .setting_row {
   margin-bottom: 30px;
 }
+
+.setting .faviconPreview{
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin: 0 auto;
+}

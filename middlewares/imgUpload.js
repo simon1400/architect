@@ -11,8 +11,18 @@ let ImgUpload = {};
 saveFiles = (bucketName, req, next) => {
   const bucket = gcs.bucket(bucketName);
   // Can optionally add a path to the gcsname below by concatenating it before the filename
+
+  if(bucketName == 'favicon_image'){
+    bucket.deleteFiles(err => {
+      if(err) console.log('Bucket delete all files err:', err);
+    });
+  }
+
   req.files.map(fileItem => {
-    const gcsname = fileItem.originalname;
+    let gcsname;
+    if(bucketName == 'favicon_image') gcsname = 'favicon.ico'
+    else gcsname = fileItem.originalname;
+
     const file = bucket.file(gcsname);
 
     const stream = file.createWriteStream({

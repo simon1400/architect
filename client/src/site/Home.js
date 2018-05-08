@@ -21,10 +21,13 @@ class Home extends Component {
         if(firstImage){
           urlImage = 'https://storage.googleapis.com/' + item.uniqID + '/' + firstImage.name;
         }
+
+        let itemLink = item.link ? item.link : `/projects/${item._id}`
+
          return (
             <Col key={index} xs="6" sm="6" md="4" lg={item.column ? '6' : '3'}>
               <div className={item.column ? 'square_wrap big' : 'square_wrap'}>
-                <a href={`/projects/${item._id}`} className="home_item_wrap">
+                <a href={item.withoutLink ? null : itemLink} className="home_item_wrap">
                   <h2>{item.title}</h2>
                   <div className="homeItem" style={{backgroundImage: `url('${urlImage}')`}}></div>
                 </a>
