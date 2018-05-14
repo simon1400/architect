@@ -13,27 +13,22 @@ function PrevArrow(props) {
 
 class SliderEl extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      width: null
-    }
-
-    this.myBlock = React.createRef();
-    this.updateDimensions = this.updateDimensions.bind(this)
+  state = {
+    width: null
   }
 
-  updateDimensions() {
+  updateDimensions = () => {
     this.setState({
-      width: this.myBlock.current ? this.myBlock.current.offsetWidth : ''
-    });
+      width: document.getElementById('test-ref').offsetWidth
+    })
   }
-  componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions);
+
+  componentWillUnmount = () => {
+    window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
+
+  componentDidMount = () => {
+    window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   render() {
@@ -50,13 +45,18 @@ class SliderEl extends Component {
 
     let renderImage, height, sliderItems = this.props.items
 
+    this.state.width ? height = this.state.width : null;
+    document.getElementById('test-ref') ? height = document.getElementById('test-ref').offsetWidth : null;
+
+    console.log(document.getElementById('test-ref'));
+    console.log(this.state.width);
+    console.log(height);
+
     if(sliderItems.image){
-      height = this.myBlock.current ? this.myBlock.current.offsetWidth : ''
-      this.state.width ? height = this.state.width : null;
       renderImage = sliderItems.image.map((item, index) =>
         <div
           key={index}
-          ref={this.myBlock}
+          id='test-ref'
           className="projectSlide"
           style={{
             backgroundImage: `url('https://storage.googleapis.com/${sliderItems.uniqID}/${item.name}')`,
