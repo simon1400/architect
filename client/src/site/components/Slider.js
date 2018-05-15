@@ -12,24 +12,6 @@ function PrevArrow(props) {
 
 class SliderEl extends Component {
 
-  state = {
-    width: null
-  }
-
-  updateDimensions = () => {
-    this.setState({
-      width: document.getElementById('test-ref').offsetWidth
-    })
-  }
-
-  componentWillUnmount = () => {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
-
-  componentDidMount = () => {
-    window.addEventListener("resize", this.updateDimensions.bind(this));
-  }
-
   render() {
     let settings = {
       dots: false,
@@ -45,18 +27,13 @@ class SliderEl extends Component {
 
     let renderImage, height, sliderItems = this.props.items
 
-    this.state.width ? height = this.state.width : null;
-    document.getElementById('test-ref') ? height = document.getElementById('test-ref').offsetWidth : null;
-
     if(sliderItems.image){
       renderImage = sliderItems.image.map((item, index) =>
         <div
           key={index}
-          id='test-ref'
           className="projectSlide"
           style={{
-            backgroundImage: `url('https://storage.googleapis.com/${sliderItems.uniqID}/${item.name}')`,
-            height: height
+            backgroundImage: `url('https://storage.googleapis.com/${sliderItems.uniqID}/${item.name}')`
           }}
           >
         </div>
