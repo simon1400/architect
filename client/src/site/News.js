@@ -24,7 +24,7 @@ class News extends Component {
                 <Slider items={item}/>
               </Col>
                 <Col sm="12" md="12" lg={{size: 6, offset: 3}}>
-                  <h2>{item.title}</h2>
+                  <h1>{item.title}</h1>
                   {item.content ? renderHTML(item.content) : ''}
               </Col>
             </Row>

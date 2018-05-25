@@ -34,8 +34,19 @@ header{
   padding: 30px 0;
 }
 
+.Sites p{
+  line-height: 23px;
+  letter-spacing: 0.75px;
+  font-weight: lighter;
+}
+
 .Sites strong{
   font-family: 'worksans';
+}
+
+.Sites h1{
+  letter-spacing: 1.5px;
+  line-height: 30px;
 }
 
 .Sites h1,
@@ -48,8 +59,34 @@ header{
   margin-top: 15px;
 }
 
+.contacts .slick-slider, .news .slick-slider{
+  padding-top: 50%!important;
+}
+
 .slick-slider{
   padding-top: 100%!important;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  transform: translateY(50px);
+}
+
+.fade-enter.fade-enter-active {
+  transition: opacity 250ms ease-in;
+  opacity: 1;
+}
+
+.fade-appear { opacity: 0.01; }
+.fade-appear.fade-appear-active { opacity: 1; transition: opacity 250ms ease-in; }
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 100ms ease-in;
 }
 
 .slick-list{
@@ -64,14 +101,14 @@ header{
   height: 100%!important;
 }
 
+.Sites .news h1{
+  margin-top: 15px;
+}
+
 .Sites h1{
   font-size: 30px;
   margin-top: 0;
   margin-bottom: 40px;
-}
-
-.Sites h2{
-  font-size: 30px;
 }
 
 .Sites p{
@@ -407,7 +444,7 @@ header{
   margin-left: 0px;
 }
 
-.newsItem h2{
+.newsItem h1{
   margin-bottom: 40px;
 }
 

@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const fileUpload = require('express-fileupload');
 const keys = require('./config/keys');
 
@@ -15,6 +17,10 @@ require('./models/Setting');
 mongoose.connect(keys.mongoURI, { autoIndex: false });
 
 const app = express();
+
+// 627716538132-bsjqc434erkqlg1ccqjmsq24juq5jc83.apps.googleusercontent.com
+// X0k5_7IdxoWw6y5DhR-BPdLk
+passport.use(new GoogleStrategy());
 
 app.use(bodyParser.json());
 app.use(
