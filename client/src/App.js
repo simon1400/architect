@@ -33,7 +33,7 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 
 class App extends Component {
   componentDidMount() {
-  //   this.props.fetchUser();
+    // this.props.fetchUser();
     this.props.getData();
     this.props.getSettings();
   }
