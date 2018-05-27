@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick'
+import renderHTML from 'react-render-html';
 
 function NextArrow(props) {
   return <i onClick={props.onClick} className="sliderIcon sl_right fas fa-chevron-right"></i>
@@ -20,12 +21,11 @@ class SliderEl extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      adaptiveHeight: true,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />
     };
 
-    let renderImage, height, sliderItems = this.props.items
+    let renderImage, sliderItems = this.props.items
 
     if(sliderItems.image){
       renderImage = sliderItems.image.map((item, index) =>

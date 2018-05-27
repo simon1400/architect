@@ -18,8 +18,17 @@
   padding: 10px;
 }
 
-.Editor ul, .Editor ul li{
+.Editor ul{
+  padding-left: 20px;
+}
+
+.Editor ul li{
   list-style-type: disc!important;
+}
+
+.Editor ul a, .Editor p a{
+  color: inherit;
+  text-decoration: underline;
 }
 
 .Editor{

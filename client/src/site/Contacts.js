@@ -16,22 +16,23 @@ class Contacts extends Component {
         ? article
         : null)
       articles.sort((a, b) => {
-        if (a.index > b.index) 
+        if (a.index > b.index)
           return 1;
-        if (a.index < b.index) 
+        if (a.index < b.index)
           return -1;
         return 0;
       });
       childElements = articles.map((item, index) => {
-        return (<Col key={item} sm="12" md="6" lg="6">
-          <Slider items={item}/>
-          <h2>{item.title}</h2>
-          {
-            item.content
-              ? renderHTML(item.content)
-              : ''
-          }
-        </Col>);
+        return (
+          <Col key={item.uniqID} sm="12" md="6" lg="6">
+            <Slider items={item}/>
+          <h1>{item.title}</h1>
+            {
+              item.content
+                ? renderHTML(item.content)
+                : ''
+            }
+          </Col>);
       });
     }
 

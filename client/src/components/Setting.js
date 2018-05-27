@@ -35,6 +35,10 @@ class Setting extends Component {
     this.setState({favicon: file[0].preview})
   }
 
+  componentDidMount = () => {
+    this.props.getSettings();
+  }
+
   render() {
     return(
       <div className="setting">

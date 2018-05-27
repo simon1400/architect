@@ -95,7 +95,7 @@ class ShortPages extends Component {
 	}
 
 	componentDidMount = () => {
-		this.props.getMenu()
+		this.props.getMenu();
 	}
 
 	componentWillReceiveProps = (nextProps) => {

@@ -11,20 +11,21 @@ class Header extends Component {
       case null:
         return;
       case false:
-        return <li><a href="/auth/google">Login With Google</a></li>;
+        return <li style={{marginBottom: '0'}} className="nav-item"><a className="nav-link" href="/auth/google">Login With Google</a></li>;
       default:
-        return <li key="2"><a href="api/logout">Logout</a></li>
+        return <li style={{marginBottom: '0'}} className="nav-item" key="2"><a className="nav-link" href="api/logout">Logout</a></li>
     }
   }
 
   render() {
+
     return(
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="nav-wrapper">
-          <Link to='/' className="navbar-brand">
-            Architect project
-          </Link>
-          <ul className="right">
+        <Link to='/admin' className="navbar-brand">
+          Architect project
+        </Link>
+        <div className="collapse navbar-collapse">
+          <ul className="navbar-nav justify-content-end" style={{width: '100%'}}>
             {this.renderContent()}
           </ul>
         </div>

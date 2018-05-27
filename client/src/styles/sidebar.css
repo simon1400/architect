@@ -13,6 +13,6 @@
   text-decoration: none;
 }
 
-ul > li{
+.sidenav ul > li{
   list-style-type: none!important;
 }

@@ -9,8 +9,12 @@
   background-color: #111;
   overflow-x: hidden;
   padding-top: 20px;
-  margin-top: 60px;
+  margin-top: 56px;
   color: white;
+}
+
+ul > li{
+  list-style-type: none!important;
 }
 
 /* Page content */

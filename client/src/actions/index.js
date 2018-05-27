@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA, SETTING_DATA } from './types'
+import { FETCH_DATA, MENU_DATA, SOCIAL_DATA, IMAGE_DATA, SETTING_DATA, FETCH_USER } from './types'
+
+export const fetchUser = () => async dispatch => {
+  const res = await axios.get('/api/current_user')
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
 
 // IMAGE
 export const saveImage = (id, images) => async dispatch => {

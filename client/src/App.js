@@ -18,6 +18,7 @@ import Home from './site/Home'
 import Project from './site/Project'
 import News from './site/News'
 import Contacts from './site/Contacts'
+import About from './site/About'
 
 import './styles/layout.css'
 
@@ -33,13 +34,10 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 
 class App extends Component {
   componentDidMount() {
-    // this.props.fetchUser();
-    this.props.getData();
     this.props.getSettings();
   }
 
   render() {
-
     const meta = {
       description: this.props.setting.length > 0 ? this.props.setting[0].description : '',
       title: this.props.setting.length > 0 ? this.props.setting[0].title : '',
@@ -61,6 +59,7 @@ class App extends Component {
               <AppRoute exact path={`/news`} layout={PageLayout} component={News} />
               <AppRoute exact path={`/contact`} layout={PageLayout} component={Contacts} />
               <AppRoute exact path={`/projects/:id`} layout={PageLayout} component={Project} />
+              <AppRoute exact path={`/about`} layout={PageLayout} component={About} />
 
               {/* Admin routes */}
               <AppRoute exact path={'/admin'} layout={AdminLayout} component={ShortPages} />

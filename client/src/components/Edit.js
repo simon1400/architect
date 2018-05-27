@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { EditorState, CompositeDecorator } from 'draft-js';
-import {stateToHTML} from 'draft-js-export-html';
-import {stateFromHTML} from 'draft-js-import-html';
+
 import { Button } from 'reactstrap'
 
 import Field from './Filed'
@@ -11,36 +10,7 @@ import Editor from './Editor/Editor'
 import DragDrop from './DragDrop'
 import '../styles/Edit.css'
 
-function findLinkEntities(contentBlock, callback, contentState) {
-  contentBlock.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        contentState.getEntity(entityKey).getType() === 'LINK'
-      );
-    },
-    callback
-  );
-}
 
-const Links = (props) => {
-  const { url } = props.contentState
-    .getEntity(props.entityKey).getData();
-
-  return (
-    <a href={url} title={url} className="ed-link">
-      {props.children}
-    </a>
-  );
-};
-
-const decorator = new CompositeDecorator([
-  {
-    strategy: findLinkEntities,
-    component: Links
-  }
-]);
 
 class Edit extends Component {
 
@@ -49,7 +19,7 @@ class Edit extends Component {
     image: [],
     uniqID: '',
     withoutLink: false,
-    editorState: EditorState.createEmpty(decorator)
+    editorState: ''
   }
 
   componentDidMount = () => {
@@ -76,7 +46,7 @@ class Edit extends Component {
             link: item.link,
             withoutLink: item.withoutLink,
             image: item.image,
-            editorState: EditorState.createWithContent(stateFromHTML(item.content)),
+            editorState: item.content,
             menuId: item.menuId,
             edit: true,
           })
@@ -115,7 +85,7 @@ class Edit extends Component {
   short = image => this.setState({image})
 
   submit = () => {
-    const content = stateToHTML(this.state.editorState.getCurrentContent());
+    const content = this.state.editorState;
     const image = this.state.image;
     image.map((item, index) => {
       delete item.preview;
@@ -159,8 +129,8 @@ class Edit extends Component {
         <Field name="link" title="Another link" onChange={this.changeTitle} placeholder="Another link" value={this.state.link} type="text" />
         <div className="checkboxInside">
           <i className={`far ${this.state.withoutLink ? 'fa-check-square' : 'fa-square'}`} onClick={() => this.withoutLink()}></i>
-          <span classNmae="label"> - without link</span>
-      </div>
+        <span className="label"> - without link</span>
+        </div>
         <Field name="description" title="Description" onChange={this.changeTitle} placeholder="Key words" value={this.state.description} type="text" />
         <DragDrop id={this.state.uniqID} image={this.state.image} onDrop={this.onDrop} onShort={this.short} deleteFoto={this.deleteFoto}/>
         <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>

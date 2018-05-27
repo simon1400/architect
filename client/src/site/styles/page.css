@@ -40,8 +40,23 @@ header{
   padding: 60px 0;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 .Sites ul>li{
-  list-style-type: disc;
+  position: relative;
+}
+
+.Sites ul>li:after{
+  content: '';
+  display: block;
+  width: 8px;
+  height: 1px;
+  background-color: #212529;
+  position: absolute;
+  left: -20px;
+  top: 10px;
 }
 
 .Sites ul{
@@ -59,11 +74,20 @@ header{
 }
 
 .Sites .topMenu ul>li{
-  list-style-type: none!important;
+  list-style-type: none;
 }
 
-.Sites a{
+.Sites .topMenu ul > li a, .Sites .mobileMenu ul > li a{
+  text-decoration: none;
+}
+
+.Sites .topMenu ul>li:after{
+  display: none;
+}
+
+.Sites p a, .Sites ul a{
   text-decoration: underline;
+  color: #212529;
 }
 
 .Sites a:hover{
@@ -86,7 +110,9 @@ header{
 .Sites h5,
 .Sites h6{
   font-family: 'worksans';
-  margin-top: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 30px;
 }
 
 .contacts .slick-slider, .news .slick-slider{
@@ -129,16 +155,6 @@ header{
 
 .slick-track{
   height: 100%!important;
-}
-
-.Sites .news h1{
-  margin-top: 15px;
-}
-
-.Sites h1{
-  font-size: 30px;
-  margin-top: 0;
-  margin-bottom: 40px;
 }
 
 .Sites p{
@@ -470,10 +486,6 @@ header{
   margin-left: 0px;
 }
 
-.newsItem h1{
-  margin-bottom: 40px;
-}
-
 @media(min-width: 768px) {
   .newsItem .projectSlide{
     height: 690px!important;
@@ -491,6 +503,9 @@ header{
 
 
 @media(max-width: 768px) {
+  .sliderIcon{
+    top: 40%;
+  }
   .mobileMenu{
     width: 100vw;
     right: -100vw;

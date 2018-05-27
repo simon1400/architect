@@ -44,10 +44,10 @@ class Header extends Component {
     return(
       <header>
         <Row>
-          <Col sm="2" xs="2" className="logo">
-            <a href="/projects" style={{color: 'black'}}>Overspace</a>
+          <Col sm="2" xs="6" className="logo">
+            <a href="/projects" style={{color: 'black', paddingTop: '5px', display: 'block'}}>Overspace</a>
           </Col>
-          <Col sm="10" xs="10">
+          <Col sm="10" xs="6">
             <nav className="right topMenu d-lg-block d-none">
               <ul>{this.renderSocial()}</ul>
               <ul>{this.renderMenu()}</ul>
@@ -61,7 +61,7 @@ class Header extends Component {
               </div>
             </div>
             <nav className={`mobileMenu ${this.state.open ? ' show' : ''}`}>
-              <ul>{this.renderMenu()}</ul>
+              <ul onClick={() => this.setState({open: !this.state.open})}>{this.renderMenu()}</ul>
               <ul>{this.renderSocial()}</ul>
             </nav>
           </Col>
