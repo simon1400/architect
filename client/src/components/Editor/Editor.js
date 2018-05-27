@@ -73,7 +73,7 @@ class TextEditor extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-     var htm = stateToHTML(this.state.editorState.getCurrentContent())
+    var htm = stateToHTML(this.state.editorState.getCurrentContent())
     if(htm !== nextProps.editorState){
       this.setState({
         editorState: EditorState.createWithContent(stateFromHTML(nextProps.editorState))
