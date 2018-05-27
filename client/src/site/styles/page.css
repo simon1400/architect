@@ -37,13 +37,37 @@
 }
 
 header{
-  padding: 30px 0;
+  padding: 60px 0;
+}
+
+.Sites ul>li{
+  list-style-type: disc;
+}
+
+.Sites ul{
+  padding-left: 20px;
 }
 
 .Sites p{
   line-height: 23px;
   letter-spacing: 0.75px;
   font-weight: lighter;
+}
+
+.Sites .topMenu ul{
+  padding-left: 0!important;
+}
+
+.Sites .topMenu ul>li{
+  list-style-type: none!important;
+}
+
+.Sites a{
+  text-decoration: underline;
+}
+
+.Sites a:hover{
+  text-decoration: none;
 }
 
 .Sites strong{
@@ -149,10 +173,6 @@ header{
 .topMenu ul{
   float: right;
   margin-bottom: 0;
-}
-
-.topMenu ul:last-child{
-  margin-right: 50px;
 }
 
 .topMenu li{
