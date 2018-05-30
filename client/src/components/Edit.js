@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { EditorState, CompositeDecorator } from 'draft-js';
+import { EditorState } from 'draft-js';
+import {stateToHTML} from 'draft-js-export-html';
+import {stateFromHTML} from 'draft-js-import-html';
 
 import { Button } from 'reactstrap'
 
@@ -19,7 +21,7 @@ class Edit extends Component {
     image: [],
     uniqID: '',
     withoutLink: false,
-    editorState: ''
+    editorState: EditorState.createEmpty()
   }
 
   componentDidMount = () => {
@@ -46,7 +48,7 @@ class Edit extends Component {
             link: item.link,
             withoutLink: item.withoutLink,
             image: item.image,
-            editorState: item.content,
+            editorState: stateFromHTML(item.content),
             menuId: item.menuId,
             edit: true,
           })
@@ -85,7 +87,7 @@ class Edit extends Component {
   short = image => this.setState({image})
 
   submit = () => {
-    const content = this.state.editorState;
+    const content = stateToHTML(this.state.editorState);
     const image = this.state.image;
     image.map((item, index) => {
       delete item.preview;
