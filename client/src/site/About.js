@@ -33,7 +33,7 @@ class News extends Component {
     }
 
     return (
-        <div className="news">
+        <div className="news" uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 300; repeat: true">
           {childElements}
         </div>
     );
