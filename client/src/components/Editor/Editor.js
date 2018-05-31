@@ -1,182 +1,156 @@
 import React, { Component } from 'react';
-import { Editor, EditorState, RichUtils, Modifier, CompositeDecorator } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+import { EditorState, ContentState, Modifier, getContentStateFragment } from 'draft-js';
+import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
+import createLinkPlugin from 'draft-js-anchor-plugin';
+import {
+  ItalicButton,
+  BoldButton,
+  UnderlineButton,
+  CodeButton,
+  HeadlineOneButton,
+  HeadlineTwoButton,
+  HeadlineThreeButton,
+  UnorderedListButton,
+  OrderedListButton,
+  BlockquoteButton,
+  CodeBlockButton,
+} from 'draft-js-buttons';
 import { Button } from 'reactstrap'
-
-import {stateToHTML} from 'draft-js-export-html';
 import {stateFromHTML} from 'draft-js-import-html';
+import {stateToHTML} from 'draft-js-export-html';
 
+import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
+import 'draft-js-anchor-plugin/lib/plugin.css';
 import './Editor.css'
 
-function findLinkEntities(contentBlock, callback, contentState) {
-  contentBlock.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        contentState.getEntity(entityKey).getType() === 'LINK'
-      );
-    },
-    callback
-  );
+class HeadlinesPicker extends Component {
+
+  componentDidMount() {
+    setTimeout(() => { window.addEventListener('click', this.onWindowClick); });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.onWindowClick);
+  }
+
+  onWindowClick = () => this.props.onOverrideContent(undefined);
+
+  render() {
+    const buttons = [HeadlineOneButton, HeadlineTwoButton, HeadlineThreeButton];
+    return (
+      <div>
+        {buttons.map((Button, i) => <Button key={i} {...this.props} /> )}
+      </div>
+    );
+  }
 }
 
-const Link = (props) => {
-  const {url} = props.contentState.getEntity(props.entityKey).getData();
-  return (
-    <a href={url}>
-      {props.children}
-    </a>
-  );
-};
+class HeadlinesButton extends Component {
 
-const decorator = new CompositeDecorator([
-    {
-      strategy: findLinkEntities,
-      component: Link,
-    },
-  ]);
+  onMouseDown = (event) => event.preventDefault()
+
+  onClick = () => this.props.onOverrideContent(HeadlinesPicker);
+
+  render() {
+    return (
+      <div onMouseDown={this.onMouseDown} className="headlineButtonWrapper">
+        <button onClick={this.onClick} className="headlineButton">H</button>
+      </div>
+    );
+  }
+}
+
+class Clear extends Component {
+
+  onMouseDown = (event) => event.preventDefault()
+
+  onClick = () => {
+    const editorState = this.props.getEditorState()
+    const selection = editorState.getSelection()
+    const contentState = editorState.getCurrentContent()
+    const plainText = contentState.getPlainText()
+    const styles = editorState.getCurrentInlineStyle()
+
+    // const removeStyles = styles.reduce((state, style) => {
+    //   return Modifier.removeInlineStyle(state, selection, style) }, contentState)
+    //
+    // const removeBlock = Modifier.setBlockType(removeStyles, selection, 'unstyled')
+
+    this.props.setEditorState(EditorState.createWithContent(stateFromHTML(plainText)))
+
+    // this.props.setEditorState(EditorState.push(
+    //   editorState,
+    //   plainText
+    // ))
+  }
+
+  render() {
+    return (
+      <div onMouseDown={this.onMouseDown} className="headlineButtonWrapper">
+        <button onClick={this.onClick} className="headlineButton">C</button>
+      </div>
+    );
+  }
+}
+
+const linkPlugin = createLinkPlugin();
+
+const inlineToolbarPlugin = createInlineToolbarPlugin({
+  structure: [
+    BoldButton,
+    ItalicButton,
+    UnderlineButton,
+    CodeButton,
+    linkPlugin.LinkButton,
+    Separator,
+    HeadlinesButton,
+    UnorderedListButton,
+    OrderedListButton,
+    BlockquoteButton,
+    CodeBlockButton,
+    Clear
+  ]
+});
+
+const { InlineToolbar } = inlineToolbarPlugin;
+const plugins = [inlineToolbarPlugin, linkPlugin];
 
 class TextEditor extends Component {
 
   state = {
-    showURLInput: false,
-    urlValue: '',
-    editorState: EditorState.createEmpty(decorator)
-  }
-
-  focus = () => this.refs.editor.focus();
-
-  promptForLink = (e) => {
-    e.preventDefault();
-    const {editorState} = this.state;
-    const selection = editorState.getSelection();
-    if (!selection.isCollapsed()) {
-      const contentState = editorState.getCurrentContent();
-      const startKey = editorState.getSelection().getStartKey();
-      const startOffset = editorState.getSelection().getStartOffset();
-      const blockWithLinkAtBeginning = contentState.getBlockForKey(startKey);
-      const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset);
-
-      let url = '';
-      if (linkKey) {
-        const linkInstance = contentState.getEntity(linkKey);
-        url = linkInstance.getData().url;
-      }
-
-      this.setState({
-        showURLInput: true,
-        urlValue: url,
-      }, () => {
-        setTimeout(() => this.refs.url.focus(), 0);
-      });
-    }
+    editorState: EditorState.createEmpty(),
+    startState: 1
   }
 
   componentWillReceiveProps = (nextProps) => {
-    var htm = stateToHTML(this.state.editorState.getCurrentContent())
-    if(htm !== nextProps.editorState){
+    if(nextProps.editorStartState && this.state.startState){
       this.setState({
-        editorState: EditorState.createWithContent(stateFromHTML(nextProps.editorState))
+        editorState: EditorState.push(this.state.editorState, stateFromHTML(nextProps.editorStartState)),
+        startState: 0
       })
     }
   }
 
-  confirmLink = (e) => {
-    e.preventDefault();
-    const {editorState} = this.state;
-    const {urlValue} = this.state;
-    const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      'LINK',
-      'MUTABLE',
-      {url: urlValue}
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
-    this.setState({
-      editorState: RichUtils.toggleLink(
-        newEditorState,
-        newEditorState.getSelection(),
-        entityKey
-      ),
-      showURLInput: false,
-      urlValue: '',
-    }, () => {
-      setTimeout(() => this.refs.editor.focus(), 0);
-    });
-  }
+  focus = () => this.editor.focus();
 
   onChange = (editorState) => {
-    this.setState({editorState});
-    this.props.changeEditor(stateToHTML(editorState.getCurrentContent()));
+    this.setState({ editorState })
+    this.props.changeEditor(editorState);
   }
 
-  toggleBlock = (typeBlock) => {
-    this.onChange(RichUtils.toggleBlockType(this.props.editorState, typeBlock));
-  }
 
-  toggleStyle = (typeStyle) => {
-    this.onChange(RichUtils.toggleInlineStyle(this.props.editorState, typeStyle));
-  }
-
-  clear = () => {
-    const {editorState} = this.props
-    const selection = editorState.getSelection()
-    const contentState = editorState.getCurrentContent()
-    const styles = editorState.getCurrentInlineStyle()
-
-    const removeStyles = styles.reduce((state, style) => {
-      return Modifier.removeInlineStyle(state, selection, style) }, contentState)
-
-    const removeBlock = Modifier.setBlockType(removeStyles, selection, 'unstyled')
-
-    this.props.changeEditor(EditorState.push(
-      editorState,
-      removeBlock
-    ))
-  }
-
-  onLinkInputKeyDown = (e) => {
-    if (e.which === 13) {
-      this._confirmLink(e);
-    }
-  }
-
-  onURLChange = (e) => this.setState({urlValue: e.target.value});
 
   render(){
-    let urlInput;
-    if (this.state.showURLInput) {
-      urlInput =
-        <div>
-          <input
-            onChange={this.onURLChange}
-            ref="url"
-            type="text"
-            value={this.state.urlValue}
-            onKeyDown={this.onLinkInputKeyDown}
-            />
-          <button onMouseDown={this.confirmLink}>
-            Confirm
-          </button>
-        </div>;
-    }
     return(
-      <div className="Editor">
-        <div className="button_group" style={{marginBottom: '20px'}}>
-          <Button color="success" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('BOLD')}><i className="fas fa-bold"></i></Button>
-          <Button color="success" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('ITALIC')}><i className="fas fa-italic"></i></Button>
-          <Button color="success" style={{marginRight: '10px'}} onClick={e => this.toggleStyle('UNDERLINE')}><i className="fas fa-underline"></i></Button>
-          <Button color="success" style={{marginRight: '10px'}} onClick={e => this.toggleBlock('unordered-list-item')}><i className="fas fa-list-ul"></i></Button>
-          <Button color="success" style={{marginRight: '10px'}} onClick={this.promptForLink}><i className="fas fa-link"></i></Button>
-          <Button color="success" onClick={e => this.clear()}><i className="fas fa-times"></i></Button>
-        </div>
-        {urlInput}
+      <div className="editor" onClick={this.focus}>
         <Editor
           editorState={this.state.editorState}
           onChange={(e) => this.onChange(e)}
-          ref="editor"
+          plugins={plugins}
+          ref={(element) => { this.editor = element; }}
         />
+        <InlineToolbar />
       </div>
     )
   }
