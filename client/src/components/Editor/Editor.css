@@ -9,7 +9,7 @@
   min-height: 300px;
 }
 
-ul:not(.browser-default)>li{
+.editor ul:not(.browser-default)>li{
   list-style-type: disc!important;
 }
 

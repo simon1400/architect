@@ -3,16 +3,12 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { EditorState } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html';
-import {stateFromHTML} from 'draft-js-import-html';
-
 import { Button } from 'reactstrap'
 
 import Field from './Filed'
 import Editor from './Editor/Editor'
 import DragDrop from './DragDrop'
 import '../styles/Edit.css'
-
-
 
 class Edit extends Component {
 
@@ -21,7 +17,8 @@ class Edit extends Component {
     image: [],
     uniqID: '',
     withoutLink: false,
-    editorState: EditorState.createEmpty()
+    editorState: '',
+    editorStartState: ''
   }
 
   componentDidMount = () => {
@@ -48,7 +45,7 @@ class Edit extends Component {
             link: item.link,
             withoutLink: item.withoutLink,
             image: item.image,
-            editorState: stateFromHTML(item.content),
+            editorStartState: item.content,
             menuId: item.menuId,
             edit: true,
           })
@@ -58,7 +55,8 @@ class Edit extends Component {
   }
 
   changeEditor = (editorState) => {
-    this.setState({editorState: editorState})
+    var newEditroState = stateToHTML(editorState.getCurrentContent())
+    this.setState({editorState: newEditroState})
   }
 
   changeTitle = (e) => {
@@ -87,7 +85,7 @@ class Edit extends Component {
   short = image => this.setState({image})
 
   submit = () => {
-    const content = stateToHTML(this.state.editorState);
+    const content = this.state.editorState;
     const image = this.state.image;
     image.map((item, index) => {
       delete item.preview;
@@ -135,7 +133,7 @@ class Edit extends Component {
         </div>
         <Field name="description" title="Description" onChange={this.changeTitle} placeholder="Key words" value={this.state.description} type="text" />
         <DragDrop id={this.state.uniqID} image={this.state.image} onDrop={this.onDrop} onShort={this.short} deleteFoto={this.deleteFoto}/>
-        <Editor editorState={this.state.editorState} changeEditor={this.changeEditor}/>
+        <Editor editorStartState={this.state.editorStartState} changeEditor={this.changeEditor}/>
         <a href="/admin">
           <Button color="success" className="button_submit" onClick={this.submit}>
             Submit

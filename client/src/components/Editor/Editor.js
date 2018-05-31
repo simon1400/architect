@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Editor from 'draft-js-plugins-editor';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, Modifier } from 'draft-js';
 import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
 import createLinkPlugin from 'draft-js-anchor-plugin';
 import {
@@ -16,17 +16,16 @@ import {
   BlockquoteButton,
   CodeBlockButton,
 } from 'draft-js-buttons';
-
 import { Button } from 'reactstrap'
+import {stateFromHTML} from 'draft-js-import-html';
+import {stateToHTML} from 'draft-js-export-html';
 
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 import 'draft-js-anchor-plugin/lib/plugin.css';
-
 import './Editor.css'
 
-const linkPlugin = createLinkPlugin();
-
 class HeadlinesPicker extends Component {
+
   componentDidMount() {
     setTimeout(() => { window.addEventListener('click', this.onWindowClick); });
   }
@@ -35,45 +34,65 @@ class HeadlinesPicker extends Component {
     window.removeEventListener('click', this.onWindowClick);
   }
 
-  onWindowClick = () =>
-    // Call `onOverrideContent` again with `undefined`
-    // so the toolbar can show its regular content again.
-    this.props.onOverrideContent(undefined);
+  onWindowClick = () => this.props.onOverrideContent(undefined);
 
   render() {
     const buttons = [HeadlineOneButton, HeadlineTwoButton, HeadlineThreeButton];
     return (
       <div>
-        {buttons.map((Button, i) => // eslint-disable-next-line
-          <Button key={i} {...this.props} />
-        )}
+        {buttons.map((Button, i) => <Button key={i} {...this.props} /> )}
       </div>
     );
   }
 }
 
 class HeadlinesButton extends Component {
-  // When using a click event inside overridden content, mouse down
-  // events needs to be prevented so the focus stays in the editor
-  // and the toolbar remains visible  onMouseDown = (event) => event.preventDefault()
+
   onMouseDown = (event) => event.preventDefault()
 
-  onClick = () =>
-    // A button can call `onOverrideContent` to replace the content
-    // of the toolbar. This can be useful for displaying sub
-    // menus or requesting additional information from the user.
-    this.props.onOverrideContent(HeadlinesPicker);
+  onClick = () => this.props.onOverrideContent(HeadlinesPicker);
 
   render() {
     return (
       <div onMouseDown={this.onMouseDown} className="headlineButtonWrapper">
-        <button onClick={this.onClick} className="headlineButton">
-          H
-        </button>
+        <button onClick={this.onClick} className="headlineButton">H</button>
       </div>
     );
   }
 }
+
+class Clear extends Component {
+
+  onMouseDown = (event) => event.preventDefault()
+
+  onClick = () => {
+    console.log(this.props.getEditorState());
+    const editorState = this.props.getEditorState()
+    const selection = editorState.getSelection()
+    const contentState = editorState.getCurrentContent()
+    const styles = editorState.getCurrentInlineStyle()
+
+    const removeStyles = styles.reduce((state, style) => {
+      return Modifier.removeInlineStyle(state, selection, style) }, contentState)
+
+    const removeBlock = Modifier.setBlockType(removeStyles, selection, 'unstyled')
+
+    this.props.setEditorState(EditorState.push(
+      editorState,
+      removeBlock
+    ))
+  }
+
+  render() {
+    return (
+      <div onMouseDown={this.onMouseDown} className="headlineButtonWrapper">
+        <button onClick={this.onClick} className="headlineButton">C</button>
+      </div>
+    );
+  }
+}
+
+const linkPlugin = createLinkPlugin();
 
 const inlineToolbarPlugin = createInlineToolbarPlugin({
   structure: [
@@ -87,7 +106,8 @@ const inlineToolbarPlugin = createInlineToolbarPlugin({
     UnorderedListButton,
     OrderedListButton,
     BlockquoteButton,
-    CodeBlockButton
+    CodeBlockButton,
+    Clear
   ]
 });
 
@@ -95,19 +115,29 @@ const { InlineToolbar } = inlineToolbarPlugin;
 const plugins = [inlineToolbarPlugin, linkPlugin];
 
 class TextEditor extends Component {
-  //
+
   state = {
-    editorState: EditorState.createEmpty()
+    editorState: EditorState.createEmpty(),
+    startState: 1
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if(nextProps.editorStartState && this.state.startState){
+      this.setState({
+        editorState: EditorState.push(this.state.editorState, stateFromHTML(nextProps.editorStartState)),
+        startState: 0
+      })
+    }
   }
 
   focus = () => this.editor.focus();
 
   onChange = (editorState) => {
-    this.setState({
-      editorState
-    })
+    this.setState({ editorState })
     this.props.changeEditor(editorState);
   }
+
+
 
   render(){
     return(
