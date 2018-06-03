@@ -71,18 +71,7 @@ class Clear extends Component {
     const contentState = editorState.getCurrentContent()
     const plainText = contentState.getPlainText()
     const styles = editorState.getCurrentInlineStyle()
-
-    // const removeStyles = styles.reduce((state, style) => {
-    //   return Modifier.removeInlineStyle(state, selection, style) }, contentState)
-    //
-    // const removeBlock = Modifier.setBlockType(removeStyles, selection, 'unstyled')
-
     this.props.setEditorState(EditorState.createWithContent(stateFromHTML(plainText)))
-
-    // this.props.setEditorState(EditorState.push(
-    //   editorState,
-    //   plainText
-    // ))
   }
 
   render() {

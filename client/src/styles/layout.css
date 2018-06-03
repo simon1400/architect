@@ -25,6 +25,10 @@ ul > li{
   margin-top: 90px;
 }
 
+.Admin .navbar{
+  z-index: 100;
+}
+
 .Admin nav{
   position: fixed;
   width: 100%;

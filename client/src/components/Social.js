@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { Button } from 'reactstrap'
 
 import '../styles/SocialIcons.css'
 
@@ -69,7 +70,7 @@ class Social extends Component {
     return(
       <div>
 				<h3>Social buttons</h3>
-        <button className="btn flat right" onClick={this.AddSocial}>{this.state.addSocial ? 'Hide' : 'Add'}</button>
+				<Button color="success" className="addBtn" onClick={this.AddSocial}>{this.state.addSocial ? 'Hide' : 'Add'}</Button>
 				<div style={{clear: 'both'}}></div>
 				{this.state.addSocial ? this.renderAdd() : ''}
 				{this.renderSocial()}
