@@ -22,6 +22,7 @@ input{
   position: absolute;
 }
 
+
 .shortPages ul li span i, .addSave i{
   cursor: pointer;
 }
