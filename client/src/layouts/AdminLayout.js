@@ -7,19 +7,6 @@ import * as actions from '../actions';
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header';
 
-// div className="Admin">
-//   <Header />
-//   {this.props.auth ? <div>
-//     <div className="sidenav bg-info">
-//       <Sidebar />
-//     </div>
-//
-//     <div className="main">
-//       {this.props.children}
-//     </div>
-//   </div> : <h1 style={{marginTop: '100px', textAlign: 'center'}}>Sorry, please login</h1>}
-// </div>
-
 class AdminLayout extends Component {
 
   componentDidMount = () => {
@@ -31,7 +18,7 @@ class AdminLayout extends Component {
     return(
         <div className="Admin">
           <Header />
-         <div>
+          {this.props.auth ? <div>
             <div className="sidenav bg-info">
               <Sidebar />
             </div>
@@ -39,7 +26,7 @@ class AdminLayout extends Component {
             <div className="main">
               {this.props.children}
             </div>
-          </div>
+          </div> : <h1 style={{marginTop: '100px', textAlign: 'center'}}>Sorry, please login</h1>}
         </div>
     )
   }

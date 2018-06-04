@@ -30,7 +30,7 @@ class Header extends Component {
   renderSocial() {
 		return this.props.social.map((item, index) =>
 			<li key={index}>
-				<a href={`/${item.link}`}><i className={item.classname}></i></a>
+				<a href={`/${item.link}`} target="_blank"><i className={item.classname}></i></a>
 			</li>);
 	}
 
@@ -48,7 +48,7 @@ class Header extends Component {
             <a href="/projects" style={{color: 'black', paddingTop: '5px', display: 'block'}}>Overspace</a>
           </Col>
           <Col sm="10" xs="6">
-            <nav className="right topMenu d-lg-block d-none">
+            <nav className="right topMenu d-lg-block d-md-none d-none">
               <ul>{this.renderSocial()}</ul>
               <ul>{this.renderMenu()}</ul>
             </nav>
@@ -60,7 +60,7 @@ class Header extends Component {
                 <span></span>
               </div>
             </div>
-            <nav className={`mobileMenu ${this.state.open ? ' show' : ''}`}>
+            <nav className={`mobileMenu d-lg-none ${this.state.open ? ' show' : ''}`}>
               <ul onClick={() => this.setState({open: !this.state.open})}>{this.renderMenu()}</ul>
               <ul>{this.renderSocial()}</ul>
             </nav>

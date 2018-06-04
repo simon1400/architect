@@ -88,7 +88,7 @@ class Clear extends Component {
   render() {
     return (
       <div onMouseDown={this.onMouseDown} className="headlineButtonWrapper">
-        <button onClick={this.onClick} className="headlineButton">C</button>
+        <button onClick={this.onClick} className="headlineButton">X</button>
       </div>
     );
   }

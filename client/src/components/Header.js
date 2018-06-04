@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-// import 'materialize-css/dist/css/materialize.min.css';
-
 class Header extends Component {
 
   renderContent() {
@@ -20,7 +18,7 @@ class Header extends Component {
   render() {
 
     return(
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{zIndex: '1100'}}>
         <Link to='/admin' className="navbar-brand">
           Architect project
         </Link>

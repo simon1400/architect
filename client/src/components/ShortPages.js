@@ -14,10 +14,10 @@ const SortableArticlesItem = SortableElement(({value, index, column, deleteArtic
 		<div className="menuLi">
 			<div className="articleShort">{value.title}</div>
 			<span className="icons">
-				<i className={`far ${value.column ? 'fa-check-square' : 'fa-square'}`} onClick={() => column(value._id, value.column)}></i>
-				<a href={`/admin/editor/edit/${value._id}`}><i className="far fa-edit"></i></a>
-				<i className={`far ${value.visible ? 'fa-check-square' : 'fa-square'}`} onClick={() => visible(value._id, value.visible)}></i>
-				<i className="far fa-trash-alt" onClick={() => deleteArticle(value._id)}></i>
+				<i className={`far ${value.column ? 'fa-check-square' : 'fa-square'}`} title="Big column" onClick={() => column(value._id, value.column)}></i>
+				<a href={`/admin/editor/edit/${value._id}`} title="Edit article"><i className="far fa-edit"></i></a>
+				<i className={`far ${value.visible ? 'fa-check-square' : 'fa-square'}`} title="Visible" onClick={() => visible(value._id, value.visible)}></i>
+				<i className="far fa-trash-alt" title="Delete article" onClick={() => deleteArticle(value._id)}></i>
 				<DragHandle />
 			</span>
 		</div>
@@ -46,10 +46,10 @@ const SortableMenuItem = SortableElement(({value, index, onClickMnu, onChangeMnu
 				disabled={state[value._id] ? state[value._id].disable : true}
 			/>
 			<span className="icons">
-				<i className={state[value._id] ? state[value._id].disable ? "hide" : 'fas fa-save' : "hide"} onClick={() => saveMnu(state[value._id].value, value._id)}></i>
-				<i className="far fa-edit" onClick={() => onClickMnu(value._id, value.name)}></i>
-				<i className="far fa-trash-alt" onClick={() => deleteData(value._id)}></i>
-				<Link to={`admin/editor/new/${value._id}`} className="addArticle"><i className="fas fa-plus"></i></Link>
+				<i className={state[value._id] ? state[value._id].disable ? "hide" : 'fas fa-save' : "hide"} title="Save" onClick={() => saveMnu(state[value._id].value, value._id)}></i>
+				<i className="far fa-edit" title="Edit page name" onClick={() => onClickMnu(value._id, value.name)}></i>
+				<i className="far fa-trash-alt" title="Delete page" onClick={() => deleteData(value._id)}></i>
+				<Link to={`admin/editor/new/${value._id}`} title="Add article" className="addArticle"><i className="fas fa-plus"></i></Link>
 				<DragHandle />
 			</span>
 			{state.articles ? <SortableArticles

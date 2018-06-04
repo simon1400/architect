@@ -339,7 +339,7 @@ body{
 
 #nav-icon3 {
   width: 50px;
-  height: 36px;
+  height: 34px;
   position: relative;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -351,6 +351,11 @@ body{
   transition: .5s ease-in-out;
   cursor: pointer;
   display: inline-block;
+}
+
+#nav-icon3.open{
+  position: fixed;
+  right: 20px;
 }
 
 
@@ -417,6 +422,7 @@ body{
 }
 
 .hamburger{
+  height: 34px;
   text-align: right;
   z-index: 1000;
   position: relative;
