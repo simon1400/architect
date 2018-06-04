@@ -184,6 +184,7 @@ class ShortPages extends Component {
 		this.setState({
 			articles: arrayMove(this.state.articles, oldIndex, newIndex),
 		});
+		console.log(this.state.articles);
 		this.props.shortArticles(this.state.articles)
 	};
 

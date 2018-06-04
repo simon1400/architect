@@ -31,21 +31,22 @@
   padding-right: 10px!important;
 }
 
+html{
+  overflow-y:scroll;
+}
+
 .Sites{
   font-family: 'worksans_light';
   -webkit-font-smoothing: antialiased;
+
 }
 
 .Sites em{
-  color: black;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 header{
   padding: 60px 0;
-}
-
-body{
-  overflow-x: hidden;
 }
 
 .Sites ul>li{
@@ -57,11 +58,12 @@ body{
   display: block;
   width: 8px;
   height: 1px;
-  background-color: #212529;
+  background-color: rgba(0, 0, 0, 0.87);
   position: absolute;
   left: -20px;
   top: 12px;
 }
+
 
 .Sites ul{
   padding-left: 20px;
@@ -91,7 +93,7 @@ body{
 
 .Sites p a, .Sites ul a{
   text-decoration: underline;
-  color: #212529;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .Sites a:hover{
@@ -201,7 +203,7 @@ body{
 }
 
 .topMenu a{
-  color: black;
+  color: rgba(0, 0, 0, 0.87);
   font-size: 20px;
   text-transform: uppercase;
   font-weight: lighter;
