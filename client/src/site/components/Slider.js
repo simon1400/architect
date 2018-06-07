@@ -4,11 +4,11 @@ import Slider from 'react-slick'
 import renderHTML from 'react-render-html';
 
 function NextArrow(props) {
-  return <i onClick={props.onClick} className="sliderIcon sl_right fas fa-chevron-right"></i>
+  return <img onClick={props.onClick} class="sliderIcon sl_right" src="/images/right.svg" alt="right" />
 }
 
 function PrevArrow(props) {
-  return <i onClick={props.onClick} className="sliderIcon sl_left fas fa-chevron-left"></i>
+  return <img onClick={props.onClick} class="sliderIcon sl_left" src="/images/left.svg" alt="left" />
 }
 
 class SliderEl extends Component {

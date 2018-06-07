@@ -50,7 +50,7 @@ class Home extends Component {
   render() {
     return (
       <div className="homePage">
-        <Row uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 300; repeat: true">
+        <Row uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 300; repeat: false">
           {this.state.childElements}
         </Row>
       </div>

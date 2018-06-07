@@ -30,7 +30,7 @@ class Header extends Component {
   renderSocial() {
 		return this.props.social.map((item, index) =>
 			<li key={index}>
-				<a href={`/${item.link}`} target="_blank"><i className={item.classname}></i></a>
+				<a href={`/${item.link}`} target="_blank"><img src={`https://storage.googleapis.com/${item.image}`} /></a>
 			</li>);
 	}
 
@@ -45,7 +45,7 @@ class Header extends Component {
       <header>
         <Row>
           <Col sm="2" xs="6" className="logo">
-            <a href="/projects" style={{color: 'black', paddingTop: '5px', display: 'block'}}>Overspace</a>
+            <a href="/projects" style={{color: 'rgba(0, 0, 0, 0.87)', display: 'block'}}>Overspace</a>
           </Col>
           <Col sm="10" xs="6">
             <nav className="right topMenu d-lg-block d-md-none d-none">

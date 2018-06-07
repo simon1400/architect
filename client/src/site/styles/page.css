@@ -119,6 +119,7 @@ header{
   margin-top: 30px;
   margin-bottom: 30px;
   font-size: 30px;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .contacts .slick-slider, .news .slick-slider{
@@ -168,7 +169,8 @@ header{
 }
 
 .container{
-  max-width: 1400px!important;
+  max-width: 1440px!important;
+  padding-bottom: 100px!important;
 }
 
 .logo{
@@ -204,7 +206,7 @@ header{
 
 .topMenu a{
   color: rgba(0, 0, 0, 0.87);
-  font-size: 20px;
+  font-size: 18px;
   text-transform: uppercase;
   font-weight: lighter;
   letter-spacing: 1px;
@@ -261,7 +263,7 @@ header{
   background-position: center center;
   position: absolute;
   z-index: -1;
-  transform: scale(1);
+  /* transform: scale(1); */
   transition: all 1s ease;
 }
 .home_item_wrap{
@@ -277,9 +279,9 @@ header{
   padding: 0 20px;
 }
 
-.home_item_wrap:hover .homeItem{
+/* .home_item_wrap:hover .homeItem{
   transform: scale(1.1);
-}
+} */
 
 .home_item_wrap:hover{
   background-color: rgba(0,0,0, .7);
@@ -452,6 +454,10 @@ header{
 .mobileMenu ul li{
   float: none;
   margin-bottom: 20px;
+}
+
+.mobileMenu ul li:after{
+  display: none;
 }
 
 .mobileMenu ul li a{

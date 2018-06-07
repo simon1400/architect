@@ -31,7 +31,7 @@ class Project extends Component {
 
     return(
       <DocumentMeta {...meta}>
-        <div className="project" uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 300; repeat: true">
+        <div className="project" uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 300; repeat: false">
           <Row>
             <Col sm="12" md="6">
               <Slider items={projectItem}/>

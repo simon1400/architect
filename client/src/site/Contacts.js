@@ -37,7 +37,7 @@ class Contacts extends Component {
     }
 
     return (
-      <Row className="contacts" uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 300; repeat: true">
+      <Row className="contacts" uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 300; repeat: false">
         {childElements}
       </Row>
     );

@@ -18,7 +18,7 @@ class PageLayout extends Component {
 
   render() {
     return (
-      <div className="Sites uk-container">
+      <div className="Sites container">
         <Header />
         {this.props.children}
       </div>

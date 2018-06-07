@@ -88,8 +88,8 @@ export const shortArticles = articles => async dispatch => {
 }
 
 // SOCIAL
-export const saveSocial = (name, classname, link) => async dispatch => {
-  const res = await axios.post('/api/icons', {name, classname, link});
+export const saveSocial = (image, link) => async dispatch => {
+  const res = await axios.post('/api/icons', {image, link});
   dispatch({ type: SOCIAL_DATA, payload: res.data});
 }
 
