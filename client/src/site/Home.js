@@ -18,7 +18,7 @@ class Home extends Component {
         url = window.location.pathname.substring(1);
     if(nextProps.articles.length > 0){
       var articles = nextProps.articles
-        .filter(article => article.parentPage == url && article.visible ? article : null)
+        .filter(article => article.parentPage === url && article.visible ? article : null)
         .sort((a, b) => {
           if (a.index > b.index) return 1;
           if (a.index < b.index) return -1;
@@ -27,7 +27,7 @@ class Home extends Component {
       var childElements = articles.map((item, index) => {
         var firstImage = item.image[0]
         if(firstImage){
-          urlImage = 'https://storage.googleapis.com/' + item.uniqID + '/' + firstImage.name;
+          urlImage = 'https://ce81e01ac.cloudimg.io/height/340/x/http://storage.googleapis.com/' + item.uniqID + '/' + firstImage.name;
         }
 
         let itemLink = item.link ? item.link : `/projects/${item._id}`

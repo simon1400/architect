@@ -43,7 +43,7 @@ class DragDrop extends Component {
 
 	render() {
     this.props.image.map(item => {
-      if(item == undefined) {
+      if(item === undefined) {
         this.props.image.splice(this.props.image.indexOf(item), 1);
       }
     })

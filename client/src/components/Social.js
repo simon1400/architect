@@ -56,7 +56,7 @@ class Social extends Component {
 			<div className="addIcons addSocial row">
 				<div className="col s5">
           <Dropzone className="dropSocial" onDrop={(e) => this.onDrop(e)}>
-            {this.state.preview ? <div className="faviconPreview"><img src={this.state.preview} /></div> : <p>Upload social icon</p>}
+            {this.state.preview ? <div className="faviconPreview"><img src={this.state.preview} alt="Preview icon" /></div> : <p>Upload social icon</p>}
           </Dropzone>
         </div>
 				<div className="col s5"><input className="inp_icon" name="link" value={this.state.link} placeholder="Social link" onChange={e => this.changeInp(e)} /></div>
@@ -70,7 +70,7 @@ class Social extends Component {
       <div className="col s12">
         <div className="item_social">
           <div className="row">
-      			<div className="col s5"><img src={`https://storage.googleapis.com/${social.image}`} /></div>
+      			<div className="col s5"><img src={`https://storage.googleapis.com/${social.image}`} alt={`Icon ${index}`} /></div>
       			<div className="col s5"><span>{social.link}</span></div>
       			<div className="col s2">
       				<span className="controllButtons">

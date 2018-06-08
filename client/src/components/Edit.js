@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { EditorState } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html';
 import { Button } from 'reactstrap'
 
@@ -34,7 +33,7 @@ class Edit extends Component {
 
   componentWillReceiveProps = (nextProps) => {
     const {type, id} = nextProps.match.params
-    if(this.props.match.params.type == 'edit'){
+    if(type === 'edit'){
       nextProps.articles.map(item => {
         if(item._id === id){
           this.setState({

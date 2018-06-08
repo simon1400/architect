@@ -30,7 +30,7 @@ class Header extends Component {
   renderSocial() {
 		return this.props.social.map((item, index) =>
 			<li key={index}>
-				<a href={`/${item.link}`} target="_blank"><img src={`https://storage.googleapis.com/${item.image}`} /></a>
+				<a href={`/${item.link}`} target="_blank"><img src={`https://storage.googleapis.com/${item.image}`} alt="Social icons" /></a>
 			</li>);
 	}
 

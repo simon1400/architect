@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Slider from 'react-slick'
-import renderHTML from 'react-render-html';
 
 function NextArrow(props) {
   return <img onClick={props.onClick} class="sliderIcon sl_right" src="/images/right.svg" alt="right" />

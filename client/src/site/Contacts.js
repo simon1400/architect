@@ -11,10 +11,7 @@ class Contacts extends Component {
       url = this.props.match.path.substring(1);
 
     if (this.props.articles.length > 0) {
-      let articles = this.props.articles.filter(
-        article => article.parentPage == url
-        ? article
-        : null)
+      let articles = this.props.articles.filter(article => article.parentPage === url ? article : null)
       articles.sort((a, b) => {
         if (a.index > b.index)
           return 1;

@@ -27,7 +27,7 @@ const SortableArticles = SortableContainer(({items, menuId, column, deleteArticl
 	return (
 		<ul className="menuArticles">
 			{items.map((value, index) => {
-				if(menuId == value.menuId){
+				if(menuId === value.menuId){
 					return <SortableArticlesItem key={`item-${index}`} index={index} value={value} column={column} visible={visible} deleteArticle={deleteArticle} />
 				}
 			})}
@@ -184,7 +184,6 @@ class ShortPages extends Component {
 		this.setState({
 			articles: arrayMove(this.state.articles, oldIndex, newIndex),
 		});
-		console.log(this.state.articles);
 		this.props.shortArticles(this.state.articles)
 	};
 

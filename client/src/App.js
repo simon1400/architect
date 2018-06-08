@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
 import DocumentMeta from 'react-document-meta';
 
 import PageLayout from './layouts/PageLayout'
@@ -52,7 +51,7 @@ class App extends Component {
       <DocumentMeta {...meta}>
         <Router>
           <div>
-            {window.location.pathname == '/' ? <Redirect to="/projects" /> : null}
+            {window.location.pathname === '/' ? <Redirect to="/projects" /> : null}
             <Switch>
               {/* Site routes */}
               <AppRoute exact path={`/projects`} layout={PageLayout} component={Home} />

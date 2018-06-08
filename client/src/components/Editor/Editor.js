@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Editor from 'draft-js-plugins-editor';
-import { EditorState, ContentState, Modifier, getContentStateFragment } from 'draft-js';
+import { EditorState } from 'draft-js';
 import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
 import createLinkPlugin from 'draft-js-anchor-plugin';
 import {
@@ -16,9 +16,7 @@ import {
   BlockquoteButton,
   CodeBlockButton,
 } from 'draft-js-buttons';
-import { Button } from 'reactstrap'
 import {stateFromHTML} from 'draft-js-import-html';
-import {stateToHTML} from 'draft-js-export-html';
 
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 import 'draft-js-anchor-plugin/lib/plugin.css';
@@ -67,10 +65,8 @@ class Clear extends Component {
 
   onClick = () => {
     const editorState = this.props.getEditorState()
-    const selection = editorState.getSelection()
     const contentState = editorState.getCurrentContent()
     const plainText = contentState.getPlainText()
-    const styles = editorState.getCurrentInlineStyle()
     this.props.setEditorState(EditorState.createWithContent(stateFromHTML(plainText)))
   }
 

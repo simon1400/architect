@@ -51,7 +51,7 @@ class Setting extends Component {
         <label>Favicon</label>
         <Dropzone onDrop={(e) => this.onDrop(e)}>
           <p>Try dropping favicon file here to upload.</p>
-          <div className="faviconPreview"><img src={this.state.favicon} /></div>
+          <div className="faviconPreview"><img src={this.state.favicon} alt="Favicon" /></div>
         </Dropzone>
         <div className="setting_row"></div>
         <div className="setting_row description">
