@@ -48,8 +48,8 @@ class Header extends Component {
             <a href="/projects" style={{color: 'rgba(0, 0, 0, 0.87)', display: 'block'}}>Overspace</a>
           </Col>
           <Col sm="10" xs="6">
-            <nav className="right topMenu d-lg-block d-md-none d-none">
-              <ul>{this.renderSocial()}</ul>
+            <nav className="topMenu d-lg-block d-md-none d-none">
+              <ul class="socIcons">{this.renderSocial()}</ul>
               <ul>{this.renderMenu()}</ul>
             </nav>
             <div className="hamburger d-lg-none">
