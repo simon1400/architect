@@ -50,12 +50,14 @@ html{
   color: rgba(0, 0, 0, 0.87);
 }
 
-header{
-  padding: 60px 0;
+.socIcons a{
+  margin-left: 5px!important;
+  margin-right: 5px!important;
+  vertical-align: top;
 }
 
-.Sites ul>li{
-  position: relative;
+header{
+  padding: 60px 0;
 }
 
 .Sites ul>li:after{
@@ -74,18 +76,15 @@ header{
   padding-left: 20px;
 }
 
+.Sites ul>li{
+  position: relative;
+}
+
 .Sites p{
   line-height: 23px;
   letter-spacing: 0.75px;
   font-weight: lighter;
-}
-
-.Sites .topMenu ul{
-  padding-left: 0!important;
-}
-
-.Sites .topMenu ul>li{
-  list-style-type: none;
+  font-size: 15px;
 }
 
 .Sites .topMenu ul > li a, .Sites .mobileMenu ul > li a{
@@ -94,6 +93,67 @@ header{
 
 .Sites .topMenu ul>li:after{
   display: none;
+}
+
+.topMenu{
+  background-color: transparent;
+  /* display: none; */
+  text-align: right;
+  box-shadow: none;
+  height: auto;
+  line-height: inherit;
+}
+
+.topMenu ul{
+  float: right;
+  margin-bottom: 0;
+  padding-left: 0!important;
+}
+
+.topMenu ul:last-child{
+  margin-right: 30px;
+}
+
+.topMenu ul>li{
+  margin-bottom: 0;
+  display: inline-block;
+  list-style-type: none;
+}
+
+.topMenu a{
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.topMenu a:after{
+  content: '';
+  position: absolute;
+  width: 0;
+  border-bottom: 2px solid black;
+  bottom: 0;
+  left: 0;
+  transition: all .5s ease;
+  display: block;
+}
+
+.topMenu .socIcons li:hover a:after{
+  width: 0;
+}
+
+.topMenu li:hover a:after{
+  width: 100%;
+}
+
+.topMenu a:hover{
+  text-decoration: none;
 }
 
 .Sites p a, .Sites ul a{
@@ -135,28 +195,6 @@ header{
   padding-top: 100%!important;
 }
 
-.fade-enter {
-  opacity: 0.01;
-  transform: translateY(50px);
-}
-
-.fade-enter.fade-enter-active {
-  transition: opacity 250ms ease-in;
-  opacity: 1;
-}
-
-.fade-appear { opacity: 0.01; }
-.fade-appear.fade-appear-active { opacity: 1; transition: opacity 250ms ease-in; }
-
-.fade-leave {
-  opacity: 1;
-}
-
-.fade-leave.fade-leave-active {
-  opacity: 0.01;
-  transition: opacity 100ms ease-in;
-}
-
 .slick-list{
   position: absolute!important;
   top: 0!important;
@@ -167,10 +205,6 @@ header{
 
 .slick-track{
   height: 100%!important;
-}
-
-.Sites p{
-  font-size: 15px;
 }
 
 .container{
@@ -187,56 +221,6 @@ header{
 }
 
 .logo a:hover{
-  text-decoration: none;
-}
-
-.topMenu{
-  background-color: transparent;
-  /* display: none; */
-  text-align: right;
-  box-shadow: none;
-  height: auto;
-  line-height: inherit;
-}
-
-.topMenu ul{
-  float: right;
-  margin-bottom: 0;
-}
-
-.topMenu li{
-  margin-bottom: 0;
-  display: inline-block;
-}
-
-.topMenu a{
-  color: rgba(0, 0, 0, 0.87);
-  font-size: 18px;
-  text-transform: uppercase;
-  font-weight: lighter;
-  letter-spacing: 1px;
-  margin-left: 20px;
-  margin-right: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.topMenu a:after{
-  content: '';
-  position: absolute;
-  width: 0;
-  border-bottom: 2px solid black;
-  bottom: 0;
-  left: 0;
-  transition: all .5s ease;
-  display: block;
-}
-
-.topMenu li:hover a:after{
-  width: 100%;
-}
-
-.topMenu a:hover{
   text-decoration: none;
 }
 
@@ -284,10 +268,6 @@ header{
   padding: 0 20px;
 }
 
-/* .home_item_wrap:hover .homeItem{
-  transform: scale(1.1);
-} */
-
 .home_item_wrap:hover{
   background-color: rgba(0,0,0, .7);
   text-decoration: none;
@@ -333,8 +313,6 @@ header{
 .sl_left{
   left: 20px;
 }
-
-
 
 .newsItem:not(:last-child){
   margin-bottom: 150px;
@@ -476,39 +454,6 @@ header{
 .mobileMenu ul:last-child li{
   display: inline-block;
   margin-right: 20px;
-}
-
-.mobileMenu ul:last-child li a i{
-  font-size: 40px;
-}
-
-.example-enter {
-  opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-  opacity: 0.01;
-  transform: translateY(20px);
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: 1s;
-}
-
-.example-appear {
-    opacity: 0;
-    transform: translateY(20px);
-}
-.example-appear.example-appear-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: 1s;
 }
 
 .mobileMenu.show {
