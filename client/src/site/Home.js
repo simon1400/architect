@@ -27,7 +27,8 @@ class Home extends Component {
       var childElements = articles.map((item, index) => {
         var firstImage = item.image[0]
         if(firstImage){
-          urlImage = 'https://ce81e01ac.cloudimg.io/height/340/x/http://storage.googleapis.com/' + item.uniqID + '/' + firstImage.name;
+          var sizeImg = item.column ? '612' : '296';
+          urlImage = 'https://ce81e01ac.cloudimg.io/height/' + sizeImg + '/x/http://storage.googleapis.com/' + item.uniqID + '/' + firstImage.name;
         }
 
         let itemLink = item.link ? item.link : `/projects/${item._id}`

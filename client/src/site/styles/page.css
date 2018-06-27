@@ -298,6 +298,7 @@ header{
 }
 
 .home_item_wrap h2{
+  text-align: center;
   opacity: 0;
   margin: auto;
   color: white;
@@ -434,7 +435,9 @@ header{
   height: 34px;
   text-align: right;
   z-index: 1000;
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 20px;
 }
 
 .mobileMenu{

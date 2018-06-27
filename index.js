@@ -44,5 +44,9 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+const PORT = process.env.PORT || 8080;
+const server = app.listen(PORT, () => {
+  const host = server.address().address;
+  const port = server.address().port;
+  console.log(`Example app listening at http://${host}:${port}`);
+});
