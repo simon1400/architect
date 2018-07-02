@@ -10,7 +10,7 @@ import '../styles/SortPages.css'
 const DragHandle = SortableHandle(() => <i>::</i>);
 
 const SortableArticlesItem = SortableElement(({value, index, column, deleteArticle, visible}) => {
-	return <li key={index}>
+	return <li key={value.index}>
 		<div className="menuLi">
 			<div className="articleShort">{value.title}</div>
 			<span className="icons">
@@ -28,7 +28,7 @@ const SortableArticles = SortableContainer(({items, menuId, column, deleteArticl
 		<ul className="menuArticles">
 			{items.map((value, index) => {
 				if(menuId === value.menuId){
-					return <SortableArticlesItem key={`item-${index}`} index={index} value={value} column={column} visible={visible} deleteArticle={deleteArticle} />
+					return <SortableArticlesItem key={`item-${value.index}`} index={index} value={value} column={column} visible={visible} deleteArticle={deleteArticle} />
 				}
 			})}
 		</ul>
@@ -92,6 +92,8 @@ class ShortPages extends Component {
 	state = {
 		addMenu: false,
 		addField: '',
+		menu: [],
+		articles: []
 	}
 
 	componentDidMount = () => {

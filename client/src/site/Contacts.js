@@ -22,13 +22,9 @@ class Contacts extends Component {
       childElements = articles.map((item, index) => {
         return (
           <Col key={item.uniqID} sm="12" md="6" lg="6">
-            <Slider items={item}/>
-          <h1>{item.title}</h1>
-            {
-              item.content
-                ? renderHTML(item.content)
-                : ''
-            }
+            {item.image.length ? <Slider items={item}/> : null}
+            <h1>{item.title}</h1>
+            {item.content ? renderHTML(item.content) : ''}
           </Col>);
       });
     }

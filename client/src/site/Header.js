@@ -49,7 +49,7 @@ class Header extends Component {
           </Col>
           <Col sm="10" xs="6">
             <nav className="topMenu d-lg-block d-md-none d-none">
-              <ul class="socIcons">{this.renderSocial()}</ul>
+              <ul className="socIcons">{this.renderSocial()}</ul>
               <ul>{this.renderMenu()}</ul>
             </nav>
             <div className="hamburger d-lg-none">

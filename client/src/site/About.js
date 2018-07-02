@@ -21,7 +21,7 @@ class News extends Component {
          return (
            <Row key={index} className="newsItem">
               <Col sm="12">
-                <Slider items={item}/>
+                {item.image.length ? <Slider items={item}/> : null}
               </Col>
                 <Col sm="12" md="12" lg={{size: 6, offset: 3}}>
                   <h1>{item.title}</h1>

@@ -23,7 +23,7 @@ class Project extends Component {
 
   render() {
 
-    let projectItem = this.state.projectItem;
+    var projectItem = this.state.projectItem;
 
     const meta = {
       description: projectItem.description
