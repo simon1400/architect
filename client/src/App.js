@@ -9,7 +9,7 @@ import AdminLayout from './layouts/AdminLayout'
 // import Error from './404';
 
 import Edit from './components/Edit'
-import ShortPages from './components/ShortPages'
+import ShortPages from './components/ShortPages/ShortPages'
 import Social from './components/Social'
 import Setting from './components/Setting'
 
